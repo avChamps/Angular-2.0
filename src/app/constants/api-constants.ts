@@ -8,3 +8,5 @@ export const alertResponseTime = 10000;
 export const base64Key = 'RevalKey';
 export const createAccount = url + '/createAccount';
 export const verifyOtpAndRegister = url + '/verifyOtpAndRegister';
+export const login = url + '/login';
+export const getProfiles = url + '/getProfiles';

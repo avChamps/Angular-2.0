@@ -65,10 +65,9 @@
                         </button>
                     </div>
                     <p class="text-muted text-center">or use your email account:</p>
-                    <form class="needs-validation" novalidate>
-
+                    <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="needs-validation" novalidate>
                         <!-- Email Input -->
-                        <div class="mb-3 position-relative input-icon-wrapper">
+                        <div class="mt-3 position-relative input-icon-wrapper">
                             <span class="input-icon">
                                 <!-- Mail Icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
@@ -77,13 +76,19 @@
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </span>
-                            <input type="email" class="form-control common-elements-height auth-inputs"
-                                placeholder="Email" required />
+                            <input type="email" formControlName="emailId"
+                                class="form-control common-elements-height auth-inputs" placeholder="Email" required />
+                        </div>
+
+                        <div class="mb-1 text-danger small"
+                            *ngIf="loginForm.get('emailId')?.touched || loginForm.get('emailId')?.dirty">
+                            <div *ngIf="loginForm.get('emailId')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="loginForm.get('emailId')?.errors?.['email']">Enter a valid email address.</div>
                         </div>
 
                         <!-- Password Input -->
                         <!-- Password Input -->
-                        <div class="mb-3 position-relative input-icon-wrapper">
+                        <div class="mt-3 position-relative input-icon-wrapper">
                             <span class="input-icon">
                                 <!-- Lock Icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
@@ -93,47 +98,74 @@
                                 </svg>
                             </span>
 
-                            <input type="password" id="password" class="form-control common-elements-height auth-inputs"
-                                placeholder="Password" required />
+                            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+                                class="form-control common-elements-height auth-inputs" placeholder="Password"
+                                required />
+
 
                             <!-- Toggle Button -->
                             <button type="button"
                                 class="btn btn-link position-absolute top-50 end-0 translate-middle-y me-3 p-0"
-                                onclick="togglePassword()">
+                                (click)="togglePasswordVisibility()">
                                 <!-- Eye Icon -->
                                 <!-- Eye Icon -->
-                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="d-block" width="18"
-                                    height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
+                                <!-- Eye Icon (when password is hidden) -->
+                                <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5
+      c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7
+      -4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
 
-                                <!-- Eye Slash Icon -->
-                                <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" class="d-none" width="18"
-                                    height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
+                                <!-- Eye Slash Icon (when password is visible) -->
+                                <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.978 9.978 0 012.264-3.592M9.88 9.88a3 3 0 104.24 4.24M7.713 7.713A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.965 9.965 0 01-3.049 4.243M3 3l18 18" />
+                                    <path d="M13.875 18.825A10.05 10.05 0 0112 19
+      c-4.478 0-8.268-2.943-9.542-7a9.978 9.978 0 012.264-3.592" />
+                                    <path d="M9.88 9.88a3 3 0 104.24 4.24" />
+                                    <path d="M7.713 7.713A9.956 9.956 0 0112 5
+      c4.478 0 8.268 2.943 9.542 7a9.965 9.965 0 01-3.049 4.243" />
+                                    <path d="M3 3l18 18" />
                                 </svg>
+
                             </button>
                         </div>
 
+                        <div class="mb-1 text-danger small"
+                            *ngIf="loginForm.get('password')?.touched || loginForm.get('password')?.dirty">
+                            <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+                            <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                                Password must be at least 6 characters.
+                            </div>
+                        </div>
 
                         <!-- Forgot Password -->
-                        <div class="mb-3 text-end">
+                        <div class="text-end">
                             <a href="#" class="text-decoration-none text-primary small forgot-password-link">Forgot your
                                 password?</a>
                         </div>
 
+                        <span class="text-danger text-center" *ngIf="loginErrorMessage != ''">{{ loginErrorMessage
+                            }}</span>
+
                         <!-- Sign In Button -->
-                        <div class="d-grid">
-                            <button type="submit"
-                                class="btn btn-primary auth-button rounded-pill py-2 text-uppercase fw-semibold common-elements-height">
-                                Sign In
+                        <div class="d-grid mt-3">
+                            <button type="submit" (click)="submitLoginForm()"
+                                class="btn btn-primary auth-button rounded-pill py-2 text-uppercase fw-semibold common-elements-height d-flex align-items-center justify-content-center"
+                                [disabled]="isLoading">
+
+                                <span *ngIf="!isLoading">Sign In</span>
+
+                                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-light"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </button>
                         </div>
+
 
                     </form>
                 </div>
@@ -219,7 +251,7 @@
                     <p class="text-muted text-center">or use your email account:</p>
                     <form class="needs-validation" *ngIf="!showOtpBox" novalidate (ngSubmit)="submitSignupForm()"
                         [formGroup]="signupForm">
-                        <div class="mb-3 position-relative input-icon-wrapper">
+                        <div class="mt-3 position-relative input-icon-wrapper">
                             <span class="input-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -227,11 +259,19 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7-7h14a7 7 0 00-7-7z"></path>
                                 </svg>
                             </span>
-                            <input type="text" class="form-control" formControlName="fullName" name="fullName"
-                                placeholder="Name" required />
+                            <input type="text" class="form-control common-elements-height" formControlName="fullName"
+                                name="fullName" placeholder="Name" required />
+
                         </div>
+                        <div class="text-danger mt-1"
+                            *ngIf="signupForm.get('fullName')?.touched && signupForm.get('fullName')?.invalid">
+                            <small *ngIf="signupForm.get('fullName')?.errors?.['required']">Full name is
+                                required.</small>
+                        </div>
+
+
                         <!-- Email Input -->
-                        <div class="mb-3 position-relative input-icon-wrapper">
+                        <div class="mt-3 position-relative input-icon-wrapper">
                             <span class="input-icon">
                                 <!-- Mail Icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
@@ -240,13 +280,20 @@
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </span>
-                            <input type="email" class="form-control" formControlName="emailId" placeholder="Email"
-                                required />
+                            <input type="email" class="form-control common-elements-height" formControlName="emailId"
+                                placeholder="Email" required />
+                        </div>
+                        <div class="text-danger mt-1"
+                            *ngIf="signupForm.get('emailId')?.touched && signupForm.get('emailId')?.invalid">
+                            <small *ngIf="signupForm.get('emailId')?.errors?.['required']">Email is
+                                required.</small>
+                            <small *ngIf="signupForm.get('emailId')?.errors?.['email']">Please enter a valid
+                                email.</small>
                         </div>
 
                         <!-- Password Input -->
                         <!-- Password Input -->
-                        <div class="mb-3 position-relative input-icon-wrapper">
+                        <div class="mt-3 position-relative input-icon-wrapper">
                             <span class="input-icon">
                                 <!-- Lock Icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
@@ -257,16 +304,16 @@
                             </span>
 
                             <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
-                                class="form-control" placeholder="Password" required />
-
+                                class="form-control common-elements-height" placeholder="Password" required />
                             <!-- Toggle Button -->
                             <button type="button"
                                 class="btn btn-link position-absolute top-50 end-0 translate-middle-y me-3 p-0"
-                                onclick="togglePassword()">
+                                (click)="togglePasswordVisibility()">
                                 <!-- Eye Icon -->
                                 <!-- Eye Icon -->
-                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="d-block" width="18"
-                                    height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
+                                <!-- Eye Icon -->
+                                <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path
@@ -274,22 +321,41 @@
                                 </svg>
 
                                 <!-- Eye Slash Icon -->
-                                <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" class="d-none" width="18"
-                                    height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
+                                <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
                                     <path
                                         d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.978 9.978 0 012.264-3.592M9.88 9.88a3 3 0 104.24 4.24M7.713 7.713A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.965 9.965 0 01-3.049 4.243M3 3l18 18" />
                                 </svg>
+
+                            </button>
+                        </div>
+                        <div class="text-danger mt-1"
+                            *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+                            <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is
+                                required.</small>
+                            <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at
+                                least 6 characters.</small>
+                        </div>
+
+                        <span class="text-danger text-center" *ngIf="errorMessage != ''">{{ errorMessage }}</span>
+
+                        <!-- Sign In Button -->
+                        <div class="d-grid mt-3">
+                            <button type="submit"
+                                class="btn btn-primary auth-button rounded-pill py-2 text-uppercase fw-semibold common-elements-height"
+                                [disabled]="isSubmitting">
+
+                                <span *ngIf="!isSubmitting">Sign Up</span>
+
+                                <span *ngIf="isSubmitting">
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"
+                                        aria-hidden="true"></span>
+                                    Signing Up...
+                                </span>
                             </button>
                         </div>
 
-                        <!-- Sign In Button -->
-                        <div class="d-grid">
-                            <button type="submit"
-                                class="btn btn-primary auth-button rounded-pill py-2 text-uppercase fw-semibold common-elements-height">
-                                Sign Up
-                            </button>
-                        </div>
 
                     </form>
 
@@ -300,10 +366,22 @@
                             <ng-otp-input [formControl]="otpControl" name="otp"
                                 [config]="{ length: 6, inputClass: 'otp-input-class' }"></ng-otp-input>
 
+                            <span class="text-danger text-center" *ngIf="errorMessage != ''">{{ errorMessage }}</span>
+
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success">Verify OTP</button>
+                            <button type="submit" class="btn btn-success" [disabled]="isVerifyingOtp">
+
+                                <span *ngIf="!isVerifyingOtp">Verify OTP</span>
+
+                                <span *ngIf="isVerifyingOtp">
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"
+                                        aria-hidden="true"></span>
+                                    Verifying...
+                                </span>
+                            </button>
                         </div>
+
                     </form>
 
                 </div>

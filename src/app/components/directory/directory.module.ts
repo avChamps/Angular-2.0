@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DirectoryRoutingModule } from './directory-routing.module';
 import { DirectoryComponent } from './directory.component';
+import { SharedModule } from '../../shared/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { DirectoryComponent } from './directory.component';
   ],
   imports: [
     CommonModule,
-    DirectoryRoutingModule
+    DirectoryRoutingModule,
+    SharedModule
   ]
 })
 export class DirectoryModule { }
