@@ -1,0 +1,155 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <a (click)="goBack()" class="text-dark text-decoration-none d-inline-block cursor-pointer">
+            <i class="bi bi-arrow-left"></i> Back to all courses
+        </a>
+
+        <div class="bg-white rounded shadow">
+            <div class="course-header">
+                <div class="course-meta">
+                    <h2 class="text-white">{{ data?.Title }}</h2>
+                    <p class="mb-0">
+                        <i class="bi bi-clock me-1"></i> {{ data?.Duration }}
+                        <i class="bi bi-laptop ms-3 me-1"></i> {{ data?.Location }}
+                        <span class="ms-3" *ngIf="data?.Price">Course Fees: {{ data?.Price}}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <ul class="nav nav-pills mb-4 course-tabs">
+                    <li class="nav-item">
+                        <a (click)="onTabSelection('Overview')" class="nav-link"
+                            [ngClass]="{ 'active': isCurrentSection === 'Overview' }">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="onTabSelection('Curriculum')" class="nav-link"
+                            [ngClass]="{ 'active': isCurrentSection === 'Curriculum' }">
+                            Curriculum
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="onTabSelection('Requirements')" class="nav-link"
+                            [ngClass]="{ 'active': isCurrentSection === 'Requirements' }">
+                            Requirements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="onTabSelection('Instructors')" class="nav-link"
+                            [ngClass]="{ 'active': isCurrentSection === 'Instructors' }">
+                            Instructors
+                        </a>
+                    </li>
+                </ul>
+
+
+                <ng-container *ngIf="isCurrentSection == Section.Overview">
+                    <h5 class="fw-bold">Course Description</h5>
+                    <p class="text-muted">
+                        {{ data?.Overview?.courseDescription }}
+                    </p>
+
+                    <h5 class="fw-bold mt-4">Learning Outcomes</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2" *ngFor="let outcome of data?.Overview?.learningOutcomes">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-circle-check-big h-5 w-5 text-green-600 shrink-0 mt-0.5 check-icon">
+                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                <path d="m9 11 3 3L22 4"></path>
+                            </svg>
+                            {{ outcome }}
+                        </li>
+                    </ul>
+                </ng-container>
+
+
+
+                <ng-container *ngIf="isCurrentSection == Section.Curriculum">
+                    <h5 class="fw-bold mb-3">Program Summary</h5>
+                    <div class="d-grid gap-2">
+                        <div class="week-item" *ngFor="let item of data?.Curriculum"><a>{{ item }}</a></div>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="isCurrentSection == Section.Requirements">
+                    <div class="row g-4 justify-content-center">
+                        <ng-container *ngFor="let key of requirementKeys">
+                            <div class="col-md-4 col-12 requirement-block">
+                                <div class="bg-light rounded-3 p-4 h-100 text-center">
+                                    <h6 class="text-primary fw-bold mb-3">{{ key.toUpperCase() }}</h6>
+                                    <ul class="list-unstyled text-start text-dark small ps-3">
+                                        <li *ngFor="let item of data.Requirements[key]" class="mb-2 text-primary">
+                                            • <span class="text-dark">{{ item }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="isCurrentSection == Section.Instructors">
+                    <h5 class="fw-semibold mb-3">Meet Your Instructors</h5>
+                    <div class="row g-4">
+                        <div *ngFor="let instructor of data.Instructors" class="col-md-6 col-12">
+                            <div class="d-flex align-items-center p-3 bg-light rounded-4 shadow-sm">
+                                <div class="flex-shrink-0">
+                                    <img [src]="instructor.image || './assets/images/placeholder-circle.svg'"
+                                        [alt]="instructor.name" class="rounded-circle" width="80" height="80">
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1 fw-bold">{{ instructor.name }}</h6>
+                                    <div class="text-primary small">{{ instructor.title }}</div>
+                                    <div class="text-muted small">{{ instructor.description }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+                <div class="d-flex gap-3 mt-4">
+                    <button class="btn btn-primary w-100" (click)="openEnrollment()">Enroll Now</button>
+                    <button class="btn btn-outline-secondary w-100" (click)="goBack()">View All Courses</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
+            </div>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
+    </div>
+</div>

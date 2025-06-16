@@ -1,0 +1,107 @@
+.course-header {
+  /* background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(0, 0, 0)); */
+  height: 240px;
+  border-radius: 12px 12px 0 0;
+  background-image: url('/assets/images/course-banner.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.course-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.301), rgba(0, 0, 0, 0.638));
+  border-radius: 12px 12px 0 0;
+}
+
+.course-tabs {
+  background-color: #f1f5f9;
+  padding: 5px;
+  width: fit-content;
+  border-radius: .75rem;
+}
+
+.course-tabs .nav-link {
+  color: #82838f;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.course-tabs .nav-link.active {
+  background-color: #fff;
+  color: #000;
+  border-radius: .75rem;
+  font-weight: 600;
+}
+
+.course-meta {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  z-index: 1;
+  color: white;
+}
+
+.course-meta h2 {
+  font-weight: bold;
+  font-size: 36px
+}
+
+.course-meta p {
+  font-size: 14px;
+}
+
+.check-icon {
+  color: #16a34a;
+  height: 20px;
+}
+
+.week-item {
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  font-weight: 500;
+}
+
+.week-item:hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.week-item a {
+  text-decoration: none;
+  color: #0d6efd;
+}
+
+.requirement-block h6 {
+  font-size: 20px;
+}
+
+.requirement-block ul li span {
+  font-size: 16px;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    top: unset;
+
+    .course-card {
+      padding: 24px;
+    }
+
+    .course-meta h2 {
+      font-weight: bold;
+      font-size: 28px
+    }
+  }
+}

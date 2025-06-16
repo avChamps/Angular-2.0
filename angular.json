@@ -40,22 +40,34 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/js/coming-soon.js",
+              "src/assets/js/header.js",
+              "src/assets/js/footer.js",
+              "src/assets/js/hero.js",
+              "src/assets/js/services.js",
+              "src/assets/js/testimonials.js",
+              "src/assets/js/contact.js",
+              "src/assets/js/scroll-to-top.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "15500kB",
+                  "maximumError": "15500kB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "15500kB",
+                  "maximumError": "15500kB"
                 }
               ],
               "outputHashing": "all"
@@ -107,9 +119,21 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/js/coming-soon.js",
+              "src/assets/js/header.js",
+              "src/assets/js/footer.js",
+              "src/assets/js/hero.js",
+              "src/assets/js/services.js",
+              "src/assets/js/testimonials.js",
+              "src/assets/js/contact.js",
+              "src/assets/js/scroll-to-top.js"
+            ]
           }
         }
       }

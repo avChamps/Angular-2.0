@@ -1,0 +1,238 @@
+<ng-container *ngIf="!isMoreInfo">
+
+    <div class="profile-page-section">
+
+        <div class="left-side">
+            <div class="profile-card">
+                <div class="profile-card-logo">
+                    <img src="./assets/images/logo.png" alt="">
+                </div>
+                <div class="profile-card-info">
+                    <h1>Training Programs</h1>
+                    <span>Enhance your audio-visual skills with our comprehensive training programs designed by industry
+                        experts</span>
+                </div>
+            </div>
+
+            <div class="row g-3 justify-content-center">
+
+                <div class="col-md-4 col-12">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg style="color: #2563eb;" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-book-open h-8 w-8 text-blue-600 mx-auto mb-2">
+                                <path d="M12 7v14"></path>
+                                <path
+                                    d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="stats-value">9+</div>
+                        <div class="stats-label">Training Programs</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg style="color: #16a34a" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-users h-8 w-8 text-green-600 mx-auto mb-2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div class="stats-value">500+</div>
+                        <div class="stats-label">Students Trained</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <svg style="color: #9333ea" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-award h-8 w-8 text-purple-600 mx-auto mb-2">
+                                <path
+                                    d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
+                                </path>
+                                <circle cx="12" cy="8" r="6"></circle>
+                            </svg>
+                        </div>
+                        <div class="stats-value">95%</div>
+                        <div class="stats-label">Success Rate</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+                <div class="col-md-4 col-12" *ngFor="let course of courses">
+                    <div class="course-card h-100">
+                        <div class="course-title">{{ course.Title }}</div>
+                        <div class="course-desc">{{ course.Descscription }}</div>
+                        <div class="course-info">
+                            <i class="bi bi-clock"></i> {{ course.Duration }}
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-geo-alt"></i> {{ course.Location }}
+                        </div>
+                        <div class="course-price">{{ course.Price }}</div>
+                        <div class="course-btns d-flex gap-2">
+                            <button class="btn btn-outline-secondary w-50" (click)="moreInfo(course)">More Info</button>
+                            <button class="btn btn-primary w-50" (click)="enrollNow(course.Title)"
+                                data-bs-toggle="modal" data-bs-target="#personalInfoModal">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+
+            <div class="ad-card">
+                <div class="ad-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-badge-info h-4 w-4 mr-2">
+                        <path
+                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                        </path>
+                        <line x1="12" x2="12" y1="16" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                    </svg> Sponsored Content
+                </div>
+                <div class="ad-image">
+                    <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                    <div class="ad-label">Advertisement</div>
+                </div>
+                <div class="ad-body">
+                    <h5>Sample Ad 1</h5>
+                    <p>This is a sample advertisement.</p>
+                    <button class="btn learn-more-btn mx-auto">Learn More</button>
+                </div>
+                <div class="ad-footer">
+                    Google Ad Slot <br>
+                    <small>Advertisement · <a href="#">Report this ad</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<app-training-overview *ngIf="isMoreInfo" [data]="clickedCourse" (backClicked)="isMoreInfo = false"
+    (enrollClicked)="openEnrollmentModal()"></app-training-overview>
+
+<form [formGroup]="personalInfoForm" (ngSubmit)="submitPersonalInfo($event)">
+    <div class="modal fade" id="personalInfoModal"  #personalInfoModal  tabindex="-1" aria-labelledby="personalInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="personalInfoLabel">
+                        Enroll in {{eventType}}
+                    </h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Full Name -->
+                    <div>
+                        <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="FullName"
+                            placeholder="Enter your full name" maxlength="32">
+                        <div *ngIf="personalInfoForm.get('FullName')?.touched && personalInfoForm.get('FullName')?.invalid"
+                            class="text-danger small mt-1">
+                            Full name is required.
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="Email" maxlength="64"
+                            placeholder="Enter your Email">
+                        <div *ngIf="personalInfoForm.get('Email')?.touched && personalInfoForm.get('Email')?.invalid"
+                            class="text-danger small mt-1">
+                            <div *ngIf="personalInfoForm.get('Email')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="personalInfoForm.get('Email')?.errors?.['email']">Enter a valid Email.</div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div>
+                        <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="Mobile"
+                            placeholder="Enter your Mobile number" maxlength="10" onlyNumbers>
+                        <div *ngIf="personalInfoForm.get('Mobile')?.touched && personalInfoForm.get('Mobile')?.invalid"
+                            class="text-danger small mt-1">
+                            <div *ngIf="personalInfoForm.get('Mobile')?.errors?.['required']">Mobile number is required.
+                            </div>
+                            <div *ngIf="personalInfoForm.get('Mobile')?.errors?.['pattern']">Enter a valid 10-digit
+                                Mobile number.</div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div>
+                        <label class="form-label">Location/City</label>
+                        <input type="text" class="form-control" formControlName="Location"
+                            placeholder="Enter your Location or city" maxlength="64">
+                        <div *ngIf="personalInfoForm.get('Location')?.touched && personalInfoForm.get('Location')?.invalid"
+                            class="text-danger small mt-1">
+                            Location is required.
+                        </div>
+                    </div>
+
+                    <!-- Working Status -->
+                    <div>
+                        <label class="form-label">Are you currently working?</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="IsWorking" id="workingYes"
+                                value="yes">
+                            <label class="form-check-label" for="workingYes">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="IsWorking" id="workingNo"
+                                value="no">
+                            <label class="form-check-label" for="workingNo">No</label>
+                        </div>
+                    </div>
+
+                    <!-- Training Mode -->
+                    <div class="mb-0">
+                        <label class="form-label">Preferred Training Mode</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="TrainingMode" id="modeOnline"
+                                value="online">
+                            <label class="form-check-label" for="modeOnline">Online</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="TrainingMode"
+                                id="modeClassroom" value="classroom">
+                            <label class="form-check-label" for="modeClassroom">Classroom</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                        [disabled]="isSaving">
+                        <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status"
+                            aria-hidden="true"></span>
+                        {{ isSaving ? 'Submitting...' : 'Submit Enrollment' }}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

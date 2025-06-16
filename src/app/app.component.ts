@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
 })
 export class AppComponent {
   title = 'avchamps';
-
+isDisplayHeader : boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,16 +18,14 @@ export class AppComponent {
     private metaService: Meta,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    // Subscribe to route changes
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(() => {
         let currentRoute = this.activatedRoute;
-        debugger;
-        // Traverse down to the deepest active route
+       this.isDisplayHeader = !this.router.url.includes('login') || !this.router.url.includes('/');
         while (currentRoute.firstChild) {
           currentRoute = currentRoute.firstChild;
         }
@@ -39,7 +37,7 @@ export class AppComponent {
         }
 
         if (routeData['description']) {
-          this.metaService.updateTag({ name: 'description', content: routeData['description' + '| AV Champs' ]  });
+          this.metaService.updateTag({ name: 'description', content: routeData['description' + '| AV Champs'] });
         }
 
         if (routeData['keywords']) {
@@ -47,6 +45,6 @@ export class AppComponent {
         }
       });
   }
-  
+
 
 }

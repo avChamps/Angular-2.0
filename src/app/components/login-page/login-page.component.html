@@ -212,7 +212,8 @@
                 <div class="form-wrapper active" id="loginForm">
                     <h3 class="text-primary text-center">Create Account</h3>
                     <div class="social-icons">
-                        <button
+                        <div class="social-icons">
+                        <button (click)="onClick('facebook')"
                             class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="#1877F2"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -221,7 +222,16 @@
                                 </path>
                             </svg>
                         </button>
-                        <button
+                        <button (click)="onClick('microsoft')"
+                            class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#F25022" d="M11.4 24H0V12.6h11.4V24z"></path>
+                                <path fill="#00A4EF" d="M24 24H12.6V12.6H24V24z"></path>
+                                <path fill="#7FBA00" d="M11.4 11.4H0V0h11.4v11.4z"></path>
+                                <path fill="#FFB900" d="M24 11.4H12.6V0H24v11.4z"></path>
+                            </svg>
+                        </button>
+                        <button (click)="onClick('google')"
                             class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors">
                             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -238,7 +248,7 @@
                                     fill="#EA4335"></path>
                             </svg>
                         </button>
-                        <button
+                        <button (click)="onClick('linkedIn')"
                             class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="#0A66C2"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -247,6 +257,7 @@
                                 </path>
                             </svg>
                         </button>
+                    </div>
                     </div>
                     <p class="text-muted text-center">or use your email account:</p>
                     <form class="needs-validation" *ngIf="!showOtpBox" novalidate (ngSubmit)="submitSignupForm()"
