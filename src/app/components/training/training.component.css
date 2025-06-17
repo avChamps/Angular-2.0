@@ -1,0 +1,13 @@
+.header-bg {
+    background-image: url('./../../../assets/images/Training-bg-Img.svg');
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+}
+
+.form-label {
+    font-weight: 500 !important;
+    color: black !important;
+    font-size: 16px !important;
+    margin-bottom: 0 !important;
+}

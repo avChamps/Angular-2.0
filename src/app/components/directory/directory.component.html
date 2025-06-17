@@ -1,0 +1,95 @@
+<div class="profile-page-section">
+  <div class="left-side">
+    <div class="profile-card">
+      <div class="profile-card-logo">
+        <img src="./assets/images/logo.png" alt="">
+      </div>
+      <div class="profile-card-info">
+        <h1>Directory</h1>
+        <span>Find AV professionals and companies</span>
+      </div>
+    </div>
+
+    <div class="">
+      <input type="text" class="form-control" [(ngModel)]="searchText" (ngModelChange)="getProfiles(1,10)"  placeholder="Search by name, role, company..."
+        style="max-width: 400px;" />
+      <p class="text-muted small mt-2" *ngIf="totalRecords != 0">Showing 1-{{totalRecords}} of {{totalRecords}} professionals</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="row g-3">
+
+      <!-- Card 1 (Active/hovered) -->
+      <div class="col-md-4 col-12" *ngFor="let data of profileList; let i = index">
+        <div class="professional-card">
+          <div class="d-flex align-items-start mb-2 gap-4">
+            <img src="./assets/images/placeholder-circle.svg" alt="Profile Picture" class="profile-logo" />
+            <div>
+              <p class="profile-name mb-0">{{ data.FullName || data.FirstName || data.LastName }} </p>
+              <p class="profile-role mb-0">{{ data.Designation }} </p>
+              <div class="meta mb-1" *ngIf="data.CompanyName"><i class="bi bi-building me-1"></i> {{ data.CompanyName }}
+              </div>
+              <div class="meta mb-2" *ngIf="data.CurrentLocation || data.City || data.State || data.Country"><i
+                  class="bi bi-geo-alt me-1"></i> {{data.CurrentLocation || data.City || data.State || data.Country }}
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-2" />
+          <div class="cert-label mb-1"><i class="bi bi-award me-1"></i> Certifications</div>
+          <div class="cert-status mb-3">No certifications</div>
+
+          <div class="position-relative btn-contact-section" appClickOutside (appClickOutside)="hideSocialPopup()">
+            <button class="btn btn-contact" (click)="toggleSocialPopup(i); $event.stopPropagation();">
+              <i class="bi bi-envelope"></i> Contact
+            </button>
+
+            <div class="social-popup" *ngIf="visibleSocialIndex === i" (click)="$event.stopPropagation()">
+              <a [href]="data.LinkedInUrl" target="_blank" *ngIf="data.LinkedInUrl">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a [href]="data.TwitterUrl" target="_blank" *ngIf="data.TwitterUrl">
+                <i class="bi bi-twitter"></i>
+              </a>
+              <a [href]="data.FacebookUrl" target="_blank" *ngIf="data.FacebookUrl">
+                <i class="bi bi-facebook"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="right-side">
+
+    <div class="ad-card">
+      <div class="ad-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-badge-info h-4 w-4 mr-2">
+          <path
+            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+          </path>
+          <line x1="12" x2="12" y1="16" y2="12"></line>
+          <line x1="12" x2="12.01" y1="8" y2="8"></line>
+        </svg> Sponsored Content
+      </div>
+      <div class="ad-image">
+        <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+        <div class="ad-label">Advertisement</div>
+      </div>
+      <div class="ad-body">
+        <h5>Sample Ad 1</h5>
+        <p>This is a sample advertisement.</p>
+        <button class="btn learn-more-btn mx-auto">Learn More</button>
+      </div>
+      <div class="ad-footer">
+        Google Ad Slot <br>
+        <small>Advertisement · <a href="#">Report this ad</a></small>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,228 @@
+
+
+:root {
+  /* Base Colors */
+  --white: #ffffff;
+  --black: #000000;
+
+  --slate-200:#e2e8f0;
+  --slate-300:#cbd5e1;
+  --slate-400:#94a3b8;
+  --slate-500:#64748B;
+  --slate-700:#334155;
+
+ --gray-500-opacity-10: rgba(107, 114, 128, 0.1);  /* Tailwind bg-gray/10 */
+  --gray-500-opacity-20: rgba(107, 114, 128, 0.2);
+  --gray-500-opacity-30: rgba(107, 114, 128, 0.3);  /* Tailwind bg-gray/30 */
+  --gray-800: #1f2937;
+
+  /* Main Color */
+  --brand-primary: var(--brand-500);
+  --brand-50: #ebf3fe;
+  --brand-100: #c2d8fc;
+  --brand-200: #a5c6fb;
+  --brand-300: #7cabf9;
+  --brand-400: #629bf8;
+  --brand-500: #3b82f6;
+  --brand-600: #3676e0;
+  --brand-700: #2a5caf;
+  --brand-800: #204887;
+  --brand-900: #193767;
+
+  /* Secondary Color */
+  --hero-secondary-text:#FFE066;
+  --stars-icon-color:#FBBF24;
+
+  --color-error:#ef4444;
+  
+  
+  /* Surface Colors */
+  --surface-hero: #020617;
+  --surface-footer: #0f172a;
+
+  /* Text Colors */
+  --color-title: #1e293b;
+  --color-paragraph: #475569;
+  --text-muted: #64748b;
+  --text-subtle: #334155;
+
+  /* Spacing Between Elements */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-9:36px;
+  --space-10:40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Font Sizes for Responsive Typography */
+  --font-h1-desktop: 80px;
+  --font-h1-tablet: 50px;
+  --font-h1-mobile: 44px;
+
+  --font-h2-desktop: 44px;
+  --font-h2-tablet: 36px;
+  --font-h2-mobile: 26px;
+
+  --font-h3-desktop: 40px;
+  --font-h3-tablet: 28px;
+  --font-h3-mobile: 22px;
+
+  --font-h4-desktop:24px;
+  --font-h4-tablet:24px;
+  --font-h4-mobile:24px;
+
+  --font-h5-desktop:19px;
+  --font-h5-mobile:17px;
+
+  --font-h6:13px;
+
+  /* Paragraph Sizes */
+  --font-p12: 12px;
+  --font-p14: 14px;
+  --font-p16: 16px;
+  --font-p18: 18px;
+
+  /* Line Heights */
+  --lh-heading-h1: 105%;
+  --lh-heading-h3:130%;
+  --lh-paragraph: 150%;
+
+  /* Font Weights */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Button Spacing */
+  --btn-padding-sm: 6px 12px;   
+  --btn-padding-md: 12px 32px;
+  --btn-padding-lg: 16px 32px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 52px;
+}
+
+
+*{
+   font-family: "DM Sans", sans-serif;
+   scroll-behavior: smooth;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: var(--fw-semibold);
+  
+}
+p{
+  line-height: var(--lh-paragraph);
+}
+h1{
+  line-height: var(--lh-heading-h1);
+  font-size: var(--font-h1-desktop);
+  /* letter-spacing: 1px; */
+  letter-spacing: 0.03em;
+
+}
+h2{
+  font-size: var(--font-h2-desktop);
+}
+h3{
+  line-height: var(--lh-heading-h3);
+  font-size: var(--font-h3-desktop);
+  letter-spacing:  0.015em;
+
+}
+h4{
+  font-size: var(--font-h4-desktop);
+}
+h5{
+  font-size: var(--font-h5-desktop);
+}
+h6{
+  font-size: var(--font-h6);
+}
+
+.container {
+  max-width: 1920px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  width: 100%;
+}
+@media screen and (max-width:1000px){
+  h1{
+    font-size: 65px;
+  }
+}
+@media screen and (max-width:768px){
+  h1{
+    font-size: var(--font-h1-tablet);
+  }
+  h2{
+    font-size: var(--font-h2-tablet);
+  }
+  h3{
+    font-size: var(--font-h3-tablet);
+  }
+  h4{
+    font-size: var(--font-h4-tablet);
+  }
+  h5{
+    font-size: var(--font-h5-mobile);
+  }
+}
+@media screen and (max-width:500px){
+  h1{
+    font-size: var(--font-h1-mobile);
+  }
+  h2{
+    font-size: var(--font-h2-mobile);
+  }
+  h3{
+    font-size: var(--font-h3-mobile);
+  }
+  h4{
+    font-size: var(--font-h4-mobile);
+  }
+}
+
+
+
+.section_header {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+}
+
+.section_header_title {
+  color: var(--brand-primary);
+  margin-bottom: var(--space-4); /* 16px */
+}
+
+.section_header_subtitle {
+  font-size: var(--font-p16);
+  
+  color: var(--color-paragraph);
+}
+
+@media screen and (max-width: 800px) {
+    .section_header{
+        text-align: left;
+        margin: unset;
+    }
+  .section_header_title {
+    margin-bottom: var(--space-3); /* 12px */
+  }
+
+  .section_header_subtitle {
+    font-size: var(--font-p16);
+  
+  }
+}

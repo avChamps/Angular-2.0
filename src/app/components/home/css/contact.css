@@ -1,0 +1,128 @@
+.contact {
+  
+  padding-top: 48px;
+  padding-bottom: 64px;
+  overflow: hidden;
+  background:  #f8fafc;
+  margin-top: 48px;
+}
+.contact_container{
+    max-width: 1300px;
+  margin: auto;
+}
+.contact_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+  align-items: center;
+}
+
+.contact_form {
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.contact_form_container {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.contact_form_container h4 {
+  margin-bottom: var(--space-2);
+  color: var(--color-title);
+  font-weight: var(--fw-semibold);
+}
+
+.contact_form .contact_form_fields {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.contact_form .submit_button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contact_details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.contact_links {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.contact_link {
+    width: 100%;
+    height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: transform 0.3s ease;
+  width: fit-content;
+}
+
+.contact_link a {
+  width: fit-content;
+  font-size: var(--font-p14);
+  color: var(--slate-700);
+  transition: all 0.3s ease;
+}
+
+.contact_link p {
+  font-size: var(--font-p14);
+  color: var(--slate-700);
+}
+
+.contact_link:hover {
+  transform: translateX(6px);
+}
+
+.contact_link a:hover {
+  color: var(--slate-900);
+  text-decoration: underline;
+}
+
+.contact_link .icon {
+ 
+  color: var(--brand-500);
+}
+
+.contact_map {
+  margin-top: 16px;
+}
+
+.map_iframe {
+  width: 100%;
+  height: 330px;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: var(--brand-500) 0px 0px 0px 1px;
+}
+
+@media screen and (max-width: 800px) {
+  .contact_wrapper {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .contact_form {
+    padding: 32px 16px;
+  }
+
+  .map_iframe {
+    height: 350px;
+  }
+  .contact_form_fields{
+    flex-direction: column;
+  }
+}
