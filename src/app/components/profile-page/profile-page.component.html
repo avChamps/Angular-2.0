@@ -95,10 +95,7 @@
                                         </svg>
                                         <div>
                                             <div class="info-label">Phone</div>
-                                            <div class="info-block"><span class="masked"
-                                                    [tooltip]="profileData?.Mobile"> {{ profileData?.Mobile ?
-                                                    (profileData.Mobile.slice(0, 4) + '****') : 'Not specified'
-                                                    }}</span></div>
+                                            <div class="info-block"><span class="masked"> {{ profileData?.Mobile || 'Not specified'}}</span></div>
                                         </div>
                                         <!-- <button class="bg-transparent border-0 shadow-none mt-auto px-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -124,12 +121,8 @@
                                         </svg>
                                         <div>
                                             <div class="info-label">Email</div>
-                                            <div class="info-block" [tooltip]="profileData?.EmailId"><span
-                                                    class="masked"> {{
-                                                    profileData?.EmailId
-                                                    ? (profileData.EmailId.split('@')[0].slice(0, 4) + '***')
-                                                    : 'Not specified'
-                                                    }}
+                                            <div class="info-block"><span
+                                                    class="masked"> {{ profileData?.EmailI || 'Not specified' }}
                                                 </span></div>
                                         </div>
                                         <!-- <button class="bg-transparent border-0 shadow-none mt-auto px-0">

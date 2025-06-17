@@ -23,7 +23,8 @@
       <div class="col-md-4 col-12" *ngFor="let data of profileList; let i = index">
         <div class="professional-card">
           <div class="d-flex align-items-start mb-2 gap-4">
-            <img src="./assets/images/placeholder-circle.svg" alt="Profile Picture" class="profile-logo" />
+            <img *ngIf="!data?.ImagePath" src="./assets/images/placeholder-circle.svg" alt="Profile Picture" class="profile-logo" />
+            <img *ngIf="data?.ImagePath" [src]="data?.ImagePath" alt="Profile Picture" class="profile-logo" />
             <div>
               <p class="profile-name mb-0">{{ data.FullName || data.FirstName || data.LastName }} </p>
               <p class="profile-role mb-0">{{ data.Designation }} </p>
