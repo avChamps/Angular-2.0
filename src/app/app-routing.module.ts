@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: async () => (await import('./components/login-page/login-page.module')).LoginPageModule,
+    canActivate: [SiteGuardGuard],
     data: {
       title: 'Sign In - AV Champs',
       description: 'Learn more about AV Champs, our vision, and our team.',
@@ -26,7 +27,9 @@ const routes: Routes = [
 
   {
     path: 'directory',
-    loadChildren: async () => (await import('./components/directory/directory.module')).DirectoryModule , data: {
+    loadChildren: async () => (await import('./components/directory/directory.module')).DirectoryModule , 
+    canActivate: [SiteGuardGuard],
+    data: {
       title: 'Directory | Find AV professionals and companies',
       description: 'Explore AV Champs members, companies, and experts.',
       keywords: 'directory, members, av champs'
@@ -36,7 +39,8 @@ const routes: Routes = [
     {
     path: 'trainings',
     loadChildren: async () => (await import('./components/training/training.module')).TrainingModule,
-     data: {
+    canActivate: [SiteGuardGuard], 
+    data: {
       title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
       description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
       keywords: 'directory, members, av champs'

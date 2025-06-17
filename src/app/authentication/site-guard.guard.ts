@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteGuardGuard implements CanActivate {
+  constructor(private router: Router) {
+  }
 
-  constructor(private router: Router) {}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const emailId = sessionStorage.getItem('EmailId');
+    const userName = sessionStorage.getItem('JwtToken');
 
-  canActivate(): boolean | UrlTree {
-    debugger;
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-
-    if (token && username) {
-      return true;
-    } else {
-      // Redirect to login if token or username is missing
-      return this.router.parseUrl('/login');
+    if (!emailId || !userName) {
+      if (state.url === '/') {
+        return true;
+      }
+      this.router.navigate(['/']);
+      return false;
     }
+
+    if (state.url === '/') {
+      this.router.navigate(['/profile']);
+      return false;
+    }
+    return true;
   }
 }
