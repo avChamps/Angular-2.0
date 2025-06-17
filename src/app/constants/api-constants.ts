@@ -18,3 +18,4 @@ export const getCities = url + '/getCities';
 export const getZipCodes = url + '/getZipCodes';
 export const getTrainings = url + '/getTrainings';
 export const trainingContactUs = url + '/trainingContactUs';
+export const ContactUs = url + '/ContactUs';

@@ -5,9 +5,9 @@ import { SiteGuardGuard } from './authentication/site-guard.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     loadChildren: async () => (await import('./components/login-page/login-page.module')).LoginPageModule,
-    canActivate: [SiteGuardGuard],
+    // canActivate: [SiteGuardGuard],
     data: {
       title: 'Sign In - AV Champs',
       description: 'Learn more about AV Champs, our vision, and our team.',
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'directory',
     loadChildren: async () => (await import('./components/directory/directory.module')).DirectoryModule , 
-    canActivate: [SiteGuardGuard],
+    // canActivate: [SiteGuardGuard],
     data: {
       title: 'Directory | Find AV professionals and companies',
       description: 'Explore AV Champs members, companies, and experts.',
@@ -39,7 +39,7 @@ const routes: Routes = [
     {
     path: 'trainings',
     loadChildren: async () => (await import('./components/training/training.module')).TrainingModule,
-    canActivate: [SiteGuardGuard], 
+    // canActivate: [SiteGuardGuard], 
     data: {
       title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
       description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
@@ -47,15 +47,15 @@ const routes: Routes = [
     }
   },
 
-  // {
-  //   path: '',
-  //   loadChildren: async () => (await import('./components/home/home.module')).HomeModule
-  //   , data: {
-  //     title: 'AV Champs Directory',
-  //     description: 'Explore AV Champs members, companies, and experts.',
-  //     keywords: 'directory, members, av champs'
-  //   }
-  // },
+  {
+    path: '',
+    loadChildren: async () => (await import('./components/home/home.module')).HomeModule
+    , data: {
+      title: 'AV Champs Directory',
+      description: 'Explore AV Champs members, companies, and experts.',
+      keywords: 'directory, members, av champs'
+    }
+  },
 
 
 

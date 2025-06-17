@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { InitialsPipe } from '../../pipe/initials.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { OnlyNumbersDirective } from '../directives/only-numbers.directive';

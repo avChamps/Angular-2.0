@@ -210,7 +210,15 @@
   display: none;
   z-index: 999;
 }
-
+.user-menu-options li{
+  padding: 3px 0 !important;
+}
+.user-menu-options .text-danger svg{
+  height: 16px !important;
+}
+.user-menu-options .text-danger{
+  font-size: 16px !important;
+}
 .profile-page-section {
   display: grid;
   grid-template-columns: 75% 25%;
@@ -406,10 +414,6 @@
   gap: 6px;
   font-size: 15px;
   color: #111827;
-}
-
-.masked {
-  letter-spacing: 3px;
 }
 
 .eye {
@@ -883,8 +887,16 @@ svg.svg-blue {
   color: #0d6efd;
   margin-right: 7px;
 }
+
 .info-label svg {
   height: 16px;
+  color: #0d6efd;
+  margin-right: 7px;
+}
+
+.info-label i {
+  font-size: 16px;
+  width: 16px;
   color: #0d6efd;
   margin-right: 7px;
 }
@@ -1116,9 +1128,10 @@ svg.svg-blue {
   padding-top: 0 !important;
 }
 
-.socialLinksModalPopup .modal-header{
+.socialLinksModalPopup .modal-header {
   border-bottom: 1px solid #f3f4f6 !important;
 }
+
 .socialLinksModalPopup .modal-content {
   width: 450px !important;
   margin: auto;
@@ -1129,13 +1142,15 @@ svg.svg-blue {
   gap: 5px !important;
   background-color: transparent !important;
 }
-.socialLinksModalPopup .modal-body .input-group{
+
+.socialLinksModalPopup .modal-body .input-group {
   position: relative;
   width: 100%;
   height: fit-content;
 
 }
-.socialLinksModalPopup .modal-body .input-group .input-group-text{
+
+.socialLinksModalPopup .modal-body .input-group .input-group-text {
   position: absolute;
   left: 10px;
   top: 5px;
@@ -1143,12 +1158,14 @@ svg.svg-blue {
   border: 0;
   padding: 6px 0;
 }
-.socialLinksModalPopup .modal-body .input-group .form-control{
+
+.socialLinksModalPopup .modal-body .input-group .form-control {
   padding-left: 40px;
-  border-radius: 0.75rem  !important;
+  border-radius: 0.75rem !important;
   border-top-left-radius: 0.75rem !important;
-    border-bottom-left-radius: 0.75rem !important;
+  border-bottom-left-radius: 0.75rem !important;
 }
+
 .socialLinksModalPopup .modal-title {
   display: flex;
   align-items: center;
@@ -1159,12 +1176,15 @@ svg.svg-blue {
   margin-right: 7px;
   height: 24px;
 }
-.socialLinksModalPopup .modal-footer{
-border-top: 1px solid #f3f4f6 !important;
+
+.socialLinksModalPopup .modal-footer {
+  border-top: 1px solid #f3f4f6 !important;
 }
-.text-danger{
+
+.text-danger {
   font-size: 12px !important;
 }
+
 .stats-card {
   background-color: #fff;
   border-radius: .75rem;
@@ -1196,7 +1216,7 @@ border-top: 1px solid #f3f4f6 !important;
 .course-card {
   border: 1px solid #eee;
   border-radius: 12px;
-  padding: 24px 24px 62px 24px;
+  padding: 24px 24px 10rem 24px;
   background-color: #fff;
   height: 100%;
   position: relative;
@@ -1229,15 +1249,22 @@ border-top: 1px solid #f3f4f6 !important;
   color: #16a34a;
   font-weight: 600;
   font-size: 16px;
-  margin: 12px 0;
+  margin: 0 0 12px 0;
 }
-
-.course-btns {
-  position: absolute;
+.course-price i{
+  color: #16a34a;
+  margin-right: 8px;
+}
+.course-card-bottom{
+  display: flex;
+  flex-direction: column;
+position: absolute;
   bottom: 24px;
   left: 0;
   width: 100%;
   padding: 0 24px;
+}
+.course-btns {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1250,63 +1277,255 @@ border-top: 1px solid #f3f4f6 !important;
   font-weight: 500;
 }
 
+.btn-close {
+  box-shadow: none !important;
+}
+
 .hideInDesktop {
   display: none;
 }
-@media (max-width: 1400px) {
-.sidebar{
-  padding: 10px;
-  width: 53px;
-}
-.sidebar h6{
-  margin-left: 0;
-}
-.icon-circle{
-  width: 32px;
-  height: 32px;
-}
-.icon-circle svg{
-  height: 15px;
-}
-.sidebar:hover {
-  width: 180px;
-  padding:8px;
+
+.btn-contact-section{
+  position: absolute !important;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
 }
 
+@media (max-width: 1500px) {
+  .profile-page-section .profile-card {
+    padding: 16px;
+  }
 
-.sidebar:hover h6 {
-  padding: 0 12px;
-  /* margin-bottom: 10px; */
+  .profile-card-logo img {
+    height: 34px;
+  }
+
+  .profile-card-info h1 {
+    font-size: 26px;
+  }
+
+  .profile-grid-left {
+    gap: 16px;
+    padding-right: 15px;
+    margin-right: 15px;
+  }
+
+  .profile-page-section {
+    padding: 16px 16px 16px 5.5rem;
+  }
+
+  .profile-page-section .left-side,
+  .profile-page-section .right-side {
+    gap: 16px;
+  }
+
+  .profile-box h4 {
+    font-size: 20px;
+  }
+
+  .profile-box .muted-label {
+    font-size: 14px;
+  }
+
+  .profile-box .muted-label {
+    font-size: 12px;
+  }
+
+  .info-label {
+    font-size: 12px;
+  }
+
+  .contact-info-section svg {
+    height: 14px;
+    margin-top: 2px;
+  }
+
+  .info-block {
+    font-size: 14px;
+  }
+
+  .info-section {
+    margin-top: 16px;
+  }
+
+  .points-header .total {
+    font-size: 30px;
+  }
+
+  .points-item {
+    padding: 8px 0;
+  }
+
+  .toggle-switch h5 {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .toggle-switch p {
+    font-size: 14px;
+  }
+
+  .tab-header a {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .section-header {
+    padding: 16px;
+  }
+
+  .verified-badge {
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .section-header h6 {
+    font-size: 17px;
+  }
+
+  .edit-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .edit-btn svg {
+    height: 16px;
+    margin-right: 2px;
+  }
+
+  .info-value {
+    font-size: 15px;
+    margin-top: 4px;
+    margin-bottom: 14px;
+  }
+
+  .info-body {
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+
+  .modal-title i {
+    margin-right: 7px !important;
+  }
+
+  .modal-body {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .form-section {
+    padding: 16px;
+  }
+
+  .form-section h6 {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    margin-bottom: 3px !important;
+  }
+
+  .form-control,
+  .form-select {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .input-group-text {
+    font-size: 12px;
+  }
+
+  .form-check-label {
+    font-size: 12px;
+  }
+
+  .modal-footer .btn {
+    padding: 6px 18px;
+    font-size: 14px;
+  }
+
+  .section-box h6 {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .sidebar {
+    padding: 10px;
+    width: 53px;
+  }
+
+  .sidebar h6 {
+    margin-left: 0;
+  }
+
+  .icon-circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-circle svg {
+    height: 15px;
+  }
+
+  .sidebar:hover {
+    width: 180px;
+    padding: 8px;
+  }
+
+
+  .sidebar:hover h6 {
+    padding: 0 12px;
+    /* margin-bottom: 10px; */
+  }
+
+  .sidebar ul {
+
+    gap: 7px;
+    /* collapsed */
+  }
+
+  .sidebar:hover ul {
+    gap: 5px;
+    /* expanded spacing */
+  }
+
+  .sidebar:hover ul li {
+    border-radius: 0.75rem;
+    padding: 2px 12px;
+  }
+
+  .sidebar li {
+    gap: 7px;
+  }
+
+  .sidebar:hover ul.user-menu-options {
+    gap: 7px;
+  }
+
+  .profile-page-section {
+    padding: 20px 20px 20px 5.5rem;
+  }
+
+  .modal-content .btn-group label{
+    font-size: 14px !important;
+  }
+.course-card{
+  padding: 16px 16px 10rem 16px;
+}
+.course-card-bottom{
+padding: 0 16px;
 }
 
-.sidebar ul {
-
-  gap: 7px;
-  /* collapsed */
 }
 
-.sidebar:hover ul {
-  gap: 5px;
-  /* expanded spacing */
-}
-
-.sidebar:hover ul li {
-  border-radius: 0.75rem;
-  padding: 2px 12px;
-}
-
-.sidebar li {
-  gap: 7px;
-}
-
-.sidebar:hover ul.user-menu-options {
-  gap: 7px;
-}
-.profile-page-section{
-  padding: 20px 20px 20px 5.5rem;
-}
-
-}
 @media (max-width: 999px) {
   .sidebar {
     top: unset;
@@ -1486,7 +1705,7 @@ border-top: 1px solid #f3f4f6 !important;
     opacity: 1;
   }
 
-  .course-btns {
+  .course-card-bottom {
     position: unset;
     padding: 0;
   }

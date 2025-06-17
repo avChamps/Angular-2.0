@@ -78,17 +78,19 @@
                     <div class="course-card h-100">
                         <div class="course-title">{{ course.Title }}</div>
                         <div class="course-desc">{{ course.Descscription }}</div>
+                        <div class="course-card-bottom">
                         <div class="course-info">
                             <i class="bi bi-clock"></i> {{ course.Duration }}
                         </div>
                         <div class="course-info">
                             <i class="bi bi-geo-alt"></i> {{ course.Location }}
                         </div>
-                        <div class="course-price">{{ course.Price }}</div>
+                        <div class="course-price"><i class="bi bi-currency-rupee"></i>{{ course.Price }}</div>
                         <div class="course-btns d-flex gap-2">
                             <button class="btn btn-outline-secondary w-50" (click)="moreInfo(course)">More Info</button>
                             <button class="btn btn-primary w-50" (click)="enrollNow(course.Title)"
                                 data-bs-toggle="modal" data-bs-target="#personalInfoModal">Enroll Now</button>
+                        </div>
                         </div>
                     </div>
                 </div>

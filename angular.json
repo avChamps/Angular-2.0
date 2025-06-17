@@ -41,18 +41,11 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/coming-soon.js",
-              "src/assets/js/header.js",
-              "src/assets/js/footer.js",
-              "src/assets/js/hero.js",
-              "src/assets/js/services.js",
-              "src/assets/js/testimonials.js",
-              "src/assets/js/contact.js",
-              "src/assets/js/scroll-to-top.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -119,18 +112,11 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/coming-soon.js",
-              "src/assets/js/header.js",
-              "src/assets/js/footer.js",
-              "src/assets/js/hero.js",
-              "src/assets/js/services.js",
-              "src/assets/js/testimonials.js",
-              "src/assets/js/contact.js",
-              "src/assets/js/scroll-to-top.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
         }

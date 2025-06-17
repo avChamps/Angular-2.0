@@ -1,3 +1,9 @@
+
+*{
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
 @font-face {
   font-family: "Inter 28pt";
   src: url("/fonts/Inter28pt-Bold.woff2") format("woff2"),
