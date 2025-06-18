@@ -47,21 +47,22 @@
               <i class="bi bi-person-lines-fill"></i>Contact
             </button>
 
-            <div class="social-popup" *ngIf="visibleSocialIndex === i && false" (click)="$event.stopPropagation()">
-              <a [href]="data.LinkedInUrl" target="_blank" *ngIf="data.LinkedInUrl">
-                <i class="bi bi-linkedin"></i>
-              </a>
-              <a [href]="data.TwitterUrl" target="_blank" *ngIf="data.TwitterUrl">
-                <i class="bi bi-twitter"></i>
-              </a>
-              <a [href]="data.FacebookUrl" target="_blank" *ngIf="data.FacebookUrl">
-                <i class="bi bi-facebook"></i>
-              </a>
+            <div class="social-popup" *ngIf="visibleSocialIndex === i" (click)="$event.stopPropagation()">
+              <ng-container *ngIf="data.LinkedInUrl || data.TwitterUrl || data.FacebookUrl; else noLinks">
+                <a [href]="data.LinkedInUrl" target="_blank" *ngIf="data.LinkedInUrl">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <a [href]="data.TwitterUrl" target="_blank" *ngIf="data.TwitterUrl">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <a [href]="data.FacebookUrl" target="_blank" *ngIf="data.FacebookUrl">
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </ng-container>
+              <ng-template #noLinks>
+                <span class="no-links-watermark">No social links available.</span>
+              </ng-template>
             </div>
-
-             <div class="social-popup"  *ngIf="visibleSocialIndex === i" (click)="$event.stopPropagation()">
-              <span class="no-links-watermark">No social links available.</span>
-             </div>
           </div>
 
         </div>

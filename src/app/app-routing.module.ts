@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: async () => (await import('./components/profile-page/profile-page.module')).ProfilePageModule,
+    canActivate: [SiteGuardGuard],
     data: {
       title: 'Profile | Manage your personal and professional information',
       description: 'Discover tools, resources, events, and opportunities for AV professionals on AV Champs.',
@@ -28,7 +29,7 @@ const routes: Routes = [
   {
     path: 'directory',
     loadChildren: async () => (await import('./components/directory/directory.module')).DirectoryModule , 
-    // canActivate: [SiteGuardGuard],
+    canActivate: [SiteGuardGuard],
     data: {
       title: 'Directory | Find AV professionals and companies',
       description: 'Explore AV Champs members, companies, and experts.',
@@ -39,7 +40,7 @@ const routes: Routes = [
     {
     path: 'trainings',
     loadChildren: async () => (await import('./components/training/training.module')).TrainingModule,
-    // canActivate: [SiteGuardGuard], 
+    canActivate: [SiteGuardGuard], 
     data: {
       title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
       description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
