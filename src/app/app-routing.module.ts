@@ -5,7 +5,7 @@ import { SiteGuardGuard } from './authentication/site-guard.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'auth/:mode',
     loadChildren: async () => (await import('./components/login-page/login-page.module')).LoginPageModule,
     // canActivate: [SiteGuardGuard],
     data: {

@@ -10,7 +10,8 @@ import { filter } from 'rxjs';
 })
 export class AppComponent {
   title = 'avchamps';
-isDisplayHeader : boolean = true;
+  isDisplayHeader: boolean = false;
+  isAppInitialized: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,30 +26,32 @@ isDisplayHeader : boolean = true;
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(() => {
         let currentRoute = this.activatedRoute;
-  
-        // Hide header if route is '/' or includes 'login'
-        this.isDisplayHeader = !(this.router.url === '/' || this.router.url.includes('login'));
-  
+
+        const hiddenRoutes = ['/login', '/signup', '/auth/login', '/auth/signup'];
+
+        this.isDisplayHeader = !hiddenRoutes.some(route => this.router.url === route || this.router.url.includes(route)) && this.router.url != '/';
+        this.isAppInitialized = true;
+
         while (currentRoute.firstChild) {
           currentRoute = currentRoute.firstChild;
         }
-  
+
         const routeData = currentRoute.snapshot.data;
-  
+
         if (routeData['title']) {
           this.titleService.setTitle(`${routeData['title']} | AV Champs`);
         }
-  
+
         if (routeData['description']) {
           this.metaService.updateTag({ name: 'description', content: `${routeData['description']} | AV Champs` });
         }
-  
+
         if (routeData['keywords']) {
           this.metaService.updateTag({ name: 'keywords', content: `${routeData['keywords']} | AV Champs` });
         }
       });
   }
-  
+
 
 
 }

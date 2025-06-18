@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { HomePageModule } from './components/home-page/home-page.module';
 import { TrainingComponent } from './components/training/training.component';
 import { SiteGuardGuard } from './authentication/site-guard.guard';
+import { RedirectedPageComponent } from './components/redirected-page/redirected-page.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RedirectedPageComponent
   ],
   imports: [
     BrowserModule,

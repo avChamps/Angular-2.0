@@ -13,6 +13,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import Swiper from 'swiper';
 import { ContactUs, updateProfile } from '../../constants/api-constants';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +30,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   private clickListener!: () => void;
   private scrollListener!: () => void;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private renderer: Renderer2, private el: ElementRef, private fb: FormBuilder, private http: HttpClient,private router : Router) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -369,6 +370,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
   }
 
 
-
+  onNavigation(url : any) {
+    this.router.navigate([url]);
+  }
 
 }

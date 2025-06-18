@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { createAccount, login, verifyOtpAndRegister } from '../../constants/api-constants';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnDestroy,OnInit {
   isLogin: boolean = true;
   baseUrl = environment.APIURL;
   signupForm: FormGroup;
@@ -23,27 +23,21 @@ export class LoginPageComponent {
   isSubmitting: boolean = false;
   isVerifyingOtp: boolean = false;
   isLoading = false;
-
-  switchTab() {
-    this.isLogin = !this.isLogin;
-  }
-
-  onClick(type: any) {
-    let subvalue;
-
-    if (type === 'google') {
-      window.location.href = `${this.baseUrl}/auth/google?destination`
-    } else if (type === 'linkedIn') {
-      window.location.href = `${this.baseUrl}/auth/linkedin?destination`
-    } else if (type === 'facebook') {
-      window.location.href = `${this.baseUrl}/auth/facebook?destination`
-    } else if (type === 'microsoft') {
-      window.location.href = `${this.baseUrl}/auth/microsoft?destination`
-    }
-  }
+  receivedValue :string = '';
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private actRoute: ActivatedRoute) {
+
+    this.actRoute.params.subscribe((res: any) => {
+      this.receivedValue = res['mode']
+      if (this.receivedValue === 'login') {
+        this.isLogin = true
+      } else {
+        this.isLogin = false
+      }
+    })
+
+
     this.signupForm = this.fb.group({
       fullName: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
@@ -59,6 +53,39 @@ export class LoginPageComponent {
       otp: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)])
     });
 
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  switchTab() {
+    this.isLogin = !this.isLogin;
+  }
+
+  onClick(type: any) {
+    let subvalue;
+
+    if (type === 'google') {
+      window.location.href = `${this.baseUrl}/auth/google?destination=${this.receivedValue}`
+    } else if (type === 'linkedIn') {
+      window.location.href = `${this.baseUrl}/auth/linkedin?destination=${this.receivedValue}`
+    } else if (type === 'facebook') {
+      window.location.href = `${this.baseUrl}/auth/facebook?destination=${this.receivedValue}`
+    } else if (type === 'microsoft') {
+      window.location.href = `${this.baseUrl}/auth/microsoft?destination${this.receivedValue}`
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.signupForm.reset();
+    this.loginForm.reset();
+    this.otpForm.reset();
+    this.errorMessage = '';
+    this.loginErrorMessage = '';
+    this.isSubmitting = false;
+    this.isVerifyingOtp = false;
+    this.isLoading = false;
+    this.showOtpBox = false;
   }
 
   get otpControl(): FormControl {

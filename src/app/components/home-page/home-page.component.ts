@@ -47,7 +47,7 @@ export class HomePageComponent {
   logOut() {
     window.localStorage.clear();
     window.sessionStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 onNaviagate(router : any) {

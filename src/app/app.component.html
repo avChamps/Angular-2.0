@@ -1,2 +1,5 @@
-<app-home-page *ngIf="isDisplayHeader"></app-home-page>
-<router-outlet></router-outlet>
+<ng-container *ngIf="isAppInitialized && isDisplayHeader">
+    <app-home-page></app-home-page>
+  </ng-container>
+  <router-outlet></router-outlet>
+  
