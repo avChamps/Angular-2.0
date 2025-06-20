@@ -48,6 +48,20 @@ const routes: Routes = [
     }
   },
 
+
+
+  {
+    path: 'events',
+    loadChildren: async () => (await import('./components/events/events.module')).EventsModule,
+    canActivate: [SiteGuardGuard], 
+    data: {
+      title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      keywords: 'directory, members, av champs'
+    }
+  },
+
+
   {
     path: '',
     loadChildren: async () => (await import('./components/home/home.module')).HomeModule
