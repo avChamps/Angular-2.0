@@ -95,8 +95,7 @@
                                         </svg>
                                         <div>
                                             <div class="info-label">Phone</div>
-                                            <div class="info-block"><span class="masked"> {{ profileData?.Mobile || 'Not
-                                                    specified'}}</span></div>
+                                            <div class="info-block"><span class="masked"> {{ profileData?.Mobile || 'Not specified'}}</span></div>
                                         </div>
                                         <!-- <button class="bg-transparent border-0 shadow-none mt-auto px-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -122,8 +121,7 @@
                                         </svg>
                                         <div>
                                             <div class="info-label">Email</div>
-                                            <div class="info-block"><span class="masked"> {{ profileData?.EmailI || 'Not
-                                                    specified' }}
+                                            <div class="info-block"><span class="masked"> {{ profileData?.EmailId || 'Not specified' }}
                                                 </span></div>
                                         </div>
                                         <!-- <button class="bg-transparent border-0 shadow-none mt-auto px-0">
@@ -805,7 +803,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="dob"
+                            <input type="text"  bsDatepicker  class="form-control"  [bsConfig]="bsConfig" placeholder="dd-mm-yyyy" name="dob"
                                 formControlName="DOB">
                             <div *ngIf="personalInfoForm.get('DOB')?.touched && personalInfoForm.get('DOB')?.invalid"
                                 class="text-danger small mt-1">
@@ -1071,7 +1069,7 @@
                                     Please enter salary amount.
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <!-- <div class="col-md-6 mb-2">
                                 <label class="form-label">Salary Duration</label>
                                 <input type="number" class="form-control" placeholder="per month / annum"
                                     formControlName="SalaryDuration" (keydown)="preventNonNumericInput($event)"> 
@@ -1086,7 +1084,7 @@
                                     class="text-danger small">
                                     Please enter salary duration.
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -1380,7 +1378,7 @@
 
             <form [formGroup]="socialForm" (ngSubmit)="submitSocialLinksForm()">
                 <div class="modal-body">
-                    <label class="form-label mb-1">Enter your URL</label>
+                    <label class="form-label mb-1 social-media-text">Enter your URL</label>
                     <div class="input-group mb-2">
                         <span class="input-group-text bg-white">
                             <i class="bi bi-link-45deg text-muted"></i>
@@ -1430,7 +1428,7 @@
 
             <form [formGroup]="socialForm" (ngSubmit)="submitSocialLinksForm()">
                 <div class="modal-body">
-                    <label class="form-label mb-1">Enter your URL</label>
+                    <label class="form-label mb-1 social-media-text">Enter your URL</label>
                     <div class="input-group mb-2">
                         <span class="input-group-text bg-white">
                             <i class="bi bi-link-45deg text-muted"></i>
@@ -1478,7 +1476,7 @@
 
             <form [formGroup]="socialForm" (ngSubmit)="submitSocialLinksForm()">
                 <div class="modal-body">
-                    <label class="form-label mb-1">Enter your URL</label>
+                    <label class="form-label mb-1 social-media-text">Enter your URL</label>
                     <div class="input-group mb-2">
                         <span class="input-group-text bg-white">
                             <i class="bi bi-link-45deg text-muted"></i>

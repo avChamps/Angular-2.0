@@ -1,0 +1,42 @@
+[
+    {
+      "title": "Aspect Ratio Calculator",
+      "description": "Calculate and visualize different aspect ratios for images and videos",
+      "icon": "bi-aspect-ratio-fill",
+      "iconBgClass": "bg-primary-subtle",
+      "iconTextClass": "text-primary",
+      "tags": ["aspect ratio", "calculator", "video", "image"],
+      "version": "v1.0.0",
+      "premium": false,
+      "badgeClass": "",
+      "link": "#",
+      "linkClass": "text-primary"
+    },
+    {
+      "title": "BTU Calculator",
+      "description": "Calculate the BTU requirements for heating and cooling spaces",
+      "icon": "bi-thermometer-half",
+      "iconBgClass": "bg-danger-subtle",
+      "iconTextClass": "text-danger",
+      "tags": ["btu", "calculator", "hvac", "cooling", "heating"],
+      "version": "v1.0.0",
+      "premium": false,
+      "badgeClass": "",
+      "link": "#",
+      "linkClass": "text-primary"
+    },
+    {
+      "title": "Video Bandwidth Calculator",
+      "description": "Calculate bandwidth requirements for video streaming and transmission",
+      "icon": "bi-camera-video-fill",
+      "iconBgClass": "bg-success-subtle",
+      "iconTextClass": "text-success",
+      "tags": ["bandwidth", "calculator", "video", "streaming"],
+      "version": "v1.0.0",
+      "premium": true,
+      "badgeClass": "bg-warning text-dark",
+      "link": "#",
+      "linkClass": "text-warning"
+    }
+  ]
+  

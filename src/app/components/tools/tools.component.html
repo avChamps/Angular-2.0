@@ -1,0 +1,133 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <div class="profile-card">
+            <div class="profile-card-logo">
+                <img src="./assets/images/logo.png" alt="">
+            </div>
+            <div class="profile-card-info">
+                <h1>AV Tools</h1>
+                <span>Access calculators, utilities, and more</span>
+            </div>
+        </div>
+
+        <!-- Points Summary Box -->
+        <div class="tools-page-section">
+            <div class="points-box">
+                <div class="left">
+                    <div class="icon"><i class="bi bi-award"></i></div>
+                    <div>
+                        <div class="text-title">Your Points</div>
+                        <div class="text-muted">Unlock premium tools with your points</div>
+                    </div>
+                </div>
+                <div class="points"><i class="bi bi-stars"></i> 715</div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="filter-bar">
+                <input type="text" class="form-control flex-grow-1" [(ngModel)]="searchTerm" (input)="getTools()"
+                    placeholder="Search tools...">
+                <button class="btn btn-outline-secondary"><i class="bi bi-funnel"></i> Filters</button>
+                <button class="btn btn-outline-secondary" (click)="getTools(true)"><i class="bi bi-star star"></i>
+                    Favorites</button>
+                <button class="btn btn-outline-secondary" (click)="loadRecentTools()"><i
+                        class="bi bi-clock-history recent"></i> Recent</button>
+            </div>
+
+            <!-- Tool Tabs (Top) -->
+            <ul class="nav nav-pills my-3 tool-tabs bg-white">
+                <li class="nav-item" (click)="getTools(false)">
+                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'all' }">All Tools</a>
+                </li>
+                <li class="nav-item" (click)="getTools(true)">
+                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'favourite' }">
+                        Favorites ({{ interestCount || 0}})
+                    </a>
+                </li>
+                <li class="nav-item" (click)="selectedTab = 'recent'" (click)="loadRecentTools()">
+                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'recent' }">Recent ({{ recentCount ||
+                        0}})</a>
+                </li>
+                <li class="nav-item" (click)="selectedTab = 'locked'">
+                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'locked' }">Locked (0)</a>
+                </li>
+            </ul>
+
+
+            <!-- Tool Filter Buttons -->
+            <div class="d-flex flex-wrap gap-2 tool-filters">
+                <button *ngFor="let filter of toolFilters" class="btn"
+                    [ngClass]="filter.active ? 'btn-primary active' : 'btn-outline-secondary'"
+                    (click)="onFilterSelect(filter.type);">
+                    <i class="bi" [ngClass]="filter.icon"></i> {{ filter.label }}
+                </button>
+            </div>
+
+            <div class="tool-grid d-flex flex-wrap gap-3">
+                <div class="tool-card" [ngClass]="{ premium: tool.premium }" *ngFor="let tool of toolsList">
+                    <div class="tool-header justify-content-between">
+                        <div class="tool-icon" [ngClass]="[tool.iconBgClass, tool.iconTextClass]">
+                            <i class="bi" [ngClass]="tool.icon + ' fs-5'"></i>
+                        </div>
+
+                        <div *ngIf="tool.premium" class="d-flex align-items-center gap-2">
+                            <span class="badge rounded-pill"
+                                [ngClass]="tool.badgeClass + ' small fw-semibold'">Premium</span>
+                            <i class="bi bi-star fs-6 text-muted"></i>
+                        </div>
+                        <i class="bi fs-6"
+                            [ngClass]="tool.isInterested ? 'bi-star-fill text-warning' : 'bi-star text-muted'"
+                            (click)="markInterest(tool)">
+                        </i>
+
+                    </div>
+
+                    <h6 class="mt-3 mb-1 fw-semibold">{{ tool.title }}</h6>
+                    <p class="text-muted small mb-2">{{ tool.description }}</p>
+
+                    <div class="tags mb-3">
+                        <span class="badge text-bg-light" *ngFor="let tag of tool.tags">{{ tag }}</span>
+                        <span class="badge text-bg-primary-subtle text-primary border border-primary-subtle">{{
+                            tool.version }}</span>
+                    </div>
+
+                    <a class="tool-link fw-semibold" [ngClass]="tool.linkClass" (click)="addToRecent(tool)">Open
+                        Tool</a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
+            </div>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
+    </div>
+</div>

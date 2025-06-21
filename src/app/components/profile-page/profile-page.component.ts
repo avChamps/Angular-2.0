@@ -42,6 +42,10 @@ export class ProfilePageComponent {
   @ViewChild('certModal') certModal!: ElementRef;
   @ViewChild('addressModal') addressModal!: ElementRef;
 
+  bsConfig = {
+    dateInputFormat: 'DD-MM-YYYY'
+  };
+
   years: number[] = [];
 
   months = [
@@ -393,11 +397,12 @@ export class ProfilePageComponent {
 
 
   patchValue(profile: any) {
-    const DOB = profile.DOB ? new Date(profile.DOB).toISOString().split('T')[0] : ''
+    debugger;
+    // const DOB = profile.DOB ? new Date(profile.DOB).toISOString().split('T')[0] : ''
     this.personalInfoForm.patchValue({
       FullName: profile.FullName,
       Gender: profile.Gender || '',
-      DOB: DOB || '',
+      DOB: profile.DOB ? new Date(profile.DOB) : null,
       WorkStatus: profile.WorkStatus,
       Mobile: profile.Mobile,
       ProfileEmailId: profile.ProfileEmailId,

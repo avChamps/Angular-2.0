@@ -725,6 +725,12 @@ svg.svg-blue {
   object-fit: cover;
 }
 
+.social-media-text {
+  font-size: 14px !important;
+  font-weight: 500; 
+  color: #374151;
+}
+
 .ad-label {
   position: absolute;
   top: 8px;
@@ -1291,6 +1297,10 @@ position: absolute;
   bottom: 0;
   left: 0;
   padding: 15px;
+}
+
+.form-text {
+  font-size: 12px;
 }
 
 @media (max-width: 1500px) {

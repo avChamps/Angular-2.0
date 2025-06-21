@@ -7,6 +7,8 @@ import { InitialsPipe } from '../../pipe/initials.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { OnlyNumbersDirective } from '../directives/only-numbers.directive';
 import { ClickOutsideDirective } from '../directives/ClickOutsideDirective.directive';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -23,7 +25,8 @@ import { ClickOutsideDirective } from '../directives/ClickOutsideDirective.direc
     HttpClientModule,
     FormsModule,
     NgMultiSelectDropDownModule,
-    TooltipModule
+    TooltipModule,
+    BsDatepickerModule
   ],
   exports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { ClickOutsideDirective } from '../directives/ClickOutsideDirective.direc
     InitialsPipe,
     TooltipModule,
     OnlyNumbersDirective,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    BsDatepickerModule
   ]
 })
 export class SharedModule { }
