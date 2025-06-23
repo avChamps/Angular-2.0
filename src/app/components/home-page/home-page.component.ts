@@ -13,6 +13,66 @@ export class HomePageComponent {
   token : any;
   emailId : any;
   profileData : any;
+  isDrawerHidden = true;
+  unreadCount : number = 10;
+
+  notifications = [
+  {
+    id: 1,
+    type: 'success',
+    icon: '✔',
+    title: 'Points earned',
+    message: 'You earned 15 points! Reason: Daily login reward',
+    timestamp: 'about 8 hours ago',
+    isRead: false
+  },
+  {
+    id: 2,
+    type: 'info',
+    icon: 'ℹ️',
+    title: 'Profile Updated',
+    message: 'Your profile has been successfully updated.',
+    timestamp: '2 hours ago',
+    isRead: false
+  },
+  {
+    id: 3,
+    type: 'warning',
+    icon: '⚠️',
+    title: 'Password Expiring',
+    message: 'Your password will expire in 5 days. Please update it.',
+    timestamp: '1 day ago',
+    isRead: false
+  },
+  {
+    id: 4,
+    type: 'alert',
+    icon: '🔔',
+    title: 'New Message',
+    message: 'You have received a new message from support.',
+    timestamp: '10 minutes ago',
+    isRead: false
+  },
+  {
+    id: 5,
+    type: 'success',
+    icon: '✔',
+    title: 'Points earned',
+    message: 'You earned 30 points! Reason: Completed survey',
+    timestamp: 'yesterday',
+    isRead: true
+  },
+  {
+    id: 6,
+    type: 'event',
+    icon: '📅',
+    title: 'Webinar Reminder',
+    message: 'AV Champs webinar starts in 30 minutes. Don’t miss it!',
+    timestamp: '30 minutes ago',
+    isRead: false
+  }
+];
+
 
   constructor(private router: Router, private actRoute : ActivatedRoute, private http : HttpClient,private route: ActivatedRoute) { }
 
@@ -42,6 +102,11 @@ export class HomePageComponent {
     if (!clickedInside) {
       this.menuVisible = false;
     }
+
+      const clickedNotication = (event.target as HTMLElement).closest('#notificationToggle');
+    if (!clickedNotication) {
+      this.isDrawerHidden = true;
+    }
   }
 
   logOut() {
@@ -63,6 +128,7 @@ getProfiles() {
   }).subscribe({
     next: (response: any) => {
       this.profileData = response?.profile;
+     sessionStorage.setItem('profileData', JSON.stringify(this.profileData));
     },
     error: (error) => {
       console.error('Error fetching profile:', error);
@@ -70,5 +136,11 @@ getProfiles() {
   });
 }
 
+
+
+ toggleDrawer(event: Event): void {
+    event.stopPropagation();
+    this.isDrawerHidden = !this.isDrawerHidden;
+  }
 
 }

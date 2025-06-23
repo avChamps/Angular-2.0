@@ -15,7 +15,7 @@
       <div class="section-header d-flex justify-content-between align-items-start flex-wrap">
         <div>
           <h4 class="mb-1">Upcoming Events</h4>
-          <div class="section-sub">Showing {{ totalRecords}} of {{ totalRecords }} events</div>
+          <div class="section-sub">Showing 10 of {{ totalRecords }} events</div>
         </div>
         <select class="custom-select form-select mt-2 mt-md-0" [(ngModel)]="selectedCategory" (change)="getEvents()">
           <option value="">All Categories</option>
@@ -62,16 +62,25 @@
           <!-- Card 1 -->
           <div class="col-md-6 col-lg-4 col-12" *ngFor="let event of events">
             <div class="event-card-bottom">
-              <div class="event-img">
+              <div class="event-img" [ngStyle]="{
+       'background-image': 'url(assets/images/' + (event?.EventType === 'TradeShow' ? 'Tradeshow.jpg' : event?.EventType === 'Webinar' ? 'Webinar.jpg' : 'default.jpg') + ')',
+   'background-size': 'cover',
+       'background-position': 'center',
+       'height': '200px',
+       'border-radius': '12px'
+     }">
                 <span class="tag-badge">{{ event?.EventType }}</span>
                 <span class="featured-badge">Featured</span>
               </div>
+
               <div class="event-body">
                 <div class="event-title">{{ event?.Title }}</div>
                 <div class="event-desc">{{ event?.ShortDescription }}</div>
-                <div class="event-meta"><i class="bi bi-calendar-event"></i> {{ event?.StartDate | date:'MMMM d, y' }}
+                <div class="event-meta" *ngIf="event?.StartDate"><i class="bi bi-calendar-event"></i> {{
+                  event?.StartDate | date:'MMMM d, y' }}
                 </div>
-                <div class="event-meta"><i class="bi bi-geo-alt"></i> {{ event?.Location }}</div>
+                <div class="event-meta" *ngIf="event?.Location"><i class="bi bi-geo-alt"></i> {{ event?.Location }}
+                </div>
                 <div class="event-actions mt-3">
                   <a class="btn btn-register" [href]="event?.RegistrationUrl" target="_blank">Register</a>
                   <!-- <button class="btn btn-icon ms-2"><i class="bi bi-share-fill"></i></button> -->
@@ -80,10 +89,19 @@
             </div>
           </div>
 
-          <div *ngIf="events?.length === 0" class="col-12">
+          <!-- Existing Event Cards Loop -->
+
+          <div *ngIf="loading && events?.length" class="text-center mt-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <div *ngIf="!events?.length && !loading" class="col-12">
             <p>No events available for the selected category.</p>
           </div>
-          
+
+
 
         </div>
       </div>
@@ -91,94 +109,96 @@
   </div>
 
 
-    <div class="left-side" *ngIf="isPostEvent">
-      <div class="submit-event-form">
-        <h5>Submit an Event Request</h5>
-        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <div class="left-side" *ngIf="isPostEvent">
+    <div class="submit-event-form">
+      <h5>Submit an Event Request</h5>
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
 
-          <!-- Event Title -->
-          <div class="mb-3">
-            <input type="text" class="form-control" formControlName="Title" placeholder="Event Title" required>
-            <div class="text-danger" *ngIf="eventForm.get('Title')?.touched && eventForm.get('Title')?.invalid">
-              Event Title is required.
-            </div>
+        <!-- Event Title -->
+        <div class="mb-3">
+          <input type="text" class="form-control" formControlName="Title" placeholder="Event Title" required>
+          <div class="text-danger" *ngIf="eventForm.get('Title')?.touched && eventForm.get('Title')?.invalid">
+            Event Title is required.
           </div>
+        </div>
 
-          <!-- Short Description -->
-          <div class="mb-3">
-            <textarea class="form-control" formControlName="ShortDescription" rows="2" placeholder="Short Description"
-              required style="min-height: 80px;"></textarea>
-            <div class="text-danger"
-              *ngIf="eventForm.get('ShortDescription')?.touched && eventForm.get('ShortDescription')?.invalid">
-              Short Description is required.
-            </div>
+        <!-- Short Description -->
+        <div class="mb-3">
+          <textarea class="form-control" formControlName="ShortDescription" rows="2" placeholder="Short Description"
+            required style="min-height: 80px;"></textarea>
+          <div class="text-danger"
+            *ngIf="eventForm.get('ShortDescription')?.touched && eventForm.get('ShortDescription')?.invalid">
+            Short Description is required.
           </div>
+        </div>
 
-          <!-- Full Event Details -->
-          <div class="mb-3">
-            <textarea class="form-control" formControlName="FullDetails" rows="4" placeholder="Full Event Details"
-              required style="min-height: 80px;"></textarea>
-            <div class="text-danger"
-              *ngIf="eventForm.get('FullDetails')?.touched && eventForm.get('FullDetails')?.invalid">
-              Full Event Details are required.
-            </div>
+        <!-- Full Event Details -->
+        <div class="mb-3">
+          <textarea class="form-control" formControlName="FullDetails" rows="4" placeholder="Full Event Details"
+            required style="min-height: 80px;"></textarea>
+          <div class="text-danger"
+            *ngIf="eventForm.get('FullDetails')?.touched && eventForm.get('FullDetails')?.invalid">
+            Full Event Details are required.
           </div>
+        </div>
 
-          <!-- Start Date -->
-          <div class="mb-3">
-            <input type="text" class="form-control" bsDatepicker formControlName="StartDate" placeholder="Start Date" required>
-            <div class="text-danger" *ngIf="eventForm.get('StartDate')?.touched && eventForm.get('StartDate')?.invalid">
-              Start Date is required.
-            </div>
+        <!-- Start Date -->
+        <div class="mb-3">
+          <input type="text" class="form-control" bsDatepicker formControlName="StartDate" placeholder="Start Date"
+            required>
+          <div class="text-danger" *ngIf="eventForm.get('StartDate')?.touched && eventForm.get('StartDate')?.invalid">
+            Start Date is required.
           </div>
+        </div>
 
-          <!-- End Date -->
-          <div class="mb-3">
-            <input type="text" class="form-control" bsDatepicker formControlName="EndDate" placeholder="End Date" required>
-            <div class="text-danger" *ngIf="eventForm.get('EndDate')?.touched && eventForm.get('EndDate')?.invalid">
-              End Date is required.
-            </div>
+        <!-- End Date -->
+        <div class="mb-3">
+          <input type="text" class="form-control" bsDatepicker formControlName="EndDate" placeholder="End Date"
+            required>
+          <div class="text-danger" *ngIf="eventForm.get('EndDate')?.touched && eventForm.get('EndDate')?.invalid">
+            End Date is required.
           </div>
+        </div>
 
-          <!-- Location -->
-          <div class="mb-3">
-            <input type="text" class="form-control" formControlName="Location" placeholder="Location" required>
-            <div class="text-danger" *ngIf="eventForm.get('Location')?.touched && eventForm.get('Location')?.invalid">
-              Location is required.
-            </div>
+        <!-- Location -->
+        <div class="mb-3">
+          <input type="text" class="form-control" formControlName="Location" placeholder="Location" required>
+          <div class="text-danger" *ngIf="eventForm.get('Location')?.touched && eventForm.get('Location')?.invalid">
+            Location is required.
           </div>
+        </div>
 
-          <!-- Event Type -->
-          <div class="mb-3">
-            <select class="form-select" formControlName="EventType" required>
-              <option value="">Select Event Type</option>
-              <option *ngFor="let type of categories" [value]="type">{{ type }}</option>
-            </select>
-            
-            <div class="text-danger" *ngIf="eventForm.get('EventType')?.touched && eventForm.get('EventType')?.invalid">
-              Event Type is required.
-            </div>
+        <!-- Event Type -->
+        <div class="mb-3">
+          <select class="form-select" formControlName="EventType" required>
+            <option value="">Select Event Type</option>
+            <option *ngFor="let type of categories" [value]="type">{{ type }}</option>
+          </select>
+
+          <div class="text-danger" *ngIf="eventForm.get('EventType')?.touched && eventForm.get('EventType')?.invalid">
+            Event Type is required.
           </div>
+        </div>
 
-          <!-- Registration URL (optional) -->
-          <div class="mb-4">
-            <input type="url" class="form-control" formControlName="RegistrationUrl"
-              placeholder="Registration URL (optional)">
-          </div>
+        <!-- Registration URL (optional) -->
+        <div class="mb-4">
+          <input type="url" class="form-control" formControlName="RegistrationUrl"
+            placeholder="Registration URL (optional)">
+        </div>
 
-          <!-- Submit Button -->
-          <div>
-            <button type="submit" class="btn btn-submit w-100" [disabled]="isSaving">
-              <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status"
-                aria-hidden="true"></span>
-              {{ isSaving ? 'Submitting...' : 'Submit Event Request' }}
-            </button>
-          </div>
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" class="btn btn-submit w-100" [disabled]="isSaving">
+            <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status"
+              aria-hidden="true"></span>
+            {{ isSaving ? 'Submitting...' : 'Submit Event Request' }}
+          </button>
+        </div>
 
 
-        </form>
-      </div>
+      </form>
     </div>
+  </div>
 
   <div class="right-side">
     <div class="ad-card">

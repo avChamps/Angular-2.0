@@ -1,4 +1,3 @@
-
 /* Events page css */
 
 .events-page-section .section-header {
@@ -28,7 +27,8 @@
   align-items: center;
   gap: 10px;
 }
-.events-page-section .browse-event{
+
+.events-page-section .browse-event {
   font-weight: 700;
   font-size: 24px;
   position: relative;
@@ -37,18 +37,22 @@
   align-items: center;
   gap: 10px;
 }
+
 .events-page-section .featured-title::before {
   content: '';
   width: 6px;
   height: 35px;
-  background-color: #facc15; /* Yellow */
+  background-color: #facc15;
+  /* Yellow */
   border-radius: 20px;
 }
+
 .events-page-section .browse-event::before {
   content: '';
   width: 6px;
   height: 35px;
-  background-color: #003ee8; /* Yellow */
+  background-color: #003ee8;
+  /* Yellow */
   border-radius: 20px;
 }
 
@@ -76,7 +80,8 @@
   align-items: end;
   padding: 24px;
 }
-.events-page-section .event-card::before{
+
+.events-page-section .event-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -144,7 +149,7 @@
   right: 16px;
   background-color: #fbbf24;
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   padding: 4px 10px;
   border-radius: 16px;
@@ -154,15 +159,17 @@
   margin-right: 8px;
 }
 
-.events-page-section .register-btn{
+.events-page-section .register-btn {
   color: #1e40af !important;
   background-color: #fff !important;
   border: 1px solid #e2e8f0 !important;
 }
-.events-page-section .register-btn i{
+
+.events-page-section .register-btn i {
   margin-left: 5px;
 }
-.events-page-section .learn-btn:hover{
+
+.events-page-section .learn-btn:hover {
   color: #1e40af !important;
   background-color: #fff !important;
   border: 1px solid #e2e8f0 !important;
@@ -177,13 +184,16 @@
   box-shadow: 0 0 0 1px #e5e7eb;
   transition: 0.3s;
 }
-.events-page-section .event-card-bottom:hover{
+
+.events-page-section .event-card-bottom:hover {
   transform: scale(1.02);
 }
-.events-page-section .event-card-bottom:hover .event-title{
+
+.events-page-section .event-card-bottom:hover .event-title {
   color: #003ee8;
   font-weight: bold;
 }
+
 .events-page-section .event-card-bottom .event-img {
   height: 180px;
   /* background-image: url('images/placeholder-course-page.svg'); */
@@ -220,7 +230,7 @@
 
 .events-page-section .event-card-bottom .event-title {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .events-page-section .event-card-bottom .event-desc {
@@ -230,7 +240,7 @@
 }
 
 .events-page-section .event-card-bottom .event-meta {
-  font-size: 16px;
+  font-size: 14px;
   color: #6b7280;
   margin-bottom: 4px;
   gap: 10px;
@@ -271,20 +281,20 @@
 .submit-event-form {
   width: 700px;
   margin: 0px auto;
-  background: #fff ;
+  background: #fff;
   border-radius: 12px;
   padding: 32px;
   box-shadow: 0 0 0 1px #e5e7eb;
 }
 
-.submit-event-form  .form-control,
-.submit-event-form  .form-select {
+.submit-event-form .form-control,
+.submit-event-form .form-select {
   border-radius: 8px;
   font-size: 14px;
   padding: 12px;
 }
 
-.submit-event-form  .btn-submit {
+.submit-event-form .btn-submit {
   border-radius: 8px;
   font-weight: 500;
   padding: 12px;
@@ -292,10 +302,11 @@
   color: #fff;
 }
 
-.submit-event-form  h5 {
+.submit-event-form h5 {
   font-weight: bold;
   margin-bottom: 28px;
 }
+
 @media (max-width: 999px) {
   .sidebar {
     top: unset;
@@ -304,10 +315,12 @@
     transform: translateY(0%);
     padding: 20px;
   }
+
   .sidebar:hover {
     width: 90%;
     padding: 20px;
   }
+
   .sidebar ul {
     flex-direction: row;
   }
@@ -315,24 +328,30 @@
   .sidebar:hover ul {
     padding: 0;
     margin: 0;
-    gap: 10px; /* expanded spacing */
+    gap: 10px;
+    /* expanded spacing */
   }
+
   .sidebar:hover ul li {
     border-radius: 0.75rem;
     padding: 0;
     gap: 10px;
   }
+
   .sidebar .first-ul-list-parent {
     width: 70% !important;
   }
+
   .sidebar .first-ul-list {
     width: 100% !important;
     overflow-x: auto;
     scrollbar-width: 0;
   }
+
   .sidebar h6 {
     display: none;
   }
+
   .user-menu-options {
     position: absolute;
     top: 0;
@@ -344,108 +363,138 @@
     flex-direction: column !important;
     z-index: 999;
   }
+
   .profile-page-section {
     display: flex;
     flex-direction: column;
     padding: 0;
   }
+
   .profile-page-section .left-side,
   .profile-page-section .right-side {
     gap: 10px;
   }
+
   .profile-page-section .profile-card {
     padding: 16px;
   }
+
   .profile-card-logo img {
     height: 35px;
   }
+
   .profile-card-logo::after {
     margin: 0 20px;
   }
+
   .profile-card-info h1 {
     font-size: 20px;
   }
+
   .profile-card-info span {
     font-size: 12px;
   }
+
   .tab-header a {
     padding: 14px 7px;
   }
+
   .profile-details-grid {
     justify-content: center;
     flex-direction: column;
   }
+
   .profile-grid-left {
     flex-direction: column;
     padding-right: 0;
     margin-right: 0;
     border-right: 0;
   }
+
   .progress-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
+
   .points-card {
     width: 100%;
   }
+
   .mobile-w-100 {
     width: 100%;
   }
+
   .points-btn b {
     font-size: 12px;
   }
+
   .profile-card-bottom-part {
     padding-bottom: 50px;
   }
+
   .credit-row {
     padding: 12px;
   }
+
   .credit-row small {
     margin-bottom: 2px;
   }
+
   .section-header {
     padding: 16px;
   }
+
   .section-header h6 {
     font-size: 18px;
   }
+
   .info-body {
     padding: 16px;
   }
+
   .info-value {
     margin-top: 5px;
     margin-bottom: 10px;
   }
+
   .hideInMobile {
     display: none !important;
   }
-  .hideInDesktop{
+
+  .hideInDesktop {
     display: block !important;
   }
+
   .modal-body {
     padding: 16px !important;
   }
+
   .businessCardModalPopup .modal-content,
   .businessCardModalPopup .modal-body {
     width: 100% !important;
   }
+
   .socialLinksModalPopup .modal-content,
   .socialLinksModalPopup .modal-body {
     width: 100% !important;
   }
-  .sign-out-tab-text{
+
+  .sign-out-tab-text {
     font-size: 14px;
     opacity: 1;
   }
-  .course-btns{
+
+  .course-btns {
     position: unset;
     padding: 0;
   }
-  .course-card{
+
+  .course-card {
     padding: 24px;
   }
+
   .course-meta h2 {
     font-weight: bold;
     font-size: 28px
@@ -458,6 +507,7 @@
   .events-page-section .section-header {
     padding: 8px 0;
   }
+
   .submit-event-form {
     width: 100%;
     padding: 20px;

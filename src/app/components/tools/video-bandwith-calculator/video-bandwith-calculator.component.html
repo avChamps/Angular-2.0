@@ -1,0 +1,110 @@
+ <div class="profile-page-section">
+    <div class="left-side tools-page-section">
+
+      <div class="tool-detail-header d-flex align-items-start gap-3 px-4 py-3">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <a routerLink="tools" class="btn btn-outline-light border text-black bg-white" routerLink="tools"><i class="bi bi-arrow-left me-2"></i> Back</a>
+          <button class="btn btn-outline-light border text-black bg-white"><i class="bi bi-star me-2"></i> Add to Favorites</button>
+        </div>
+        <!-- Icon -->
+         <div class="tools-header-grid">
+        <div class="icon-box bg-success-subtle text-success">
+          <i class="bi bi-camera-video-fill fs-5"></i>
+        </div>
+
+        <!-- Details -->
+
+        <div class="flex-grow-1">
+          <h3 class="fw-bold mb-1">Video Bandwidth Calculator</h3>
+          <p class="text-muted mb-3">Calculate bandwidth requirements for video streaming and transmission</p>
+
+          <!-- Tags -->
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge text-bg-light">bandwidth</span>
+            <span class="badge text-bg-light">calculator</span>
+            <span class="badge text-bg-light">video</span>
+            <span class="badge text-bg-light">streaming</span>
+            <span class="badge text-bg-light green">New</span>
+            <span class="badge text-bg-primary-subtle text-primary border border-primary-subtle">v1.0.0</span>
+          </div>
+
+          <!-- Meta Info -->
+          <div class="updated-author-block text-muted small">
+            <div><i class="bi bi-calendar3"></i> Updated: 2023-05-15</div>
+            <div><i class="bi bi-person"></i> Author: AV Champs</div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="container px-0">
+        <div class="bg-white rounded p-3 border calculator-section">
+          <div class="tab-content">
+            <div class="tab-pane fade show active">
+              <h2>Video Bandwidth Calculator</h2>
+              <div class="row g-4 mt-1">
+                <!-- Inputs -->
+                <div class="col-12">
+                  <label class="form-label text-black">Resolution</label>
+                  <select class="form-select" name="" id="">
+                    <option value="" selected>1080</option>
+                    <option value="">720</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label text-black">Frame Rate (fps)</label>
+                  <input type="number" class="form-control" value="30">
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label text-black">Bit Depth</label>
+                  <input type="number" class="form-control" value="8">
+                </div>
+
+              </div>
+
+              <div class="mt-4 d-flex justify-content-start align-items-center">
+                <button class="btn btn-primary" style="width: fit-content;">Calculate</button>
+              </div>
+             <div class="est-bandwidth-section">
+              <h2>Estimated Bandwidth</h2>
+              <span>497.66 Mbps</span>
+             </div>
+              <div class="text-center mt-3">
+                <button class="btn btn-outline-secondary px-4">View Documentation</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    <div class="right-side">
+
+      <div class="ad-card">
+        <div class="ad-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-badge-info h-4 w-4 mr-2">
+            <path
+              d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+            </path>
+            <line x1="12" x2="12" y1="16" y2="12"></line>
+            <line x1="12" x2="12.01" y1="8" y2="8"></line>
+          </svg> Sponsored Content
+        </div>
+        <div class="ad-image">
+          <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+          <div class="ad-label">Advertisement</div>
+        </div>
+        <div class="ad-body">
+          <h5>Sample Ad 1</h5>
+          <p>This is a sample advertisement.</p>
+          <button class="btn learn-more-btn mx-auto">Learn More</button>
+        </div>
+        <div class="ad-footer">
+          Google Ad Slot <br>
+          <small>Advertisement · <a href="#">Report this ad</a></small>
+        </div>
+      </div>
+    </div>
+  </div>

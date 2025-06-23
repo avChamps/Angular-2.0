@@ -45,7 +45,7 @@ export class ToolsComponent {
   ];
 
 
-  constructor(private http: HttpClient, public route : Router,) { }
+  constructor(private http: HttpClient, public route : Router) { }
 
   ngOnInit(): void {
     this.emailId = localStorage.getItem('EmailId');

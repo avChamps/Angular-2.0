@@ -11,9 +11,10 @@
     </div>
 
     <div class="">
-      <input type="text" class="form-control" [(ngModel)]="searchText" (ngModelChange)="getProfiles(1,10)"  placeholder="Search by name, role, company..."
-        style="max-width: 400px;" />
-      <p class="text-muted small mt-2" *ngIf="totalRecords != 0">Showing 1-{{totalRecords}} of {{totalRecords}} professionals</p>
+      <input type="text" class="form-control" [(ngModel)]="searchText" (input)="searchProfiles()"
+        (ngModelChange)="getProfiles(1,10)" placeholder="Search by name, role, company..." style="max-width: 400px;" />
+      <p class="text-muted small mt-2" *ngIf="totalRecords != 0">Showing 1-{{totalRecords}} of {{totalRecords}}
+        professionals</p>
     </div>
 
     <!-- Cards Grid -->
@@ -24,16 +25,17 @@
         <div class="professional-card">
           <div class="d-flex justify-content-center align-items-center flex-column mb-2 gap-2">
             <div class="d-flex justify-content-center align-items-center pb-3 w-100 border-bottom">
-            <img *ngIf="!data?.ImagePath" src="./assets/images/placeholder-circle.svg" alt="Profile Picture" class="profile-logo" />
-            <img *ngIf="data?.ImagePath" [src]="data?.ImagePath" alt="Profile Picture" class="profile-logo" />
+              <img *ngIf="!data?.ImagePath" src="./assets/images/placeholder-circle.svg" alt="Profile Picture"
+                class="profile-logo" />
+              <img *ngIf="data?.ImagePath" [src]="data?.ImagePath" alt="Profile Picture" class="profile-logo" />
             </div>
             <div class="w-100">
-              <p class="profile-name mb-0">{{ data.FullName || data.FirstName || data.LastName }} </p>
-              <p class="profile-role mb-0">{{ data.Designation }} </p>
-              <div class="meta mb-1" *ngIf="data.CompanyName"><i class="bi bi-building me-1"></i> {{ data.CompanyName }}
+              <p class="profile-name mb-0">{{ data.FullName || data.FirstName || data.LastName || 'not updated' }} </p>
+              <p class="profile-role mb-0">{{ data.Designation || 'not updated' }} </p>
+              <div class="meta mb-1"><i class="bi bi-building me-1"></i> {{ data.CompanyName || 'not updated' }}
               </div>
-              <div class="meta mb-2" *ngIf="data.CurrentLocation || data.City || data.State || data.Country"><i
-                  class="bi bi-geo-alt me-1"></i> {{data.CurrentLocation || data.City || data.State || data.Country }}
+              <div class="meta mb-2"><i
+                  class="bi bi-geo-alt me-1"></i> {{data.CurrentLocation || data.City || data.State || data.Country || 'not updated' }}
               </div>
             </div>
           </div>
@@ -65,6 +67,12 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div *ngIf="loading" class="text-center my-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
 

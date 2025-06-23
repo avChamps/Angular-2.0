@@ -1,0 +1,73 @@
+ .search-bar {
+     background: #f0f5ff;
+     padding: 15px;
+     border-radius: 10px;
+     margin-bottom: 20px;
+ }
+
+ .search-bar .input-group {
+     margin-bottom: 10px;
+ }
+
+ .filter-section {
+     border-right: 1px solid #dee2e6;
+ }
+
+ .category-item {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 5px 10px;
+     border-radius: 5px;
+ }
+
+ .job-results {
+     min-height: 400px;
+     padding-left: 20px;
+ }
+
+ .spinner-custom {
+     width: 2rem;
+     height: 2rem;
+ }
+
+ .dropdown-toggle::after {
+     display: none !important;
+ }
+
+ .fs-14 {
+     font-size: 14px;
+ }
+
+ .button-card-section {
+     padding: 3px;
+     border-radius: 44px;
+     font-size: 12px;
+ }
+
+ .clicked-card-section {
+     padding: 8px;
+     border-radius: 40px;
+     font-weight: normal;
+ }
+
+ .border-radius-10 {
+     border-radius: 10px;
+ }
+
+ .btn-facebook {
+     background-color: #1877F2;
+     color: white;
+ }
+
+ .btn-facebook:hover {
+     background-color: #145dbf;
+     color: white;
+ }
+
+ .benefits-text {
+     background-color: #dcfce7;
+     padding: 10px;
+     border-radius: 15px;
+     font-size: 14px;
+ }

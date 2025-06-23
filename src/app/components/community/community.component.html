@@ -1,0 +1,115 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <div class="profile-card">
+            <div class="profile-card-logo">
+                <img src="./assets/images/logo.png" alt="">
+            </div>
+            <div class="profile-card-info">
+                <h1>Discussions</h1>
+                <span>Share your thoughts, ask questions, and get help from the community</span>
+            </div>
+        </div>
+
+
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <!-- Left Sidebar -->
+    <div class="col-12 col-md-3 mb-4">
+      <!-- Categories Card -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h6 class="filter-names">Categories</h6>
+          <button class="btn btn-primary filter-names w-100 mt-2">All Categories</button>
+        </div>
+      </div>
+      <!-- My Activity Card -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="filter-names">My Activity</h6>
+          <button class="btn btn-primary w-100 filter-names mt-2">My Posts</button>
+          <div class="pt-2 ps-1">Saved</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="col-12 col-md-9">
+      <!-- Start Discussion Input -->
+      <div class="card shadow-sm mb-3">
+        <div class="card-body d-flex align-items-center">
+          <div class="rounded-circle bg-primary text-white d-flex profile-name justify-content-center align-items-center" *ngIf="!storedProfile?.ImagePath">
+          </div>
+
+           <div class="rounded-circle text-white d-flex justify-content-center align-items-center"  *ngIf="storedProfile?.ImagePath">
+           <img [src]="storedProfile?.ImagePath" class="profile-Img">
+           </div>
+
+          <input type="text" class="form-control ms-3" placeholder="Start a discussion..." />
+        </div>
+      </div>
+
+      <!-- Search + Sort By -->
+      <div class="card shadow-sm mb-3">
+        <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+          <div class="w-100">
+            <input type="text" class="form-control" placeholder="Search discussions..." />
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-light filter-names border dropdown-toggle w-100 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort By
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end w-100">
+              <li><a class="dropdown-item active" href="#">All Topics</a></li>
+              <li><a class="dropdown-item" href="#">Trending</a></li>
+              <li><a class="dropdown-item" href="#">Newest</a></li>
+              <li><a class="dropdown-item" href="#">Oldest</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Discussions Text -->
+      <div class="text-center mt-5">
+        <span>Loading discussions...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+    </div>
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
+            </div>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
+    </div>

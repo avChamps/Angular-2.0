@@ -1,0 +1,20 @@
+.profile-Img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.profile-name {
+     width: 45px;
+    height: 40px;
+}
+
+.filter-names {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dropdown-menu li .dropdown-item {
+     font-size: 14px;
+    font-weight: 500;
+}

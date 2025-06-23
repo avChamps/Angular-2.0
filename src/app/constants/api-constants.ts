@@ -23,3 +23,6 @@ export const getTools = url + '/getTools'
 export const markInterest = url + '/markInterest';
 export const addRecentTool = url + '/addRecentTool';
 export const getRecentTools = url + '/getRecentTools';
+export const postJob = url + '/postJob';
+export const getJobs = url + '/getJobs';
+export const deleteJob = url + '/deleteJob';

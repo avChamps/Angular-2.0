@@ -1,0 +1,439 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <div class="profile-card" *ngIf="false">
+            <div class="profile-card-logo">
+                <img src="./assets/images/logo.png" alt="">
+            </div>
+            <div class="profile-card-info">
+                <h1>Careers</h1>
+                <span>Find your next opportunity in AV</span>
+            </div>
+        </div>
+
+
+
+
+        <ng-container *ngIf="!selectedJob">
+            <div class="mt-2">
+                <div class="p-3 p-md-4 rounded-4 shadow-lg border mb-4 position-relative"
+                    style="background: linear-gradient(to right, #f0f9ff, #e0e7ff); border-color: #cfe2ff;">
+                    <h4 class="fw-bold mb-4">Find Your Perfect Role</h4>
+
+                    <div class="row g-2 align-items-center">
+                        <!-- Job Title Input -->
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" class="form-control border-start-0"
+                                    placeholder="Job title or keywords" />
+                            </div>
+                        </div>
+
+                        <!-- Location Input -->
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="bi bi-geo-alt"></i>
+                                </span>
+                                <input type="text" class="form-control border-start-0" placeholder="Location" />
+                            </div>
+                        </div>
+
+                        <!-- Find Jobs Button -->
+                        <div class="col-md-2 d-grid">
+                            <button class="btn btn-primary">
+                                <i class="bi bi-search me-1"></i> Find Jobs
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Popular Tags -->
+                    <div class="mt-3">
+                        <span class="me-2 text-muted">Popular:</span>
+                        <span class="badge bg-light text-dark border me-2">
+                            <i class="bi bi-search me-1"></i> AV Engineer
+                        </span>
+                        <span class="badge bg-light text-dark border me-2">
+                            <i class="bi bi-search me-1"></i> Designer
+                        </span>
+                        <span class="badge bg-light text-dark border me-2">
+                            <i class="bi bi-clipboard-check me-1"></i> Full-time
+                        </span>
+                        <span class="badge bg-light text-dark border me-2">
+                            <i class="bi bi-geo-alt me-1"></i> Remote
+                        </span>
+                        <span class="badge bg-light text-dark border">
+                            <i class="bi bi-geo-alt me-1"></i> Hyderabad
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Sidebar Filters -->
+                    <div class="col-md-3 border-end pr-3" style="height: 90vh; overflow-y: auto;">
+
+                        <!-- Categories -->
+                        <div class="mb-4 p-3 border rounded shadow-sm bg-white">
+                            <h6 class="fw-bold mb-3">Categories</h6>
+                            <div *ngFor="let cat of categories" class="d-grid gap-2 mb-2">
+                                <button class="btn d-flex justify-content-between align-items-center fs-14 border"
+                                    (click)="selectCategory(cat.name)">
+                                    <span>{{ cat.name }}</span>
+                                    <span class="badge bg-white text-primary border border-primary rounded-pill">{{
+                                        cat.count }}</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Job Type Filter -->
+                        <div class="mb-4 p-3 border rounded shadow-sm bg-white">
+                            <h6 class="fw-bold mb-3">Job Type</h6>
+                            <div *ngFor="let type of jobTypes" class="d-grid gap-2 mb-2">
+                                <button class="btn d-flex justify-content-between align-items-center fs-14 border"
+                                    (click)="selectJobType(type.name)">
+                                    <span>{{ type.name }}</span>
+                                    <span class="badge bg-white text-primary border border-primary rounded-pill">{{
+                                        type.count }}</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Experience Level Filter -->
+                        <div class="mb-4 p-3 border rounded shadow-sm bg-white">
+                            <h6 class="fw-bold mb-3">Experience Level</h6>
+                            <div *ngFor="let exp of experienceLevels"
+                                class="form-check mb-2 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input class="form-check-input me-2" type="radio" [name]="'expLevel'"
+                                        [value]="exp.name" [checked]="selectedExperience === exp.name"
+                                        (change)="selectExperience(exp.name)" />
+                                    <label class="form-check-label">{{ exp.name }}</label>
+                                </div>
+                                <span class="badge bg-white text-primary border border-primary rounded-pill">{{
+                                    exp.count
+                                    }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Salary Range Filter -->
+                        <div class="mb-4 p-3 border rounded shadow-sm bg-white">
+                            <h6 class="fw-bold mb-3">Salary Range</h6>
+
+                            <div class="d-flex justify-content-between small fw-semibold mb-1">
+                                <span>₹{{ minSalary }}L</span>
+                                <span>₹{{ maxSalary }}L</span>
+                            </div>
+
+                            <input type="range" class="form-range" min="0" max="50" [(ngModel)]="maxSalary" />
+
+                            <div class="d-flex justify-content-between small mt-1 text-muted">
+                                <span>₹0L</span>
+                                <span>₹25L</span>
+                                <span>₹50L+</span>
+                            </div>
+                        </div>
+
+                        <!-- Apply / Clear Buttons -->
+                        <div class="d-grid gap-2 mb-4 fs-14">
+                            <button class="btn btn-primary fs-14" (click)="applyFilters()">Apply Filters</button>
+                            <button class="btn btn-outline-secondary fs-14" (click)="clearAll()">Clear All</button>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Job Result Panel -->
+                    <div class="col-md-9 p-2">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4 class="fw-bold mb-1">
+                                    <span class="text-primary">{{ totalJobs }}</span> Jobs Available
+                                </h4>
+                                <small class="text-muted">Active Filters: {{ activeFilters }}</small><br />
+                                <small class="text-muted">Showing results based on your preferences</small>
+                            </div>
+
+
+                            <!-- Sort Dropdown -->
+                            <div class="dropdown">
+                                <button class="btn btn-light border dropdown-toggle d-flex align-items-center gap-2"
+                                    type="button" id="sortMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-clock me-1"></i> Sort
+                                </button>
+                                <ul class="dropdown-menu shadow-sm border-0" aria-labelledby="sortMenuButton">
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" (click)="sortBy('recent')">
+                                            <i class="bi bi-clock me-2"></i> Most Recent
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" (click)="sortBy('salary')">
+                                            <i class="bi bi-currency-dollar me-2"></i> Highest Salary
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" (click)="sortBy('relevant')">
+                                            <i class="bi bi-star me-2"></i> Most Relevant
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+                        <div class="py-2">
+                            <div class="row g-3">
+                                <div class="col-md-6" *ngFor="let job of jobList">
+                                    <div class="card h-100 border rounded-4 shadow-sm" (click)="selectJob(job)">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center"
+                                                        style="width: 40px; height: 40px;">
+                                                        <strong>{{ job.initial }}</strong>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0 fw-bold text-primary">{{ job.title }}</h6>
+                                                        <small class="text-muted">{{ job.company }}</small>
+                                                    </div>
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">{{ job.type }}</span>
+                                            </div>
+
+                                            <div class="d-flex flex-wrap mt-3 gap-2 text-muted small">
+                                                <div class="border button-card-section">
+                                                    <i class="bi bi-geo-alt-fill"></i> {{ job.location }}
+                                                </div>
+                                                <div class="border button-card-section">
+                                                    <i class="bi bi-clock-fill"></i> {{ job.posted }}
+                                                </div>
+                                                <div class="border button-card-section">
+                                                    <i class="bi bi-currency-rupee"></i> {{ job.salary }}
+                                                </div>
+                                            </div>
+
+                                            <p class="mt-3 text-muted small mb-2">{{ job.shortDesc }}</p>
+
+                                            <div class="d-flex flex-wrap gap-2 small mb-3" *ngIf="job.skills?.length">
+                                                <span *ngFor="let skill of job.skills"
+                                                    class="badge rounded-pill bg-light text-dark border">
+                                                    {{ skill }}
+                                                </span>
+                                            </div>
+
+                                            <p class="text-muted small" *ngIf="job.fullDesc">{{ job.fullDesc }}</p>
+
+                                            <div class="text-end mt-3">
+                                                <a href="#" class="btn btn-primary">Apply Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- Loader -->
+                        <div class="d-flex flex-column align-items-center d-none justify-content-center mt-5">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span class="text-muted">Loading jobs...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="selectedJob">
+            <div class="container py-1">
+                <div class="row g-4">
+                    <!-- Left Main Section -->
+                    <div class="col-lg-8">
+                        <!-- Job Header Card -->
+                        <div class="card p-4 shadow-sm rounded-4">
+                            <div class="d-flex justify-content-between flex-wrap gap-3">
+                                <div class="d-flex align-items-start gap-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center"
+                                        style="width: 50px; height: 50px;">
+                                        <strong style="font-size: 1.2rem;">{{ selectedJob.initial }}</strong>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 fw-bold">{{ selectedJob.title }}</h5>
+                                        <small class="text-muted">{{ selectedJob.company }}</small>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge clicked-card-section bg-light text-dark">
+                                            <i class="bi bi-geo-alt"></i> {{ selectedJob.location }}
+                                        </span>
+                                        <span class="badge clicked-card-section bg-light text-dark">
+                                            <i class="bi bi-calendar"></i> {{ selectedJob.posted }}
+                                        </span>
+                                        <span class="badge clicked-card-section bg-success-subtle text-success border">
+                                            {{ selectedJob.salary }}
+                                        </span>
+                                        <span class="badge clicked-card-section bg-primary-subtle text-primary border">
+                                            {{ selectedJob.type }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-primary">Apply Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Job Description -->
+                        <div class="card mt-4 p-4 shadow-sm rounded-4">
+                            <h6 class="fw-bold mb-3">
+                                <i class="bi bi-card-text me-2"></i>Job Description
+                            </h6>
+                            <p class="mb-0 text-muted">{{ selectedJob.shortDesc }}</p>
+
+
+                            <!-- Requirements -->
+                             <hr>
+                            <div class="mt-2 rounded-4">
+                                <h6 class="fw-bold mb-3">
+                                    <i class="bi bi-envelope-check me-2"></i>Requirements
+                                </h6>
+                                <div class="mb-2 d-flex flex-wrap gap-2">
+                                    <span class="badge rounded-pill bg-primary-subtle text-primary"
+                                        *ngFor="let skill of selectedJob.skills">
+                                        {{ skill }}
+                                    </span>
+                                </div>
+                          <div *ngFor="let line of selectedJob.fullDesc.split('\n')">
+  <p class="text-muted mb-0">{{ line }}</p>
+</div>
+
+                            </div>
+
+                            <!-- Benefits -->
+                             <hr>
+                            <div class="mt-2 rounded-4">
+                                <h6 class="fw-bold mb-3">
+                                    <i class="bi bi-people me-2"></i>Benefits
+                                </h6>
+                                <p class="text-success benefits-text mb-0">
+                                    • Competitive salary and benefits. • Opportunities for growth and development. •
+                                    Collaborative work environment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar Section -->
+                    <div class="col-lg-4">
+                        <!-- Job Overview -->
+                        <div class="card p-4 shadow-sm rounded-4 mb-4">
+                            <h6 class="fw-bold mb-3">
+                                <i class="bi bi-info-circle me-2"></i>Job Overview
+                            </h6>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li class="mb-2">
+                                    <i class="bi bi-calendar me-2 text-primary"></i>
+                                    <strong>Date Posted:</strong> {{ currentDate }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-geo-alt me-2 text-primary"></i>
+                                    <strong>Location:</strong> {{ selectedJob.location }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-briefcase me-2 text-primary"></i>
+                                    <strong>Job Type:</strong> {{ selectedJob.type | titlecase }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-currency-rupee me-2 text-primary"></i>
+                                    <strong>Salary:</strong> {{ selectedJob.salary }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-bar-chart me-2 text-primary"></i>
+                                    <strong>Experience:</strong> Mid level
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Share Section -->
+                        <div class="card p-4 shadow-sm rounded-4 mb-4">
+                            <h6 class="fw-bold mb-3">
+                                <i class="bi bi-share-fill me-2"></i>Share This Job
+                            </h6>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-success btn-sm rounded-3"><i class="bi bi-whatsapp"></i></a>
+                                <a href="#" class="btn btn-info btn-sm text-white rounded-3"><i
+                                        class="bi bi-twitter"></i></a>
+                                <a href="#" class="btn btn-primary btn-sm rounded-3"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="btn btn-facebook btn-sm rounded-3"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Apply CTA -->
+                        <div class="card p-4 shadow-sm rounded-4 text-center">
+                            <h6 class="fw-bold">Ready to Apply?</h6>
+                            <p class="text-muted small mb-3">
+                                Submit your application now and take the next step in your career journey.
+                            </p>
+                            <a href="#" class="btn btn-primary w-100">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+
+
+
+
+
+
+
+    </div>
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
+            </div>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
+    </div>

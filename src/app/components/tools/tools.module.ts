@@ -5,6 +5,8 @@ import { ToolsRoutingModule } from './tools-routing.module';
 import { SharedModule } from '../../shared/shared/shared.module';
 import { ToolsComponent } from './tools.component';
 import { AspectRatioComponent } from './aspect-ratio/aspect-ratio.component';
+import { BtuCalculatorComponent } from './btu-calculator/btu-calculator.component';
+import { VideoBandwithCalculatorComponent } from './video-bandwith-calculator/video-bandwith-calculator.component';
 
 
 @NgModule({

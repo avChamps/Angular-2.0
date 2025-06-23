@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getEvents, postEvents } from '../../constants/api-constants';
 import { HttpClient } from '@angular/common/http';
@@ -11,12 +11,23 @@ import { HttpParams } from '@angular/common/http';
 })
 export class EventsComponent implements OnInit {
   eventForm: FormGroup;
-  isSaving : boolean = false;
-  isPostEvent : boolean = false;
-  events : any;
+  isSaving: boolean = false;
+  isPostEvent: boolean = false;
+  events: any;
   selectedCategory: string = '';
-  totalRecords : any;
- 
+  totalRecords: any;
+  currentPage = 1;
+  limit = 10;
+  loading = false;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100 && !this.loading) {
+      this.loadMoreEvents();
+    }
+  }
+
+
 
   categories: string[] = [
     'Conference',
@@ -27,9 +38,9 @@ export class EventsComponent implements OnInit {
     'Festival',
     'Seminar'
   ];
-  
 
-  constructor(private fb: FormBuilder, private http : HttpClient) {
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.eventForm = this.fb.group({
       Title: ['', Validators.required],
       ShortDescription: ['', Validators.required],
@@ -47,31 +58,44 @@ export class EventsComponent implements OnInit {
   }
 
 
+  loadMoreEvents() {
+    if (this.events.length >= this.totalRecords) return;
+
+    this.currentPage++;
+    this.fetchEvents(true);
+  }
+
   getEvents() {
-    let params = new HttpParams();
-  
+    this.currentPage = 1;
+    this.fetchEvents(false);
+  }
+
+  fetchEvents(append: boolean = false) {
+    this.loading = true;
+    let params = new HttpParams()
+      .set('page', this.currentPage)
+      .set('limit', this.limit);
+
     if (this.selectedCategory && this.selectedCategory !== 'All') {
       params = params.set('category', this.selectedCategory);
     }
-  
+
     this.http.get(getEvents, { params }).subscribe({
       next: (res: any) => {
+        this.loading = false;
         if (res.status) {
-          this.events = res?.Events;
-          this.totalRecords = res?.totalRecords;
-        } else {
+          this.totalRecords = res.totalRecords;
+          this.events = append ? [...this.events, ...res.Events] : res.Events;
+        } else if (!append) {
           this.events = [];
-          this.totalRecords = 0;
         }
       },
-      error: (err) => {
-        console.error('Error fetching events:', err);
+      error: () => {
+        this.loading = false;
         this.events = [];
-        this.totalRecords = 0;
       }
     });
   }
-  
 
   onSubmit() {
     if (this.eventForm.invalid) {
@@ -87,7 +111,7 @@ export class EventsComponent implements OnInit {
         this.isPostEvent = false;
         this.getEvents();
       },
-      error: (error : any) => {
+      error: (error: any) => {
         this.isSaving = false;
       }
     });

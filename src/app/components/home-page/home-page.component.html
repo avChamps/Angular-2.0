@@ -16,7 +16,7 @@
           </div>
           <span class="label-text hideInMobile">Tools</span>
         </li>
-        <li>
+        <li (click)="onNaviagate('/careers')">
           <div class="icon-circle careers"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
               viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" class="lucide lucide-send">
@@ -36,7 +36,7 @@
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg></div><span class="label-text hideInMobile">Directory</span>
         </li>
-        <li>
+        <li (click)="onNaviagate('/community')">
           <div class="icon-circle community"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
               viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" class="lucide lucide-message-circle">
@@ -53,7 +53,7 @@
               <path d="M3 10h18"></path>
             </svg></div><span class="label-text hideInMobile">Events</span>
         </li>
-        <li>
+        <li (click)="onNaviagate('/ekart')">
           <div class="icon-circle ekart"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
               viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" class="lucide lucide-shopping-cart">
@@ -94,11 +94,88 @@
     </li>
 
     <li class="divider hideInMobile"></li>
-    <li>
-      <div class="icon-circle notifications"><i class="bi bi-bell"></i></div><span
-        class="notification-text hideInMobile">No new
-        alerts</span>
-    </li>
+   
+   
+   
+   
+   
+ <li id="notificationToggle" (click)="toggleDrawer($event)">
+<div class="icon-circle notifications position-relative">
+  <i class="bi bi-bell"></i>
+
+  <!-- Badge shown only when count > 0 -->
+  <span *ngIf="unreadCount > 0" class="position-absolute top-0 start-100 translate-middle  badge rounded-pill bg-danger notification-badge">
+    {{ unreadCount }}
+  </span>
+</div>
+
+<!-- Show fallback text when no unread notifications -->
+<span class="notification-text hideInMobile">
+  {{ unreadCount > 0 ? 'Notifications' : 'No new alerts' }}
+</span>
+
+
+  <div id="notificationDrawer" class="notification-drawer" [class.hidden]="isDrawerHidden">
+    <div class="drawer-header">
+      <span>Notifications</span>
+      <a href="#" class="mark-read-link">Mark all as read</a>
+    </div>
+
+    <div class="notification-list">
+      <div class="notification-card" *ngFor="let item of notifications">
+        <div class="icon-success">✔</div>
+        <div class="notification-content">
+          <div class="d-flex justify-content-between align-items-center">
+            <strong>{{ item.title }}</strong>
+            <span class="timestamp">{{ item.timestamp }}</span>
+          </div>
+          <p>{{ item.message }}</p>
+          <div class="actions">
+            <button class="btn-read">✓ Mark as read</button>
+            <button class="btn-dismiss">✕ Dismiss</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <li class="position-relative" (click)="toggleMenu($event)">
       <div class="icon-circle fs-14 test" *ngIf="!profileData?.ImagePath"><strong>{{ profileData?.FullName ||
           profileData?.FirstName | initials }}</strong></div>
@@ -119,8 +196,8 @@
             <i class="bi bi-gear"></i> Profile Settings
           </a>
         </li>
-        <li>
-          <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+        <li (click)="onNaviagate('/user-admin')">
+          <a class="dropdown-item d-flex align-items-center gap-2">
             <i class="bi bi-grid"></i> Dashboard
           </a>
         </li>

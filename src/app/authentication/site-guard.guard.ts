@@ -11,7 +11,7 @@ export class SiteGuardGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const emailId = localStorage.getItem('EmailId');
     const userName = localStorage.getItem('JwtToken');
-
+      debugger;
     if (!emailId || !userName) {
       if (state.url === '/') {
         return true;
