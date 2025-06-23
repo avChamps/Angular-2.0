@@ -26,3 +26,5 @@ export const getRecentTools = url + '/getRecentTools';
 export const postJob = url + '/postJob';
 export const getJobs = url + '/getJobs';
 export const deleteJob = url + '/deleteJob';
+export const getJobStats = url + '/getJobStats';
+export const applyJob = url + '/applyJob';

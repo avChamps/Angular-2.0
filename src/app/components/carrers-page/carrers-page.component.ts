@@ -1,13 +1,48 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { applyJob, getJobs, getJobStats } from '../../constants/api-constants';
+import { ActivatedRoute, Router } from '@angular/router';
+
+var bootstrap: any;
 
 @Component({
   selector: 'app-carrers-page',
   templateUrl: './carrers-page.component.html',
   styleUrls: ['./carrers-page.component.css', '../../../assets/css/profile.css']
 })
-export class CarrersPageComponent {
+export class CarrersPageComponent implements OnInit {
+  searchKeyword = '';
+  searchLocation = '';
+  sortOption = '';
   minSalary = 0;
   maxSalary = 50;
+  emailId: any;
+  jobList: any;
+  selectedCategory = '';
+  selectedJobType = '';
+  selectedExperience = '';
+  totalJobs = 0;
+  activeFilters = '';
+  selectedJob: any = null;
+  fileName = '';
+  showDefault = true;
+  showFileArea = false;
+  showProgress = false;
+  showFinalStep = false;
+  uploadProgress = 0;
+  uploadInterval: any;
+  selectedFile: File | null = null;
+  isApplying = false;
+  companyInfo: any;
+  currentUrl: any;
+  twitterUrl: any;
+  linkedinUrl: any;
+  facebookUrl: any;
+  whatsappUrl: any;
+  currentDate: string = new Date().toLocaleDateString();
+  @ViewChild('closePopup') closePopup!: ElementRef<HTMLButtonElement>;
+
+
   categories = [
     { name: 'All', count: 1 },
     { name: 'AV Engineer', count: 1 },
@@ -33,128 +68,275 @@ export class CarrersPageComponent {
     { name: 'Senior Level', count: 0 }
   ];
 
-  selectedCategory = 'All';
-  totalJobs = 0;
-  activeFilters = 1;
-  selectedJobType: any;
-  selectedExperience: any;
 
+  constructor(private http: HttpClient, private router: Router, actRouter : ActivatedRoute) {
+    this.emailId = localStorage.getItem('EmailId')
+   actRouter.paramMap.subscribe(params => {
+      const jobId = params.get('id');
+      if (jobId) {
+        this.getJobs(jobId);
+      } else {
+        this.getJobs()
+        this.getJobStats();
+        this.applyFilters();
+      }
+    });
 
-  jobList = [
-  {
-    initial: 'G',
-    title: 'Audio-Visual Technician',
-    company: 'Godrej & Boyce Mfg. Co. Ltd.',
-    type: 'full-time',
-    location: 'Bengaluru',
-    posted: 'Posted about 3 hours ago',
-    salary: '₹8L – ₹50L',
-    shortDesc: "We're looking for experienced Audio-Visual professionals to join our team in Bengaluru. The successful candidate will be responsible for implementing and maintaining AV systems across Bengaluru.",
-    skills: ['ITI/Diploma/Degree in Electronics', 'Electrical'],
-    fullDesc:
-      `• ITI/Diploma/Degree in Electronics, Electrical, or related field.\n` +
-      `• Proven experience in AV system installation and service.\n` +
-      `• Strong knowledge of AV technologies and protocols\n` +
-      `• Excellent problem-solving and communication skills`
-  },
-  {
-    initial: 'S',
-    title: 'Senior AV Project Manager',
-    company: 'Samsung India',
-    type: 'contract',
-    location: 'Noida',
-    posted: 'Posted 1 day ago',
-    salary: '₹20L – ₹30L',
-    shortDesc: 'Lead AV installation projects across corporate and education sectors.',
-    skills: ['Project Management', 'AutoCAD', 'AVIXA CTS'],
-    fullDesc:
-      `• Manage project timelines\n` +
-      `• Vendor coordination\n` +
-      `• Installation team management to deliver projects on schedule`
-  },
-  {
-    initial: 'I',
-    title: 'Installation Technician',
-    company: 'Infosys',
-    type: 'full-time',
-    location: 'Pune',
-    posted: 'Posted 2 days ago',
-    salary: '₹4.5L – ₹8L',
-    shortDesc: 'Looking for hands-on AV technicians for field installations in client locations.',
-    skills: ['Structured Cabling', 'Display Mounting'],
-    fullDesc:
-      `• Handle on-site installations\n` +
-      `• Rack dressing\n` +
-      `• AV device configuration\n` +
-      `• Travel may be required`
-  },
-  {
-    initial: 'H',
-    title: 'Helpdesk AV Support',
-    company: 'HCL Technologies',
-    type: 'part-time',
-    location: 'Chennai',
-    posted: 'Posted 5 hours ago',
-    salary: '₹3L – ₹6L',
-    shortDesc: 'Provide remote AV support for enterprise clients using ticket-based system.',
-    skills: ['Zoom/Teams/Meet', 'Customer Support'],
-    fullDesc:
-      `• Experience in troubleshooting live AV sessions remotely\n` +
-      `• Proficiency with conferencing platforms like Zoom, Teams, and Google Meet`
   }
-];
 
 
-  currentDate: string = new Date().toLocaleDateString(); // Used in the sidebar
+  ngOnInit(): void {
+ 
+  }
+
+  getJobs(jobId ?:any) {
+    const params: any = { EmailId: this.emailId };
+
+    if (jobId) {
+      params.jobId = jobId;
+    }
+  
+    this.http.get(getJobs, { params }).subscribe({
+      next: (response: any) => { 
+        if (response.status && response.data) {
+          this.jobList = response.data.map((job: any) => ({
+            initial: job.CompanyName?.charAt(0) || '',
+            title: job.JobTitle,
+            company: job.CompanyName,
+            type: job.JobType?.toLowerCase() || '',
+            location: job.Location,
+            posted: this.getPostedText(job.PostedDate),
+            salary: `₹${job.Salary}L`,
+            shortDesc: job.Description?.split('\n')[0] || '',
+            skills: job.Requirements?.split(',').map((s: string) => s.trim()) || [],
+            fullDesc: job.Description,
+            EmailId: job.EmailId,
+            JobID: job.JobID,
+            Status: job.Applied
+          }));
+          if (jobId) {
+          this.selectedJob = this.jobList[0];
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching profile:', error);
+      }
+    });
+  }
 
 
+  getPostedText(dateString: string): string {
+    const postedDate = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - postedDate.getTime();
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
 
+    if (diffHours < 1) return 'Posted just now';
+    if (diffHours < 24) return `Posted about ${diffHours} hours ago`;
 
-
+    const diffDays = Math.floor(diffHours / 24);
+    return `Posted ${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+  }
 
   selectCategory(category: string) {
     this.selectedCategory = category;
-    // You can set logic to filter jobs here
+    this.selectedJobType = '';
+    this.selectedExperience = '';
+    this.maxSalary = 50;
+    this.searchKeyword = '';
+    this.searchLocation = '';
+    this.applyFilters();
   }
 
   selectJobType(type: string) {
     this.selectedJobType = type;
-    // Update jobs
+    this.selectedCategory = '';
+    this.selectedExperience = '';
+    this.searchKeyword = '';
+    this.searchLocation = '';
+    this.maxSalary = 50;
+    this.applyFilters();
   }
 
-  selectExperience(level: string) {
-    this.selectedExperience = level;
-    // Update jobs
+  selectExperience(experience: string) {
+    this.selectedExperience = experience;
+    this.selectedCategory = '';
+    this.selectedJobType = '';
+    this.searchKeyword = '';
+    this.searchLocation = '';
+    this.maxSalary = 50;
+    this.applyFilters();
   }
 
 
   applyFilters() {
-    console.log('Filters applied:', {
-      category: this.selectedCategory,
-      type: this.selectedJobType,
-      experience: this.selectedExperience,
-      salaryRange: [this.minSalary, this.maxSalary]
+    const params: any = { EmailId: this.emailId };
+
+    if (this.selectedCategory) params.category = this.selectedCategory;
+    if (this.selectedJobType) params.type = this.selectedJobType;
+    if (this.selectedExperience) params.experience = this.selectedExperience;
+    if (this.maxSalary) params.maxSalary = this.maxSalary;
+
+    if (this.searchKeyword) params.keyword = this.searchKeyword;
+    if (this.searchLocation) params.location = this.searchLocation;
+    if (this.sortOption) params.sort = this.sortOption;
+
+    this.http.get<any>(getJobs, { params }).subscribe({
+      next: (res) => {
+        if (res.status) {
+          this.totalJobs = res.data.length;
+          this.activeFilters = `${this.selectedCategory || ''} ${this.selectedJobType || ''} ${this.selectedExperience || ''} ${this.searchKeyword || ''} ${this.searchLocation || ''} Salary ≤ ₹${this.maxSalary}L`.trim();
+
+          this.jobList = res.data.map((job: any) => ({
+            initial: job.CompanyName?.charAt(0) || '',
+            title: job.JobTitle,
+            company: job.CompanyName,
+            type: job.JobType?.toLowerCase() || '',
+            location: job.Location,
+            posted: this.getPostedText(job.PostedDate),
+            salary: `₹${job.Salary}L`,
+            shortDesc: job.Description?.split('\n')[0] || '',
+            skills: job.Requirements?.split(',').map((s: string) => s.trim()) || [],
+            fullDesc: job.Description,
+            EmailId: job.EmailId,
+            JobID: job.JobID,
+            Status: job.Applied
+          }));
+        }
+      }
     });
-    // Add logic to filter jobs
-  }
-
-  clearAll() {
-    this.selectedCategory = 'All';
-    this.selectedJobType = 'Full-time';
-    this.selectedExperience = 'Entry Level';
-    this.minSalary = 0;
-    this.maxSalary = 50;
-    // Optionally reset jobs list
   }
 
 
-  sortBy(type: any) {
 
+  getJobStats() {
+    this.http.get<any>(getJobStats, { params: { EmailId: this.emailId } }).subscribe({
+      next: (res) => {
+        if (res.status) {
+          this.categories = res.data.categories;
+          this.jobTypes = res.data.jobTypes;
+          this.experienceLevels = res.data.experienceLevels;
+        }
+      }
+    });
   }
-
-  selectedJob: any = null;
 
   selectJob(job: any) {
     this.selectedJob = job;
+    this.currentUrl = window.location.origin + this.router.url + '/job/' + job.JobID;
+    this.whatsappUrl = `https://wa.me/?text=${encodeURIComponent(this.currentUrl)}`;
+    this.twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(this.currentUrl)}`;
+    this.linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(this.currentUrl)}`;
+    this.facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
   }
+
+  sortBy(type: string) {
+    this.sortOption = type;
+    this.applyFilters();
+  }
+
+  clearAll() {
+    this.selectedCategory = '';
+    this.selectedJobType = '';
+    this.selectedExperience = '';
+    this.maxSalary = 50;
+    this.applyFilters();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;  // Store file reference
+      this.fileName = file.name;
+      this.showDefault = false;
+      this.showFileArea = true;
+
+      setTimeout(() => {
+        this.startUpload();
+      }, 500);
+    }
+  }
+
+
+  changeFile() {
+    this.resetFileUpload();
+  }
+
+  startUpload() {
+    this.showFileArea = false;
+    this.showProgress = true;
+    this.uploadProgress = 0;
+
+    this.uploadInterval = setInterval(() => {
+      if (this.uploadProgress < 100) {
+        this.uploadProgress += 5;
+      } else {
+        clearInterval(this.uploadInterval);
+        this.showProgress = false;
+        this.showFinalStep = true;
+      }
+    }, 200);
+  }
+
+  cancelUpload() {
+    clearInterval(this.uploadInterval);
+    this.resetFileUpload();
+  }
+
+  onJobApply(job: any) {
+    this.companyInfo = job
+  }
+
+
+  onApplyJob() {
+    if (!this.selectedFile || !this.companyInfo) {
+      alert('Please select a file before proceeding.');
+      return;
+    }
+
+    this.isApplying = true;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const resumeBase64 = reader.result?.toString().split(',')[1];
+
+      const payload = {
+        CompanyName: this.companyInfo.company,
+        CompanyEmailId: this.companyInfo.EmailId,
+        JobID: this.companyInfo.JobID,
+        SenderName: localStorage.getItem('UserName') || 'User',
+        senderEmailId: localStorage.getItem('EmailId') || '',
+        Resume: resumeBase64
+      };
+
+      this.http.post(applyJob, payload).subscribe({
+        next: () => {
+          alert('Application submitted successfully!');
+          this.resetFileUpload();
+          this.isApplying = false;
+          this.closePopup.nativeElement.click();
+        },
+        error: (err) => {
+          console.error('Error sending application:', err);
+          alert('Failed to submit application.');
+          this.isApplying = false;
+        }
+      });
+    };
+
+    reader.readAsDataURL(this.selectedFile);
+  }
+
+
+
+  resetFileUpload() {
+    this.fileName = '';
+    this.showDefault = true;
+    this.showFileArea = false;
+    this.showProgress = false;
+    this.showFinalStep = false;
+    this.uploadProgress = 0;
+    clearInterval(this.uploadInterval);
+  }
+
 }

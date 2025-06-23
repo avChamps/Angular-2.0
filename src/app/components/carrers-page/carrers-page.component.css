@@ -71,3 +71,12 @@
      border-radius: 15px;
      font-size: 14px;
  }
+
+ .display-text {
+ display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4.5em;
+ }

@@ -85,10 +85,10 @@ export class HomePageComponent {
     });
 
     let emailId = localStorage.getItem('EmailId');
+    this.profileData = JSON.parse(localStorage.getItem('ProfileData') || '{}');
     if (emailId) {
       this.emailId = emailId;
     }
-    this.getProfiles()
   }
 
   toggleMenu(event: Event) {
@@ -118,25 +118,6 @@ export class HomePageComponent {
 onNaviagate(router : any) {
   this.router.navigate([router])
 }
-
-getProfiles() {
-  this.http.get(getProfile, {
-    params: {
-      emailId: this.emailId || '',
-      JwtToken: this.token || ''
-    }
-  }).subscribe({
-    next: (response: any) => {
-      this.profileData = response?.profile;
-     sessionStorage.setItem('profileData', JSON.stringify(this.profileData));
-    },
-    error: (error) => {
-      console.error('Error fetching profile:', error);
-    }
-  });
-}
-
-
 
  toggleDrawer(event: Event): void {
     event.stopPropagation();

@@ -255,11 +255,12 @@ export class ProfilePageComponent {
       }
     }).subscribe({
       next: (response: any) => {
-        const profile = response?.profile;
-        this.profileData = response?.profile;
+        const profile = response?.data[0];
+        this.profileData = response?.data[0];
         this.progress = this.profileData.profileWeight;
         if (profile) {
           localStorage.setItem('EmailId', profile.EmailId);
+          localStorage.setItem('ProfileData', JSON.stringify(profile));
           this.patchValue(profile);
         }
       },

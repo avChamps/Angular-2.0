@@ -83,6 +83,17 @@ const routes: Routes = [
     }
   },
 
+  {
+    path: 'careers/job/:id',
+    loadChildren: async () => (await import('./components/carrers-page/carrers-page.module')).CarrersPageModule,
+    canActivate: [SiteGuardGuard], 
+    data: {
+      title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      keywords: 'directory, members, av champs'
+    }
+  },
+
 
    {
     path: 'community',
