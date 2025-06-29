@@ -32,3 +32,225 @@
     "strictTemplates": true
   }
 }
+
+
+
+// {
+//   "tools": [
+//     {
+//       "id": "aspect-ratio",
+//       "name": "Aspect Ratio Calculator",
+//       "description": "Calculate and convert aspect ratios for video and images",
+//       "iconName": "crop",
+//       "iconColor": "#6366f1",
+//       "category": "video",
+//       "tags": ["video", "calculator", "aspect-ratio", "dimensions"],
+//       "isNew": true,
+//       "version": "1.0.0",
+//       "lastUpdated": "2024-03-20",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/aspect-ratio",
+//       "isPremium": false,
+//       "pointsRequired": 0
+//     },
+//     {
+//       "id": "video-bandwidth-calculator",
+//       "name": "Video Bandwidth Calculator",
+//       "description": "Calculate bandwidth requirements for video streaming and storage",
+//       "iconName": "globe",
+//       "iconColor": "#8b5cf6",
+//       "category": "video",
+//       "tags": ["video", "calculator", "bandwidth", "streaming", "storage"],
+//       "isNew": true,
+//       "version": "1.0.0",
+//       "lastUpdated": "2025-05-18",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/video-bandwidth-calculator",
+//       "isPremium": false,
+//       "pointsRequired": 0
+//     },
+
+//   {
+//   "id": "certified-list",
+//   "name": "Certified List",
+//   "description": "Access and search the AVIXA Individual Member Directory to find certified audiovisual professionals worldwide.",
+//   "iconName": "globe",
+//   "iconColor": "#8b5cf6",
+//   "category": "integrations",
+//   "tags": ["AVIXA", "certification", "directory", "AV professionals", "CTS", "members"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-21",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/avixa-certified-member-directory",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+// {
+//   "id": "certified-product-list",
+//   "name": "Certified Product List",
+//   "description": "Explore the official HDBaseT Certified Product Catalogue to find compliant AV devices, cables, and components for professional installations.",
+//   "iconName": "check-circle",
+//   "iconColor": "#10b981",
+//   "category": "integrations",
+//   "tags": ["HDBaseT", "certification", "AV products", "cables", "interoperability", "standards"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-21",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/hdbaset-certified-product-catalogue",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+// {
+//   "id": "dante-enabled-products",
+//   "name": "Dante Enabled Products",
+//   "description": "Browse the comprehensive catalog of over 4,000 Dante-enabled AV products from more than 600 manufacturers, including amplifiers, mixers, speakers, and networked video solutions.",
+//   "iconName": "network",
+//   "iconColor": "#2563eb",
+//   "category": "integrations",
+//   "tags": ["Dante", "AV-over-IP", "networked audio", "networked video", "Audinate", "AV products"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-23",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/dante-enabled-products-catalog",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+
+// {
+//   "id": "zoom-certified-hardware",
+//   "name": "Zoom Certified Hardware",
+//   "description": "Explore Zoom's official list of certified hardware for Zoom Rooms, including appliances, controllers, cameras, and more, ensuring optimal compatibility and performance.",
+//   "iconName": "video-camera",
+//   "iconColor": "#2D8CFF",
+//   "category": "integrations",
+//   "tags": ["Zoom", "certification", "hardware", "Zoom Rooms", "AV devices", "video conferencing"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-23",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/zoom-certified-hardware",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+
+// {
+//   "id": "teams-certified-hardware",
+//   "name": "Microsoft Teams Certified Hardware",
+//   "description": "Browse Microsoft's official list of certified hardware for Microsoft Teams Rooms, including systems, peripherals, and devices optimized for seamless Teams integration.",
+//   "iconName": "devices",
+//   "iconColor": "#6264A7",
+//   "category": "integrations",
+//   "tags": ["Microsoft Teams", "certification", "hardware", "Teams Rooms", "AV devices", "video conferencing"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-23",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/teams-certified-hardware",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+// {
+//   "id": "iprs",
+//   "name": "IPRS",
+//   "description": "Access the Indian Performing Right Society (IPRS) to obtain licenses for the public performance and communication of copyrighted musical and literary works in India.",
+//   "iconName": "music-note",
+//   "iconColor": "#e11d48",
+//   "category": "integrations",
+//   "tags": ["IPRS", "music licensing", "copyright", "public performance", "India", "royalties"],
+//   "isNew": true,
+//   "version": "1.0.0",
+//   "lastUpdated": "2025-05-23",
+//   "author": "AV Champs",
+//   "documentation": "/docs/tools/iprs-music-licensing",
+//   "isPremium": false,
+//   "pointsRequired": 0
+// },
+
+//     {
+//       "id": "btu-calculator",
+//       "name": "BTU Calculator",
+//       "description": "Calculate BTU requirements for air conditioning systems",
+//       "iconName": "thermometer",
+//       "iconColor": "#14b8a6",
+//       "category": "engineering",
+//       "tags": ["calculator", "btu", "hvac", "air-conditioning"],
+//       "isFeatured": true,
+//       "version": "1.0.0",
+//       "lastUpdated": "2024-03-20",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/btu-calculator",
+//       "isPremium": false,
+//       "pointsRequired": 100
+//     },
+//     {
+//       "id": "placeholder-tool",
+//       "name": "Placeholder Tool",
+//       "description": "This is a placeholder for future tools",
+//       "iconName": "tool",
+//       "iconColor": "#ec4899",
+//       "category": "general",
+//       "tags": ["placeholder", "upcoming"],
+//       "isNew": true,
+//       "version": "0.0.1",
+//       "lastUpdated": "2024-03-20",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/placeholder",
+//       "isPremium": false,
+//       "pointsRequired": 100
+//     },
+//     {
+//       "id": "advanced-room-designer",
+//       "name": "Advanced Room Designer",
+//       "description": "Professional 3D room design tool with acoustic modeling and equipment placement",
+//       "iconName": "layout-dashboard",
+//       "iconColor": "#6366f1",
+//       "category": "project",
+//       "tags": ["design", "3D", "acoustics"],
+//       "isNew": true,
+//       "version": "1.0.0",
+//       "lastUpdated": "2025-05-18",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/advanced-room-designer",
+//       "isPremium": true,
+//       "pointsRequired": 100
+//     },
+//     {
+//       "id": "signal-analyzer",
+//       "name": "Signal Analyzer Pro",
+//       "description": "Advanced audio signal analysis with frequency response, phase, and distortion measurements",
+//       "iconName": "activity",
+//       "iconColor": "#ec4899",
+//       "category": "audio",
+//       "tags": ["audio", "analysis", "measurement"],
+//       "version": "1.0.0",
+//       "lastUpdated": "2025-04-12",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/signal-analyzer",
+//       "isPremium": true,
+//       "pointsRequired": 475
+//     },
+//     {
+//       "id": "network-simulator",
+//       "name": "AV Network Simulator",
+//       "description": "Simulate AV over IP networks with bandwidth analysis and latency testing",
+//       "iconName": "wifi",
+//       "iconColor": "#14b8a6",
+//       "category": "video",
+//       "tags": ["network", "IP", "bandwidth"],
+//       "version": "1.0.0",
+//       "lastUpdated": "2025-03-01",
+//       "author": "AV Champs",
+//       "documentation": "/docs/tools/network-simulator",
+//       "isPremium": true,
+//       "pointsRequired": 150
+//     }
+//   ]
+// }

@@ -1047,7 +1047,7 @@ svg.svg-blue {
 }
 
 .modal-body {
-  background-color: #FFF !important;
+  background-color: #f0f2f5 !important;
   display: flex;
   flex-direction: column;
   gap: 20px;

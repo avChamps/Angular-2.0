@@ -15,6 +15,7 @@ export class PostJobComponent implements AfterViewInit {
   selectedFile: File | null = null;
   previewUrl: any = null;
   loading: boolean = false;
+  showCoins : boolean = false;
   @Input() Products : any;
   @Output() onProductSaved = new EventEmitter<void>();
 
@@ -107,6 +108,7 @@ let endPoint : any;
       this.postItemForm.reset();
       this.selectedFile = null;
       this.previewUrl = null;
+      this.showCoins = true;
 
       const modalEl = document.getElementById('PostItem');
       if (modalEl) {

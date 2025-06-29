@@ -42,6 +42,17 @@ export class ProfilePageComponent {
   @ViewChild('certModal') certModal!: ElementRef;
   @ViewChild('addressModal') addressModal!: ElementRef;
 
+
+pointsList = [
+  { label: 'Profile', icon: 'user' },
+  { label: 'Community', icon: 'users' },
+  { label: 'Reiviews', icon: 'star' },
+  { label: 'EKart', icon: 'shopping-cart' },
+  { label: 'Events', icon: 'calendar' },
+  { label: 'Careers', icon: 'briefcase' }
+];
+
+
   bsConfig = {
     dateInputFormat: 'DD-MM-YYYY'
   };

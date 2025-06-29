@@ -9,6 +9,7 @@ import { OnlyNumbersDirective } from '../directives/only-numbers.directive';
 import { ClickOutsideDirective } from '../directives/ClickOutsideDirective.directive';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoinsPageComponent } from '../../components/coins-page/coins-page.component';
 
 
 

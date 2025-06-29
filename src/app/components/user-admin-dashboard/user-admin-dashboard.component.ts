@@ -5,7 +5,8 @@ import { deleteJob, getCartItems, getJobs, getProducts, postJob } from '../../co
 declare var bootstrap: any;
 
 export enum Section {
-  Product = 'Product'
+  Product = 'Product',
+  Events = 'Events'
 }
 
 @Component({

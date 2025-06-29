@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { addToCart, checkout, deleteCartItem, getCartItems, getProducts, getProfile, updateCartQuantity } from '../../constants/api-constants';
+import { addToCart, checkout, deleteAllCartItem, deleteCartItem, getCartItems, getProducts, getProfile, updateCartQuantity } from '../../constants/api-constants';
 declare var bootstrap: any;
 
 
@@ -175,6 +175,20 @@ cartMessages: { [title: string]: string } = {};
 
     this.getProducts();
   }
+
+  clearCart(): void {
+  const emailId = localStorage.getItem('EmailId') || '';
+  this.http.delete(deleteAllCartItem, {
+    params: { emailId }
+  }).subscribe({
+    next: (res: any) => {
+      if (res.status) {
+        this.cartItems = [];
+      }
+    },
+    error: err => console.error('Failed to clear cart:', err)
+  });
+}
 
   displayView(type: any) {
     debugger;

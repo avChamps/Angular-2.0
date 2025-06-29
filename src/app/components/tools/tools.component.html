@@ -12,7 +12,7 @@
 
         <!-- Points Summary Box -->
         <div class="tools-page-section">
-            <div class="points-box">
+            <!-- <div class="points-box">
                 <div class="left">
                     <div class="icon"><i class="bi bi-award"></i></div>
                     <div>
@@ -21,37 +21,41 @@
                     </div>
                 </div>
                 <div class="points"><i class="bi bi-stars"></i> 715</div>
-            </div>
+            </div> -->
 
-            <!-- Search and Filters -->
-            <div class="filter-bar">
-                <input type="text" class="form-control flex-grow-1" [(ngModel)]="searchTerm" (input)="getTools()"
-                    placeholder="Search tools...">
-                <button class="btn btn-outline-secondary"><i class="bi bi-funnel"></i> Filters</button>
-                <button class="btn btn-outline-secondary" (click)="getTools(true)"><i class="bi bi-star star"></i>
-                    Favorites</button>
-                <button class="btn btn-outline-secondary" (click)="loadRecentTools()"><i
-                        class="bi bi-clock-history recent"></i> Recent</button>
-            </div>
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
 
-            <!-- Tool Tabs (Top) -->
-            <ul class="nav nav-pills my-3 tool-tabs bg-white">
-                <li class="nav-item" (click)="getTools(false)">
-                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'all' }">All Tools</a>
-                </li>
-                <li class="nav-item" (click)="getTools(true)">
-                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'favourite' }">
-                        Favorites ({{ interestCount || 0}})
-                    </a>
-                </li>
-                <li class="nav-item" (click)="selectedTab = 'recent'" (click)="loadRecentTools()">
-                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'recent' }">Recent ({{ recentCount ||
-                        0}})</a>
-                </li>
-                <li class="nav-item" (click)="selectedTab = 'locked'">
-                    <a class="nav-link" [ngClass]="{ active: selectedTab === 'locked' }">Locked (0)</a>
-                </li>
-            </ul>
+  <!-- Search Input -->
+  <div class="flex-grow-1 me-3">
+    <input type="text"
+           class="form-control"
+           [(ngModel)]="searchTerm"
+           (input)="getTools()"
+           placeholder="Search tools...">
+  </div>
+
+  <!-- Tool Tabs (Pills) -->
+  <ul class="nav nav-pills tool-tabs mb-0">
+    <li class="nav-item" (click)="getTools(false)">
+      <a class="nav-link" [ngClass]="{ active: selectedTab === 'all' }">All Tools</a>
+    </li>
+    <li class="nav-item" (click)="getTools(true)">
+      <a class="nav-link" [ngClass]="{ active: selectedTab === 'favourite' }">
+        Favorites ({{ interestCount || 0}})
+      </a>
+    </li>
+    <li class="nav-item" (click)="selectedTab = 'recent'; loadRecentTools()">
+      <a class="nav-link" [ngClass]="{ active: selectedTab === 'recent' }">
+        Recent ({{ recentCount || 0}})
+      </a>
+    </li>
+    <li class="nav-item" (click)="selectedTab = 'locked'">
+      <a class="nav-link" [ngClass]="{ active: selectedTab === 'locked' }">Locked (0)</a>
+    </li>
+  </ul>
+
+</div>
+
 
 
             <!-- Tool Filter Buttons -->

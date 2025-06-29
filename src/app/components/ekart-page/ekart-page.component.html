@@ -546,10 +546,10 @@
       <div class="modal-cart-footer">
         <div class="modal-cart-footer-top">
           <p>Total</p>
-          <p class="text-primary fw-bolder">{{ totalAmount }}</p>
+          <p class="text-primary fw-bolder">₹{{ totalAmount }} /-</p>
         </div>
         <div class="modal-cart-footer-bottom">
-          <button class="btn btn-outline-secondary w-100">
+          <button class="btn btn-outline-secondary w-100" (click)="clearCart()">
             Clear Cart
           </button>
           <div class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#CheckoutModel">

@@ -47,7 +47,7 @@
 
 
 body {
-  background-color: #f3f4f6;
+  background-color: #f0f2f5;
   font-family: "Inter", sans-serif;
 }
 
@@ -63,4 +63,14 @@ body {
 
 .text-primary {
    color: #0B5CFF !important;
+}
+
+
+.form-control::placeholder,
+.form-select::placeholder{
+  color: #d1d5db !important;
+}
+
+.text-danger {
+  font-size: 12px !important;
 }

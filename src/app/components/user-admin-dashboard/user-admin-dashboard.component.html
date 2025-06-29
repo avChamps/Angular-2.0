@@ -290,6 +290,18 @@
       </div>
 
 
+ <div class="job-card-wrapper container">
+        <div class="header">
+          <div>
+            <h2>Post your event</h2>
+            <p>You have posted {{jobList?.length || 0}} job(s).</p>
+          </div>
+          <button class="btn-post" (click)="onSubmission('Events')"><i class="bi bi-plus-lg"></i>
+            Post Events</button>
+        </div>
+  </div>
+
+
 
       <div class="my-orders-section job-card-wrapper container">
         <h4 class="mb-3 fw-bold">My Orders</h4>
@@ -619,3 +631,4 @@
 
 
 <app-post-job *ngIf="currentSection === 'Product'"   (onProductSaved)="handleProductSaved()" [Products]="editProducts"></app-post-job>
+<app-post-events *ngIf="currentSection === 'Events'"></app-post-events>

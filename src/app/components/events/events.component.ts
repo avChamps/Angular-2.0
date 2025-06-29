@@ -19,7 +19,7 @@ export class EventsComponent implements OnInit {
   currentPage = 1;
   limit = 10;
   loading = false;
-  activeTab = 'Trade show';
+  activeTab = 'Trade Show';
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -29,7 +29,7 @@ export class EventsComponent implements OnInit {
   }
 
   courseTabs  = [
-    'TradeShow','Training' ,'Webinar' , 'Networking' , 'Product Launch'
+    'Trade Show','Training' ,'Webinar' , 'Networking' , 'Product Launch'
   ]
 
 

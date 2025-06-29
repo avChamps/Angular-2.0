@@ -1289,7 +1289,7 @@ a{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 64px;
-  padding: 40px 1rem;
+  padding: 15px 1rem;
   max-width: 1300px;
   margin: auto;
   justify-items: flex-start;
@@ -1315,12 +1315,13 @@ a{
 }
 .footer_branding_bottom {
   display: flex;
-  gap: 24px;
+  gap: 12px;
+  margin-top: -35px !important
 }
 .footer_branding_bottom a .icon {
   width: 26px;
   height: 26px;
-  fill: #94a3b8 !important;
+  fill: #fff !important;
   cursor: pointer;
   transition: color 0.2s ease;
   stroke-width: 2;
@@ -1431,7 +1432,7 @@ a{
   justify-content: center;
 }
 .footer_text p {
-  margin: 24px 0;
+  margin: 15px 0;
   color: #64748B;
   font-size: 14px;
 }
@@ -1499,6 +1500,21 @@ a{
   pointer-events: auto;
 }
 
+
+  .social-icon:hover {
+    color: #0d6efd !important;
+  }
+
+#socialIcons .icon {
+  width: 24px;
+  height: 24px;
+  fill: #333;
+  transition: fill 0.3s ease;
+}
+
+#socialIcons a:hover .icon {
+  fill: #0d6efd;
+}
 
 
 /* -------------- Scroll-to-top ----------------- */

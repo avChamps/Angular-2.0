@@ -34,3 +34,5 @@ export const getCartItems = url + '/getCartItems';
 export const updateCartQuantity = url + '/updateCartQuantity';
 export const deleteCartItem = url +  '/deleteCartItem';
 export const checkout = url + '/checkout';
+export const deleteAllCartItem = url + '/deleteAllCartItem';
+export const addCoins = url + '/addCoins';

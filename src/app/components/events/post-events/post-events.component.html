@@ -1,0 +1,100 @@
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="submitEventModal" tabindex="-1" #submitEventModal aria-labelledby="submitEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="submitEventModalLabel">Submit an Event Request</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+
+          <!-- Event Title -->
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="Title" placeholder="Event Title" required>
+            <div class="text-danger" *ngIf="eventForm.get('Title')?.touched && eventForm.get('Title')?.invalid">
+              Event Title is required.
+            </div>
+          </div>
+
+          <!-- Short Description -->
+          <div class="mb-3">
+            <textarea class="form-control" formControlName="ShortDescription" rows="2" placeholder="Short Description"
+              required style="min-height: 80px;"></textarea>
+            <div class="text-danger"
+              *ngIf="eventForm.get('ShortDescription')?.touched && eventForm.get('ShortDescription')?.invalid">
+              Short Description is required.
+            </div>
+          </div>
+
+          <!-- Full Event Details -->
+          <div class="mb-3">
+            <textarea class="form-control" formControlName="FullDetails" rows="4" placeholder="Full Event Details"
+              required style="min-height: 80px;"></textarea>
+            <div class="text-danger"
+              *ngIf="eventForm.get('FullDetails')?.touched && eventForm.get('FullDetails')?.invalid">
+              Full Event Details are required.
+            </div>
+          </div>
+
+          <!-- Start Date -->
+          <div class="mb-3">
+            <input type="text" class="form-control" bsDatepicker formControlName="StartDate" placeholder="Start Date"
+              required>
+            <div class="text-danger" *ngIf="eventForm.get('StartDate')?.touched && eventForm.get('StartDate')?.invalid">
+              Start Date is required.
+            </div>
+          </div>
+
+          <!-- End Date -->
+          <div class="mb-3">
+            <input type="text" class="form-control" bsDatepicker formControlName="EndDate" placeholder="End Date"
+              required>
+            <div class="text-danger" *ngIf="eventForm.get('EndDate')?.touched && eventForm.get('EndDate')?.invalid">
+              End Date is required.
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="Location" placeholder="Location" required>
+            <div class="text-danger" *ngIf="eventForm.get('Location')?.touched && eventForm.get('Location')?.invalid">
+              Location is required.
+            </div>
+          </div>
+
+          <!-- Event Type -->
+          <div class="mb-3">
+            <select class="form-select" formControlName="EventType" required>
+              <option value="">Select Event Type</option>
+              <option *ngFor="let type of categories" [value]="type">{{ type }}</option>
+            </select>
+            <div class="text-danger" *ngIf="eventForm.get('EventType')?.touched && eventForm.get('EventType')?.invalid">
+              Event Type is required.
+            </div>
+          </div>
+
+          <!-- Registration URL -->
+          <div class="mb-4">
+            <input type="url" class="form-control" formControlName="RegistrationUrl"
+              placeholder="Registration URL (optional)">
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button type="submit" class="btn btn-submit  btn-primary w-100" [disabled]="isSaving">
+              <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status"
+                aria-hidden="true"></span>
+              {{ isSaving ? 'Submitting...' : 'Submit Event Request' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
