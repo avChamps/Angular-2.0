@@ -131,4 +131,7 @@
   width: 100%;
   text-align: center;
 }
-
+.result-note{
+  color: #9ca3af !important;
+  font-weight: bold;
+}

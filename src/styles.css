@@ -56,4 +56,11 @@ body {
   cursor: pointer;
 }
 
+.bs-datepicker-head {
+  background-color: royalblue !important;
+}
 
+
+.text-primary {
+   color: #0B5CFF !important;
+}

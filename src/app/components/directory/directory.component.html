@@ -13,7 +13,7 @@
     <div class="">
       <input type="text" class="form-control" [(ngModel)]="searchText" (input)="searchProfiles()"
         (ngModelChange)="getProfiles(1,10)" placeholder="Search by name, role, company..." style="max-width: 400px;" />
-      <p class="text-muted small mt-2" *ngIf="totalRecords != 0">Showing 1-{{totalRecords}} of {{totalRecords}}
+      <p class="text-muted small mt-2 result-note" *ngIf="totalRecords != 0">Showing 1-{{totalRecords}} of {{totalRecords}}
         professionals</p>
     </div>
 

@@ -75,6 +75,7 @@ clickedCourse : any;
   }
 
 enrollNow(type: any) {
+  debugger;
   this.eventType = type;
 }
 

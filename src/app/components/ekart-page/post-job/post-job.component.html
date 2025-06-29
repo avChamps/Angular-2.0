@@ -1,0 +1,134 @@
+<!-- Post Item Modal -->
+<div class="modal fade" id="PostItem" tabindex="-1" aria-labelledby="postItemModel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content rounded-4">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="postItemModelLabel">
+                    <i class="bi bi-box text-primary me-2"></i> Post an Item for Sale
+                </h5>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="postItemForm" (ngSubmit)="submitForm()">
+
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" maxlength="50" formControlName="title"
+                            placeholder="e.g., Sony 4K Camcorder" />
+                        <div class="text-danger small" *ngIf="f['title'].touched && f['title'].invalid">
+                            <div *ngIf="f['title'].errors?.['required']">Title is required.</div>
+                            <div *ngIf="f['title'].errors?.['minlength']">At least 3 characters required.</div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
+                        <textarea class="form-control" maxlength="250" formControlName="description"
+                            placeholder="Describe your item" style="min-height: 100px"></textarea>
+                        <div class="text-danger small" *ngIf="f['description'].touched && f['description'].invalid">
+                            <div *ngIf="f['description'].errors?.['required']">Description is required.</div>
+                            <div *ngIf="f['description'].errors?.['minlength']">Minimum 10 characters required.</div>
+                        </div>
+                    </div>
+
+                    <!-- Price, Quantity, Condition -->
+                    <div class="mb-3 d-flex w-100 gap-2">
+                        <div class="flex-fill">
+                            <label class="form-label">Price (₹) <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="price" maxlength="9" onlyNumbers
+                                placeholder="e.g., 2499" />
+                            <div class="text-danger small" *ngIf="f['price'].touched && f['price'].invalid">
+                                <div *ngIf="f['price'].errors?.['required']">Price is required.</div>
+                                <div *ngIf="f['price'].errors?.['pattern']">Only numeric values allowed.</div>
+                            </div>
+                        </div>
+
+                        <div class="flex-fill">
+                            <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                            <input type="number" maxlength="4" class="form-control" formControlName="quantity"
+                                onlyNumbers placeholder="Enter quantity" />
+                            <div class="text-danger small" *ngIf="f['quantity'].touched && f['quantity'].invalid">
+                                <div *ngIf="f['quantity'].errors?.['required']">Quantity is required.</div>
+                                <div *ngIf="f['quantity'].errors?.['min']">Minimum quantity is 1.</div>
+                            </div>
+                        </div>
+
+                        <div class="flex-fill">
+                            <label class="form-label">Condition <span class="text-danger">*</span></label>
+                            <select class="form-select" formControlName="condition">
+                                <option value="">Select condition</option>
+                                <option>New</option>
+                                <option>Like New</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>For Parts</option>
+                            </select>
+                            <div class="text-danger small" *ngIf="f['condition'].touched && f['condition'].invalid">
+                                Condition is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label class="form-label">Location <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" maxlength="75" formControlName="location"
+                            placeholder="Enter your location" />
+                        <div class="text-danger small" *ngIf="f['location'].touched && f['location'].invalid">
+                            <div *ngIf="f['location'].errors?.['required']">Location is required.</div>
+                            <div *ngIf="f['location'].errors?.['minlength']">Minimum 3 characters required.</div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Image -->
+                    <!-- Upload Image -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Upload Image</label>
+                        <div class="upload-box border rounded-3 p-4 text-center position-relative">
+                            <p class="text-muted">Drag and drop images here, or click to browse</p>
+
+                            <!-- Hidden File Input -->
+                            <input type="file" id="imageInput" (change)="onImageChange($event)" accept="image/*"
+                                class="d-none" />
+
+                            <!-- Button to trigger input -->
+                            <button type="button" class="btn btn-outline-secondary mt-2" (click)="triggerImageInput()">
+                                Upload Image
+                            </button>
+
+                            <!-- Image Preview -->
+                            <div class="image-preview mt-3" *ngIf="previewUrl">
+                                <img [src]="previewUrl" class="img-thumbnail" style="max-height: 180px" />
+                                <div class="small text-muted mt-1">Image Preview</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Points -->
+                    <div class="points-badge my-3 d-flex align-items-center">
+                        <i class="bi bi-award-fill text-warning me-2"></i> You'll earn 50 points for posting this item!
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <!-- <button type="submit" class="btn btn-primary">Post Item</button> -->
+                        <button type="submit" class="btn btn-primary">
+                            <span *ngIf="!loading">Post Item</span>
+                            <span *ngIf="loading">
+                                <span class="spinner-border spinner-border-sm me-2" role="status"
+                                    aria-hidden="true"></span>
+                                Processing...
+                            </span>
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

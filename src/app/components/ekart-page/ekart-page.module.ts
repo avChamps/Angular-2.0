@@ -3,14 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { EkartPageRoutingModule } from './ekart-page-routing.module';
 import { SharedModule } from '../../shared/shared/shared.module';
+import { EkartPageComponent } from './ekart-page.component';
+import { PostJobComponent } from './post-job/post-job.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    EkartPageComponent,
+    PostJobComponent
+  ],
   imports: [
     CommonModule,
     EkartPageRoutingModule,
     SharedModule
+  ],
+  exports : [
+    PostJobComponent
   ]
 })
 export class EkartPageModule { }

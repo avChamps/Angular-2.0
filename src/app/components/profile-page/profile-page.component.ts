@@ -63,6 +63,14 @@ export class ProfilePageComponent {
     { name: 'Dec', value: '12' }
   ];
 
+  pointsData = [
+  { label: 'Training', icon: 'award', points: 0 },
+  { label: 'Referrals', icon: 'user', points: 0 },
+  { label: 'Achievements', icon: 'award', points: 0 },
+  { label: 'Careers', icon: 'award', points: 0 },
+  { label: 'Tools', icon: 'award', points: 0 }
+];
+
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) { }
 
@@ -412,7 +420,7 @@ export class ProfilePageComponent {
     this.professionalForm.patchValue({
       CompanyName: profile.CompanyName,
       Designation: profile.Designation,
-      JoiningYear: profile.JoiningYear,
+      JoiningYear: profile.JoiningYear ? new Date(profile.JoiningYear) : null,
       JoiningMonth: profile.JoiningMonth,
       ExperienceYears: profile.ExperienceYears,
       ExperienceMonths: profile.ExperienceMonths,

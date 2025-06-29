@@ -5,6 +5,8 @@ import { UserAdminDashboardRoutingModule } from './user-admin-dashboard-routing.
 import { SharedModule } from '../../shared/shared/shared.module';
 import { UserAdminDashboardComponent } from './user-admin-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostJobComponent } from '../ekart-page/post-job/post-job.component';
+import { EkartPageModule } from '../ekart-page/ekart-page.module';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     UserAdminDashboardRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    EkartPageModule
   ]
 })
 export class UserAdminDashboardModule { }

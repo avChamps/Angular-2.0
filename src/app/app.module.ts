@@ -7,14 +7,11 @@ import { HomePageModule } from './components/home-page/home-page.module';
 import { SiteGuardGuard } from './authentication/site-guard.guard';
 import { RedirectedPageComponent } from './components/redirected-page/redirected-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EkartPageComponent } from './components/ekart-page/ekart-page.component';
-import { CommunityComponent } from './components/community/community.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RedirectedPageComponent,
-    EkartPageComponent
+    RedirectedPageComponent
   ],
   imports: [
     BrowserModule,

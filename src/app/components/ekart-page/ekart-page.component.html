@@ -1,667 +1,708 @@
- <div class="kart-page-section">
-      <div class="left-side">
-        <div class="kart-card | card-section">
-          <div class="kart-card-left">
-            <div class="kart-card-left-logo">
-              <img src="images/logo-black.png" alt="" />
-            </div>
-            <div class="kart-card-left-info">
-              <h1>AV Kart</h1>
-              <span>Buy and sell AV equipment within the community</span>
-            </div>
-          </div>
+<div class="profile-page-section kart-page-section">
+  <div class="left-side">
+
+
+       <div class="profile-card position-relative">
+      <div class="profile-card-logo">
+        <img src="./assets/images/logo.png" alt="">
+      </div>
+      <div class="profile-card-info">
+        <h1>AV Kart</h1>
+        <span>Buy and sell AV equipment within the community</span>
+      </div>
           <div class="kart-card-right">
-            <button
-              type="button"
-              class="btn btn-outline-secondary | cart-btn"
-              data-bs-toggle="modal"
-              data-bs-target="#CartModel"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart h-5 w-5"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path>
+        <button type="button" class="btn btn-outline-secondary | cart-btn" data-bs-toggle="modal"
+          data-bs-target="#CartModel">
+<i class="bi bi-cart3"></i>
+          <div class="cart-btn-badge">{{ cartItemCount }}</div>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="kart-product-section">
+      <div class="kart-product-left">
+        <div class="kart-clear-filters | card-section">
+          <button type="button" class="btn btn-outline-secondary" (click)="clearAllFilters()">
+            Clear All Filters
+          </button>
+        </div>
+        <div class="kart-product-type | card-section">
+          <div class="filter-card">
+            <h2 class="mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-shopping-bag h-5 w-5 mr-2">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                <path d="M3 6h18"></path>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
-              <div class="cart-btn-badge">1</div>
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#PostItem"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-plus h-4 w-4 mr-2"
-              >
-                <path d="M5 12h14"></path>
-                <path d="M12 5v14"></path>
-              </svg>
-              Post Item
-            </button>
+              Product Type
+            </h2>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="new" value="New"
+                [(ngModel)]="selectedCondition" (change)="getProducts()" />
+              <label class="form-check-label" for="new">New</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="likeNew" value="Like New"
+                [(ngModel)]="selectedCondition" (change)="getProducts()" />
+              <label class="form-check-label" for="likeNew">Like New</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="good" value="Good"
+                [(ngModel)]="selectedCondition" (change)="getProducts()" />
+              <label class="form-check-label" for="good">Good</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="fair" value="Fair"
+                [(ngModel)]="selectedCondition" (change)="getProducts()" />
+              <label class="form-check-label" for="fair">Fair</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="parts" value="For Parts"
+                [(ngModel)]="selectedCondition" (change)="getProducts()" />
+              <label class="form-check-label" for="parts">For Parts</label>
+            </div>
           </div>
         </div>
+        <div class="kart-price-range | card-section">
+          <h2 class="mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-dollar-sign h-5 w-5 mr-2">
+              <line x1="12" x2="12" y1="2" y2="22"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Price Range
+          </h2>
+          <div class="d-flex gap-2 mb-3">
+            <div>
+              <label class="form-label">Min Price (₹)</label>
+              <input type="number" class="form-control" placeholder="0" [(ngModel)]="minPrice"
+                (change)="getProducts()" />
+            </div>
+            <div>
+              <label class="form-label">Max Price (₹)</label>
+              <input type="number" class="form-control" placeholder="∞" [(ngModel)]="maxPrice"
+                (change)="getProducts()" />
+            </div>
+          </div>
+          <div class="price-range-buttons d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary" (click)="applyPriceRange(0, 999)">Under ₹1,000</button>
+            <button class="btn btn-outline-secondary" (click)="applyPriceRange(1000, 5000)">₹1,000 - ₹5,000</button>
+            <button class="btn btn-outline-secondary" (click)="applyPriceRange(5001, null)">Over ₹5,000</button>
+          </div>
 
-        <div class="kart-product-section">
-          <div class="kart-product-left">
-            <div class="kart-clear-filters | card-section">
-              <button type="button" class="btn btn-outline-secondary">
-                Clear All Filters
+        </div>
+      </div>
+      <div class="kart-product-right">
+        <div class="kart-available | card-section">
+          <div class="kart-available-left">
+            <h2>{{ totalCount }} Products Available</h2>
+            <p>Showing results based on your preferences</p>
+            <div class="d-flex flex-wrap gap-2">
+              <div class="available-badge">Good</div>
+              <div class="available-badge">Fair Parts</div>
+              <div class="available-badge">New</div>
+            </div>
+          </div>
+          <div class="kart-available-right">
+            <div class="d-flex gap-2">
+              <div class="available-search input-group overflow-hidden rounded-3 border">
+                <span class="input-group-text bg-white border-0 ps-3">
+                  <i class="bi bi-search text-secondary"></i>
+                </span>
+                <input type="text" class="form-control border-0 ps-0" placeholder="Search for AV equipment"
+                  [(ngModel)]="searchText" (input)="getProducts()" />
+              </div>
+              <button class="filter_btn btn btn-outline-secondary" data-bs-toggle="modal"
+                data-bs-target="#FiltersModel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-filter h-4 w-4">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                Filters
               </button>
             </div>
-            <div class="kart-product-type | card-section">
-              <div class="filter-card">
-                <h2 class="mb-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-shopping-bag h-5 w-5 mr-2"
-                  >
-                    <path
-                      d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
-                    ></path>
-                    <path d="M3 6h18"></path>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+
+            <div class="price_dropdown position-relative w-100 cursor-pointer border border-0 px-2"
+              style="max-width: 180px">
+              <!-- Left SVG Icon -->
+              <span class="position-absolute start-0 top-50 translate-middle-y ps-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-filter">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+              </span>
+
+              <select class="form-select ps-5 pe-4 rounded-3 fw-medium" [(ngModel)]="sortOrder"
+                (change)="getProducts()">
+                <option value="newest">Newest</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+              </select>
+
+
+              <!-- Right SVG Icon -->
+              <span class="position-absolute end-0 top-50 translate-middle-y pe-3 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-chevron-down opacity-50" aria-hidden="true"></svg>
+              </span>
+            </div>
+
+            <div class="products-and-view">
+              <p class="text">4 Products</p>
+              <div class="d-flex gap-2">
+                <!-- Grid View -->
+                <input type="radio" class="btn-check" name="layout" (change)="displayView('Grid')" id="gridView"
+                  autocomplete="off" checked />
+                <label (change)="displayView('Grid')"
+                  class="grid_list_label btn border-0 rounded-3 px-2 d-flex align-items-center" for="gridView">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-grid3x3 h-4 w-4">
+                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    <path d="M3 9h18"></path>
+                    <path d="M3 15h18"></path>
+                    <path d="M9 3v18"></path>
+                    <path d="M15 3v18"></path>
                   </svg>
-                  Product Type
-                </h2>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="productType"
-                    id="new"
-                  />
-                  <label class="form-check-label" for="new">New</label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="productType"
-                    id="likeNew"
-                  />
-                  <label class="form-check-label" for="likeNew">Like New</label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="productType"
-                    id="good"
-                  />
-                  <label class="form-check-label" for="good">Good</label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="productType"
-                    id="fair"
-                  />
-                  <label class="form-check-label" for="fair">Fair</label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="productType"
-                    id="parts"
-                  />
-                  <label class="form-check-label" for="parts">For Parts</label>
-                </div>
+                </label>
+
+                <!-- List View -->
+                <input type="radio" class="btn-check" name="layout" (change)="displayView('List')" id="listView"
+                  autocomplete="off" />
+                <label (change)="displayView('List')"
+                  class="grid_list_label btn border-0 rounded-3 px-2 d-flex align-items-center" for="listView">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-list h-4 w-4">
+                    <path d="M3 12h.01"></path>
+                    <path d="M3 18h.01"></path>
+                    <path d="M3 6h.01"></path>
+                    <path d="M8 12h13"></path>
+                    <path d="M8 18h13"></path>
+                    <path d="M8 6h13"></path>
+                  </svg>
+                </label>
               </div>
             </div>
-            <div class="kart-price-range | card-section">
-              <h2 class="mb-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-dollar-sign h-5 w-5 mr-2"
-                >
-                  <line x1="12" x2="12" y1="2" y2="22"></line>
-                  <path
-                    d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                  ></path>
-                </svg>
-                Price Range
-              </h2>
-              <div class="d-flex gap-2 mb-3">
-                <div>
-                  <label class="form-label">Min Price (₹)</label>
-                  <input type="number" class="form-control" placeholder="0" />
+          </div>
+        </div>
+
+        <!-- product-list.component.html -->
+        <div class="kart-products" [ngClass]="{ 'list-view': isDisplayView === 'List' }">
+          <div class="kart-product" *ngFor="let product of products">
+            <div class="kart-product-top">
+              <div class="kart-product-top-image" data-bs-toggle="productDetailModal"
+                (click)="openProductModal(product)" data-bs-target="#productDetailModal">
+                <img [src]="product.image" alt="Image">
+              </div>
+              <div class="kart-product-badge | limited-stock-badge">{{ product.badge }}</div>
+            </div>
+            <div class="kart-product-bottom">
+              <div class="kart-product-bottom-content">
+                <div class="kart-product-tags">
+                  <div *ngFor="let tag of product.tags" class="kart-product-tag">{{ tag }}</div>
+                  <p class="kart-product-date">{{ product.date }}</p>
                 </div>
-                <div>
-                  <label class="form-label">Max Price (₹)</label>
-                  <input type="number" class="form-control" placeholder="∞" />
+                <div class="kart-product-info">
+                  <h3 class="text-line-clamp-1">{{ product.title }}</h3>
+                  <p class="text-line-clamp-2">{{ product.description }}</p>
                 </div>
               </div>
-              <div class="d-flex flex-wrap gap-2">
-                <button class="btn btn-outline-secondary">Under ₹1,000</button>
-                <button class="btn btn-outline-secondary">
-                  ₹1,000 - ₹5,000
+              <div class="kart-product-author-wrapper">
+                <div>
+                  <div class="kart-product-author">
+                    <div class="kart-product-author-img" *ngIf="product?.author?.image">
+                      <img [src]="product?.author?.image" [alt]="product?.author?.name">
+                    </div>
+
+                    <div class="icon-circle fs-14 test" *ngIf="!product?.author?.image"><strong>
+                        {{ product?.author?.name | initials}}
+                      </strong></div>
+
+                    <div class="kart-product-author-details">
+                      <p class="name">{{ product.author.name }}</p>
+                      <p class="location">{{ product.author.location }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="kart-product-buttons">
+                  <button type="button" class="btn btn-add-to-cart w-100" (click)="addToCartProduct(product)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-shopping-cart h-4 w-4 mr-2 flex-shrink-0 me-2">
+                      <circle cx="8" cy="21" r="1"></circle>
+                      <circle cx="19" cy="21" r="1"></circle>
+                      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                      </path>
+                    </svg>
+                  {{ cartMessages[product.title] || 'Add to cart' }}
+                  </button>
+                  <button type="button" class="btn btn-primary w-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-arrow-up-right h-4 w-4 mr-2 flex-shrink-0 me-2">
+                      <path d="M7 7h10v10"></path>
+                      <path d="M7 17 17 7"></path>
+                    </svg>
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+              <div class="kart-product-price">₹{{ product.price }}</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- NO PRODUCTS -->
+        <div class="card-section" *ngIf="!products || products.length == 0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-package h-12 w-12 text-gray-400 mx-auto mb-4 ">
+            <path
+              d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
+            </path>
+            <path d="M12 22V12"></path>
+            <path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"></path>
+            <path d="m7.5 4.27 9 5.15"></path>
+          </svg>
+          <h3>No products found</h3>
+          <p>Try adjusting your search or filters to find what you're looking for.</p>
+        </div>
+
+        <!-- Loading Section -->
+        <div class="kart-product-loader | card-section">
+          <div class="loader"></div>
+          <h2>Loading products...</h2>
+          <p>Please wait while we fetch the latest items</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="ad-card">
+      <div class="ad-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-badge-info h-4 w-4 mr-2">
+          <path
+            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+          </path>
+          <line x1="12" x2="12" y1="16" y2="12"></line>
+          <line x1="12" x2="12.01" y1="8" y2="8"></line>
+        </svg>
+        Sponsored Content
+      </div>
+      <div class="ad-image">
+        <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad" />
+        <div class="ad-label">Advertisement</div>
+      </div>
+      <div class="ad-body">
+        <h5>Sample Ad 1</h5>
+        <p>This is a sample advertisement.</p>
+        <button class="btn learn-more-btn mx-auto">Learn More</button>
+      </div>
+      <div class="ad-footer">
+        Google Ad Slot <br />
+        <small>Advertisement · <a href="#">Report this ad</a></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Product Detail Modal -->
+<div class="modal fade product-modal" id="productDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg position-relative">
+
+    <!-- Close Button -->
+    <button type="button" class="custom-modal-close" data-bs-dismiss="modal" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="modal-content kart-model-content">
+      <div class="modal-body kart-product-model">
+        <div class="kart-product">
+
+          <!-- Image + Badge -->
+          <div class="kart-product-top position-relative">
+            <div class="kart-product-top-image">
+              <img id="productModalImg" src="" alt="Product Image" />
+            </div>
+            <div id="productModalBadge" class="kart-product-badge limited-stock-badge"></div>
+          </div>
+
+          <!-- Product Bottom -->
+          <div class="kart-product-bottom">
+            <div class="kart-product-bottom-content">
+
+              <div class="d-flex gap-2 align-items-center ">
+                <div id="productModalTags" class="kart-product-tags"></div>
+                <p id="productModalDate" class="kart-product-date mb-2"></p>
+              </div>
+              <div class="kart-product-info">
+                <h3 id="productModalTitle"></h3>
+                <p id="productModalDesc"></p>
+              </div>
+            </div>
+
+            <div class="kart-product-author-wrapper">
+              <div class="kart-product-author">
+              
+                               <div class="kart-product-author-img" *ngIf="selectedProduct?.author?.image">
+                      <img [src]="selectedProduct?.author?.image" [alt]="selectedProduct?.author?.name">
+                    </div>
+
+                    <div class="icon-circle fs-14 test" *ngIf="!selectedProduct?.author?.image"><strong>
+                        {{ selectedProduct?.author?.name | initials}}
+                      </strong></div>
+                <div class="kart-product-author-details">
+                  <p class="name" id="productModalAuthor"></p>
+                  <p class="location" id="productModalLocation"></p>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="kart-product-buttons">
+                <button class="btn btn-add-to-cart w-100" (click)="addToCartProduct(selectedProduct)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-shopping-cart h-4 w-4 mr-2 flex-shrink-0 me-2">
+                    <circle cx="8" cy="21" r="1"></circle>
+                    <circle cx="19" cy="21" r="1"></circle>
+                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                  </svg>
+                 Add to cart
                 </button>
-                <button class="btn btn-outline-secondary">Over ₹5,000</button>
+                <button class="btn btn-primary w-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-right h-4 w-4 mr-2 flex-shrink-0 me-2">
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
+                  Buy Now
+                </button>
               </div>
             </div>
-          </div>
-          <div class="kart-product-right">
-            <div class="kart-available | card-section">
-              <div class="kart-available-left">
-                <h2>6 Products Available</h2>
-                <p>Showing results based on your preferences</p>
-                <div class="d-flex flex-wrap gap-2">
-                  <div class="available-badge">Good</div>
-                  <div class="available-badge">Fair Parts</div>
-                  <div class="available-badge">New</div>
-                </div>
-              </div>
-              <div class="kart-available-right">
-                <div class="d-flex gap-2">
-                  <button class="filter_btn btn btn-outline-secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-filter h-4 w-4"
-                    >
-                      <polygon
-                        points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
-                      ></polygon>
-                    </svg>
-                    Filters
-                  </button>
-                  <div
-                    class="available-search input-group overflow-hidden rounded-3 border"
-                  >
-                    <span class="input-group-text bg-white border-0 ps-3">
-                      <i class="bi bi-search text-secondary"></i>
-                    </span>
-                    <input
-                      type="text"
-                      class="form-control border-0 ps-0"
-                      placeholder="Search for AV equipment"
-                    />
-                  </div>
-                </div>
 
-                <div
-                  class="price_dropdown position-relative w-100 cursor-pointer border border-0 px-2"
-                  style="max-width: 180px"
-                >
-                  <!-- Left SVG Icon -->
-                  <span
-                    class="position-absolute start-0 top-50 translate-middle-y ps-3"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-filter"
-                    >
-                      <polygon
-                        points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
-                      ></polygon>
-                    </svg>
-                  </span>
-
-                  <select class="form-select ps-5 pe-4 rounded-3 fw-medium">
-                    <option selected>Newest</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                  </select>
-
-                  <!-- Right SVG Icon -->
-                  <span
-                    class="position-absolute end-0 top-50 translate-middle-y pe-3 pointer-events-none"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-chevron-down opacity-50"
-                      aria-hidden="true"
-                    ></svg>
-                  </span>
-                </div>
-
-                <div class="products-and-view">
-                  <p class="text">4 Products</p>
-                  <div class="d-flex gap-2">
-                    <!-- Grid View -->
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="layout"
-                      id="gridView"
-                      autocomplete="off"
-                      checked
-                    />
-                    <label
-                      class="grid_list_label btn border-0 rounded-3 px-2 d-flex align-items-center"
-                      for="gridView"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-grid3x3 h-4 w-4"
-                      >
-                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                        <path d="M3 9h18"></path>
-                        <path d="M3 15h18"></path>
-                        <path d="M9 3v18"></path>
-                        <path d="M15 3v18"></path>
-                      </svg>
-                    </label>
-
-                    <!-- List View -->
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="layout"
-                      id="listView"
-                      autocomplete="off"
-                    />
-                    <label
-                      class="grid_list_label btn border-0 rounded-3 px-2 d-flex align-items-center"
-                      for="listView"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-list h-4 w-4"
-                      >
-                        <path d="M3 12h.01"></path>
-                        <path d="M3 18h.01"></path>
-                        <path d="M3 6h.01"></path>
-                        <path d="M8 12h13"></path>
-                        <path d="M8 18h13"></path>
-                        <path d="M8 6h13"></path>
-                      </svg>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right-side">
-        <div class="ad-card">
-          <div class="ad-header">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-badge-info h-4 w-4 mr-2"
-            >
-              <path
-                d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
-              ></path>
-              <line x1="12" x2="12" y1="16" y2="12"></line>
-              <line x1="12" x2="12.01" y1="8" y2="8"></line>
-            </svg>
-            Sponsored Content
-          </div>
-          <div class="ad-image">
-            <img
-              src="https://via.placeholder.com/240x150?text=Sample+Ad+1"
-              alt="Sample Ad"
-            />
-            <div class="ad-label">Advertisement</div>
-          </div>
-          <div class="ad-body">
-            <h5>Sample Ad 1</h5>
-            <p>This is a sample advertisement.</p>
-            <button class="btn learn-more-btn mx-auto">Learn More</button>
-          </div>
-          <div class="ad-footer">
-            Google Ad Slot <br />
-            <small>Advertisement · <a href="#">Report this ad</a></small>
+            <div class="kart-product-price" id="productModalPrice"></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div
-      class="modal fade| modal-cart"
-      id="CartModel"
-      tabindex="-1"
-      aria-labelledby="CartModelLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
-      >
-        <div class="modal-content rounded-4">
-          <div class="modal-header border-bottom-0" id="CartModelLabel">
-            <div class="d-flex justify-content-between w-100 align-items-start">
-              <div class="modal-header-content">
-                <h2 class="h5">Your Cart (1)</h2>
-                <p class="mb-0">
-                  Review your items before proceeding to checkout
-                </p>
-              </div>
 
-              <button
-                type="button"
-                class="btn-close shadow-none"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+
+<!-- Filters Model Visible In Mobile -->
+<div class="modal fade | modal-cart" id="FiltersModel" tabindex="-1" aria-labelledby="CartModelLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-slide-left">
+    <div class="modal-content ">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="FiltersLabel">
+          <i class="bi bi-funnel text-primary me-2"></i>
+          Filters
+        </h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-section">
+          <div class="mb-3">
+            <label class="form-label text-black">Price Range</label>
+            <div class="d-flex flex-column gap-2">
+
+              <input type="number" class="form-control" [(ngModel)]="minPrice" (change)="getProducts()"
+                placeholder="Min Price (₹)" />
+              <input type="number" class="form-control" placeholder="Max Price (₹)" [(ngModel)]="maxPrice"
+                (change)="getProducts()" />
             </div>
           </div>
-          <div class="modal-body">
-            <div class="card-body-items">
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
-              <div class="cart-model-item">
-                <div class="cart-model-item-image">
-                  <img src="./images/02_Av_img.webp" alt="AV Img" />
-                </div>
-                <div class="cart-model-item-content">
-                  <h4>Av Projector Thumbnail</h4>
-                  <div class="seller">Seller:test</div>
-                  <div class="price">₹200</div>
-                </div>
-              </div>
+          <div class="mb-3">
+            <label class="form-label text-black">Condition</label>
+
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="productType" id="filter-new" />
+              <label class="form-check-label" for="filter-new">New</label>
             </div>
-          </div>
-          <div class="modal-cart-footer">
-            <div class="modal-cart-footer-top">
-              <p>Total</p>
-              <p class="text-primary fw-bolder">₹3200</p>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" [(ngModel)]="selectedCondition" (change)="getProducts()"
+                name="productType" id="filter-likeNew" />
+              <label class="form-check-label" for="filter-likeNew">Like New</label>
             </div>
-            <div class="modal-cart-footer-bottom">
-              <button class="btn btn-outline-secondary ">Clear Cart</button>
-              <div class="btn btn-primary ">Checkout</div>
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="selectedCondition" (change)="getProducts()" type="radio"
+                name="productType" id="filter-good" />
+              <label class="form-check-label" for="filter-good">Good</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="selectedCondition" (change)="getProducts()" type="radio"
+                name="productType" id="filter-fair" />
+              <label class="form-check-label" for="filter-fair">Fair</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="selectedCondition" (change)="getProducts()" type="radio"
+                name="productType" id="filter-parts" />
+              <label class="form-check-label" for="filter-parts">For Parts</label>
             </div>
 
           </div>
+          <div class="mb-3">
+            <label class="form-label text-black">Sort By</label>
+
+            <select class="form-select  pe-4 rounded-3 fw-medium" [(ngModel)]="sortOrder" (change)="getProducts()">
+              <option value="newest">Newest</option>
+              <option value="low">Price: Low to High</option>
+              <option value="high">Price: High to Low</option>
+            </select>
+
+          </div>
+          <div class="d-flex flex-column gap-2 mt-4">
+
+            <button class="btn btn-primary rounded-3 ">Apply Filters</button>
+            <button class="btn btn-outline-secondary rounded-3 " (click)="clearAllFilters()">Clear All Filters</button>
+          </div>
+
+
         </div>
       </div>
     </div>
-    <!-- Post Item -->
+  </div>
+</div>
 
-    <div
-      class="modal fade"
-      id="PostItem"
-      tabindex="-1"
-      aria-labelledby="personalInfoLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
-      >
-        <div class="modal-content rounded-4">
-          <div class="modal-header border-bottom-0">
-            <h5 class="modal-title" id="personalInfoLabel">
-              <i class="bi bi-box text-primary me-2"></i>
-              Post an Item for Sale
-            </h5>
-            <button
-              type="button"
-              class="btn-close shadow-none"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+<!-- Cart Model -->
+<div class="modal fade| modal-cart" id="CartModel" tabindex="-1" aria-labelledby="CartModelLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-cart-right">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom-0" id="CartModelLabel">
+        <div class="d-flex justify-content-between w-100 align-items-start">
+          <div class="modal-header-content">
+            <h2 class="h5">Your Cart ({{cartItemCount}})</h2>
+            <p class="mb-0">
+              Review your items before proceeding to checkout
+            </p>
           </div>
 
-          <div class="modal-body">
-            <!-- Personal Info -->
-            <div class="form-section">
-              <h6>Post an Item for Sale</h6>
-              <div class="mb-3">
-                <label class="form-label"
-                  >Title <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="e.g., Sony 4K Camcorder"
-                />
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="card-body-items">
+          <div class="cart-model-item" *ngFor="let item of cartItems">
+            <div class="d-flex align-items-center gap-3">
+              <div class="cart-model-item-image">
+                <img [src]="item?.ImageUrl" [alt]="item.Title" />
               </div>
-              <div class="mb-3">
-                <label class="form-label"
-                  >Description <span class="text-danger">*</span></label
-                >
-                <textarea
-                  class="form-control"
-                  placeholder="Describe your item in detail"
-                  style="min-height: 100px"
-                ></textarea>
+              <div>
+                <h4 class="mb-0 text-line-clamp-1 heading">{{ item.Title }}</h4>
+                <div class="seller">Seller: {{ item.EmailId.split('@')[0] }}</div>
+                <div class="price">₹{{ item.Price }}</div>
               </div>
-              <div class="mb-3 d-flex w-100 gap-2">
-                <div class="flex-fill">
-                  <label class="form-label"
-                    >Price (₹) <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="e.g., 2499"
-                  />
-                </div>
-                <div class="flex-fill">
-                  <label class="form-label"
-                    >Quantity <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    placeholder="Enter quantity"
-                  />
-                </div>
-                <div class="flex-fill">
-                  <label class="form-label"
-                    >Good <span class="text-danger">*</span></label
-                  >
-                  <select class="form-select">
-                    <option>New</option>
-                    <option>Like New</option>
-                    <option selected>Good</option>
-                    <option>Fair</option>
-                    <option>For Parts</option>
-                  </select>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label"
-                  >Location <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Enter your location"
-                />
-              </div>
+            </div>
 
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Upload Image</label>
-                <div
-                  class="upload-box border rounded-3 p-4 text-center position-relative"
-                  id="uploadBox"
-                >
-                  <p class="text-muted">
-                    Drag and drop images here, or click to browse
-                  </p>
-                  <input
-                    type="file"
-                    id="imageInput"
-                    class="d-none"
-                    accept="image/*"
-                  />
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary mt-2"
-                    onclick="document.getElementById('imageInput').click()"
-                  >
-                    Upload Image
-                  </button>
-                  <div class="image-preview mt-3 d-none">
-                    <img
-                      id="previewImg"
-                      class="img-thumbnail"
-                      style="max-height: 180px"
-                    />
-                    <div class="small text-muted mt-1">Image Preview</div>
-                  </div>
-                </div>
+            <div class="cart-model-item-content">
+              <div class="cart-model-item-quantity">
+                <button class="quantity-button" (click)="increaseQuantity(item)">
+                  <i class="bi bi-plus"></i>
+                </button>
+                <p>{{ item.Quantity }}</p>
+                <button class="quantity-button" (click)="decreaseQuantity(item)">
+                  <i class="bi bi-dash"></i>
+                </button>
               </div>
-              <div class="points-badge">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-award h-4 w-4 mr-2"
-                >
-                  <path
-                    d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"
-                  ></path>
-                  <circle cx="12" cy="8" r="6"></circle>
+              <button class="delete-item" (click)="removeFromCart(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
+                  <path d="M3 6h18"></path>
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                  <line x1="10" x2="10" y1="11" y2="17"></line>
+                  <line x1="14" x2="14" y1="11" y2="17"></line>
                 </svg>
-                You'll earn 50 points for posting this item!
-              </div>
+              </button>
             </div>
           </div>
+          <div *ngIf="!cartItems || cartItems?.length == 0">
+            <span>No items found in your cart</span>
+          </div>
+        </div>
 
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button type="button" class="btn btn-primary">Post Item</button>
+      </div>
+      <div class="modal-cart-footer">
+        <div class="modal-cart-footer-top">
+          <p>Total</p>
+          <p class="text-primary fw-bolder">{{ totalAmount }}</p>
+        </div>
+        <div class="modal-cart-footer-bottom">
+          <button class="btn btn-outline-secondary w-100">
+            Clear Cart
+          </button>
+          <div class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#CheckoutModel">
+            Checkout
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Checkout -->
+<div class="modal fade" id="CheckoutModel" tabindex="-1" aria-labelledby="CheckoutModelLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content rounded-4" [formGroup]="checkoutForm">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title">
+          <i class="bi bi-cart3 text-primary me-2"></i>
+          Checkout
+        </h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Personal Info -->
+        <div class="form-section">
+          <h6>Checkout</h6>
+
+          <!-- Cart Summary -->
+          <div class="modal-checkout-summary mb-3" *ngIf="cartItems.length > 0">
+            <div class="summary-top">
+              <h3>Order Summary ({{ cartItems.length }} items)</h3>
+            </div>
+            <div class="summary-middle">
+              <div class="summary-middle-item" *ngFor="let item of cartItems">
+                <div class="summary-middle-item-left">
+                  <div class="summary-middle-item-image">
+                    <img [src]="item.ImageUrl" [alt]="item.Title" />
+                  </div>
+                  <div>
+                    <p class="title text-truncate" style="max-width: 160px">{{ item.Title }}</p>
+                    <p class="quantity">Qty: {{ item.Quantity }}</p>
+                  </div>
+                </div>
+                <div class="summary-middle-item-right fw-bold">
+                  ₹{{ item.Price }}
+                </div>
+              </div>
+            </div>
+            <div class="summary-bottom">
+              <p class="fw-medium">Total</p>
+              <p class="fw-bold text-primary">₹{{ totalAmount }}</p>
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label">Full name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" maxlength="50" placeholder="Enter your full name"
+              formControlName="fullName" />
+            <small class="text-danger"
+              *ngIf="checkoutForm.get('fullName')?.touched && checkoutForm.get('fullName')?.hasError('required')">Full
+              name is required</small>
+            <small class="text-danger" *ngIf="checkoutForm.get('fullName')?.hasError('maxLength')">Full name must be
+              under 100 characters</small>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-3">
+            <label class="form-label">Shipping Address <span class="text-danger">*</span></label>
+            <textarea class="form-control" placeholder="Enter your complete shipping address..."
+              style="min-height: 80px" formControlName="address" maxlength="250"></textarea>
+            <small class="text-danger"
+              *ngIf="checkoutForm.get('address')?.touched && checkoutForm.get('address')?.hasError('required')">Address
+              is required</small>
+            <small class="text-danger" *ngIf="checkoutForm.get('address')?.hasError('maxLength')">Address must be under
+              250 characters</small>
+          </div>
+
+          <!-- Email -->
+          <div class="flex-fill">
+            <label class="form-label">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" maxlength="75" placeholder="your@email.com"
+              formControlName="email" />
+            <small class="text-danger"
+              *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.hasError('required')">Email is
+              required</small>
+            <small class="text-danger" *ngIf="checkoutForm.get('email')?.hasError('email')">Enter a valid email</small>
+            <small class="text-danger" *ngIf="checkoutForm.get('email')?.hasError('maxLength')">Email must be under 100
+              characters</small>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="flex-fill">
+            <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" maxlength="10" placeholder="+91 98765 43210"
+              formControlName="phoneNumber" onlyNumbers />
+            <small class="text-danger"
+              *ngIf="checkoutForm.get('phoneNumber')?.touched && checkoutForm.get('phoneNumber')?.hasError('required')">Phone
+              number is required</small>
+            <small class="text-danger" *ngIf="checkoutForm.get('phoneNumber')?.hasError('pattern')">Enter a valid
+              10-digit number</small>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="flex-fill mb-3">
+            <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+            <select class="form-select" formControlName="paymentMethod">
+              <option value="Cash on Delivery" disabled>Cash on Delivery</option>
+              <option value="UPI Payment" disabled>UPI Payment</option>
+            </select>
+            <small class="text-danger"
+              *ngIf="checkoutForm.get('paymentMethod')?.touched && checkoutForm.get('paymentMethod')?.hasError('required')">Payment
+              method is required</small>
+          </div>
+
+          <!-- Notes -->
+          <div class="mb-3">
+            <label class="form-label">Notes (Optional)</label>
+            <textarea class="form-control" maxlength="250" placeholder="Any special instructions..."
+              style="min-height: 80px" formControlName="notes"></textarea>
+            <small class="text-danger" *ngIf="checkoutForm.get('notes')?.hasError('maxLength')">Notes must be under 200
+              characters</small>
+          </div>
+
+
+          <!-- Reward Message -->
+          <div class="points-badge mt-3">
+            <svg xmlns="http://www.w3.org2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award h-4 w-4 me-2">
+              <circle cx="12" cy="8" r="6"></circle>
+              <path d="m15.5 12.9 1.5 8.5a.5.5 0 0 1-.8.5l-3.6-2.7a1 1 0 0 0-1.2 0l-3.6 2.7a.5.5 0 0 1-.8-.5l1.5-8.5" />
+            </svg>
+            You'll earn 50 points for posting this item!
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" [disabled]="loading" (click)="placeOrder()">
+          <span *ngIf="!loading">Place Order</span>
+          <span *ngIf="loading">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Processing...
+          </span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-post-job *ngIf="isPostItem"></app-post-job>

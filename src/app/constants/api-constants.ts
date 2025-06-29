@@ -1,5 +1,3 @@
-import { InjectionToken } from '@angular/core';
-import { Request } from 'express';
 import { environment } from '../../environments/environment.development';
 
 let url = environment.APIURL;
@@ -28,3 +26,11 @@ export const getJobs = url + '/getJobs';
 export const deleteJob = url + '/deleteJob';
 export const getJobStats = url + '/getJobStats';
 export const applyJob = url + '/applyJob';
+export const postItem = url + '/postItem';
+export const updateProduct = url + '/updateProduct';
+export const getProducts = url + '/getProducts';
+export const addToCart = url + '/addToCart';
+export const getCartItems = url + '/getCartItems';
+export const updateCartQuantity = url + '/updateCartQuantity';
+export const deleteCartItem = url +  '/deleteCartItem';
+export const checkout = url + '/checkout';

@@ -10,9 +10,23 @@
       </div>
     </div>
 
+    <div class="header-filtering">
+     <ul class="nav nav-pills mb-4 course-tabs">
+  <li class="nav-item cursor-pointer" *ngFor="let tab of courseTabs" (click)="selctedTab(tab)">
+    <a 
+      class="nav-link" 
+      [class.active]="tab === activeTab" 
+      (click)="activeTab = tab">
+      {{ tab }}
+    </a>
+  </li>
+</ul>
+  </div>
+  <div class="section-sub">Showing 10 of {{ totalRecords }} events</div>
+
 
     <div class="events-page-section">
-      <div class="section-header d-flex justify-content-between align-items-start flex-wrap">
+      <!-- <div class="section-header d-flex justify-content-between align-items-start flex-wrap">
         <div>
           <h4 class="mb-1">Upcoming Events</h4>
           <div class="section-sub">Showing 10 of {{ totalRecords }} events</div>
@@ -21,7 +35,7 @@
           <option value="">All Categories</option>
           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
         </select>
-      </div>
+      </div> -->
 
       <!-- <div class="px-lg-4 p-0">
         <div class="featured-title">Featured Events</div>
@@ -53,10 +67,10 @@
         </div>
       </div> -->
       <div class="container p-lg-4 p-0 pt-4">
-        <div class="d-flex justify-content-between align-items-start flex-column mb-4">
+        <!-- <div class="d-flex justify-content-between align-items-start flex-column mb-4">
           <a class="btn btn-primary text-decoration-none" (click)="isPostEvent = true">Submit Your Event</a>
           <h4 class="fw-bold mt-0"><span class="browse-event">Browse Events</span></h4>
-        </div>
+        </div> -->
 
         <div class="row g-4">
           <!-- Card 1 -->
@@ -70,7 +84,7 @@
        'border-radius': '12px'
      }">
                 <span class="tag-badge">{{ event?.EventType }}</span>
-                <span class="featured-badge">Featured</span>
+                <!-- <span class="featured-badge">Featured</span> -->
               </div>
 
               <div class="event-body">
@@ -79,7 +93,7 @@
                 <div class="event-meta" *ngIf="event?.StartDate"><i class="bi bi-calendar-event"></i> {{
                   event?.StartDate | date:'MMMM d, y' }}
                 </div>
-                <div class="event-meta" *ngIf="event?.Location"><i class="bi bi-geo-alt"></i> {{ event?.Location }}
+                <div class="event-meta"><i class="bi bi-geo-alt"></i> {{ event?.Location || 'NA'}}
                 </div>
                 <div class="event-actions mt-3">
                   <a class="btn btn-register" [href]="event?.RegistrationUrl" target="_blank">Register</a>

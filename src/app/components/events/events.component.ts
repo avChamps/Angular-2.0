@@ -19,6 +19,7 @@ export class EventsComponent implements OnInit {
   currentPage = 1;
   limit = 10;
   loading = false;
+  activeTab = 'Trade show';
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -27,6 +28,9 @@ export class EventsComponent implements OnInit {
     }
   }
 
+  courseTabs  = [
+    'TradeShow','Training' ,'Webinar' , 'Networking' , 'Product Launch'
+  ]
 
 
   categories: string[] = [
@@ -95,6 +99,11 @@ export class EventsComponent implements OnInit {
         this.events = [];
       }
     });
+  }
+
+  selctedTab(tab : any) {
+    this.selectedCategory = tab;
+    this.getEvents()
   }
 
   onSubmit() {
