@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { addCoins } from '../../constants/api-constants';
 
 @Component({
@@ -7,36 +7,42 @@ import { addCoins } from '../../constants/api-constants';
   templateUrl: './coins-page.component.html',
   styleUrl: './coins-page.component.css'
 })
-export class CoinsPageComponent {
- @Input() Coins : any;
- @Input() PageType : any;
+export class CoinsPageComponent implements OnInit {
+  @Input() Coins: number = 0;
+  @Input() PageType: string = '';
+  @Input() Description: string = '';
+  @Input() TransactionType: string = 'Earned';
 
-constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-addCoins(): void {
-  debugger;
-  let emailId = localStorage.getItem('EmailId')
-  let coins = this.Coins;
-  let PageType = this.PageType
-  const payload = {
-    emailId,
-    coins,
-    PageType
-  };
+  ngOnInit(): void {
+    this.addCoins();
+  }
 
-  this.http.post(addCoins, payload).subscribe({
-    next: (res: any) => {
-      if (res.status) {
-        console.log('Coins awarded:', coins);
-      } else {
-        console.warn('Coin award failed:', res.message);
-      }
-    },
-    error: (err) => {
-      console.error('Error awarding coins:', err);
+  addCoins(): void {
+    const emailId = localStorage.getItem('EmailId');
+    if (!emailId || !this.Coins || !this.PageType || !this.TransactionType) {
+      console.warn('Missing required transaction parameters');
+      return;
     }
-  });
-}
 
+    const payload = {
+      emailId,
+      coins: this.Coins,
+      pageType: this.PageType,
+      description: this.Description || '',
+      transactionType: this.TransactionType
+    };
 
+    this.http.post(addCoins, payload).subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          console.log(`Transaction successful: ${this.Coins} coins ${this.TransactionType}`);
+        } else {
+          console.warn('Transaction failed:', res.message);
+        }
+      },
+      error: (err) => console.error('Error recording transaction:', err)
+    });
+  }
 }

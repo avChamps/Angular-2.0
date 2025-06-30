@@ -134,4 +134,9 @@
 </div>
 
 
-<app-coins-page *ngIf="showCoins" [Coins]="50" [PageType]="'Job'"></app-coins-page>
+<app-coins-page 
+  [Coins]="50" 
+  [PageType]="'Job'" 
+  [Description]="'Points for posting a job'" 
+  [TransactionType]="'Earned'">
+</app-coins-page>

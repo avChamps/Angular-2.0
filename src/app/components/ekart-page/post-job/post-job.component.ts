@@ -15,7 +15,7 @@ export class PostJobComponent implements AfterViewInit {
   selectedFile: File | null = null;
   previewUrl: any = null;
   loading: boolean = false;
-  showCoins : boolean = false;
+  showCoins : boolean = true;
   @Input() Products : any;
   @Output() onProductSaved = new EventEmitter<void>();
 

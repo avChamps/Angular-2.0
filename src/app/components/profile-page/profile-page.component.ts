@@ -417,7 +417,6 @@ pointsList = [
 
 
   patchValue(profile: any) {
-    debugger;
     // const DOB = profile.DOB ? new Date(profile.DOB).toISOString().split('T')[0] : ''
     this.personalInfoForm.patchValue({
       FullName: profile.FullName,
