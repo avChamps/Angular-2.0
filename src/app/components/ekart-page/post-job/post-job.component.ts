@@ -108,8 +108,9 @@ let endPoint : any;
       this.postItemForm.reset();
       this.selectedFile = null;
       this.previewUrl = null;
+      if(endPoint === postItem) {
       this.showCoins = true;
-
+      }
       const modalEl = document.getElementById('PostItem');
       if (modalEl) {
         const modalInstance = bootstrap.Modal.getInstance(modalEl);

@@ -4,7 +4,7 @@
       <a href="#" class="back-link">← Back</a>
       <h2 class="dashboard-title">Dashboard</h2>
 
-      <div class="purchase-box">
+      <!-- <div class="purchase-box">
         <h3>Your Purchases</h3>
         <p class="purchase-subtext">You have 1 purchase</p>
         <div class="table-responsive">
@@ -29,8 +29,7 @@
             </tbody>
           </table>
         </div>
-      </div>
-
+      </div> -->
 
 
       <div class="points-container">
@@ -38,16 +37,16 @@
 
         <div class="points-summary">
           <div class="points-header">Your Points</div>
-          <div class="points-balance">885</div>
+          <div class="points-balance">{{ totalBalance }}</div>
           <div class="points-stats">
-            <span class="earned">↑ 1085<br><small>Total Earned</small></span>
-            <span class="spent">↓ 200<br><small>Total Spent</small></span>
+            <span class="earned">↑ {{ totalEarned }}<br><small>Total Earned</small></span>
+            <span class="spent">↓ {{ totalSpent }}<br><small>Total Spent</small></span>
           </div>
         </div>
 
-        <div class="transactions">
+        <div class="transactions" *ngIf="coinsHistory?.length">
           <h3>Transaction History</h3>
-          <table>
+          <table class="table">
             <thead>
               <tr>
                 <th>Date</th>
@@ -57,83 +56,54 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>June 22nd, 2025 11:02 AM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+10</td>
-                <td>Applied to a job</td>
-              </tr>
-              <tr>
-                <td>June 22nd, 2025 9:24 AM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 21st, 2025 4:05 PM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 21st, 2025 3:59 PM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 21st, 2025 12:45 AM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 20th, 2025 9:32 PM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 20th, 2025 6:19 AM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+15</td>
-                <td>Daily login reward</td>
-              </tr>
-              <tr>
-                <td>June 20th, 2025 12:30 AM</td>
-                <td class="earned">Earned</td>
-                <td class="amount">+50</td>
-                <td>Points earned for posting a product</td>
+              <tr *ngFor="let item of coinsHistory">
+                <td>{{ item.CreatedAt | date:'MMMM d, y h:mm a' }}</td>
+                <td
+                  [ngClass]="{'earned': item.TransactionType === 'Earned', 'spent': item.TransactionType === 'Spent'}">
+                  {{ item.TransactionType }}
+                </td>
+                <td class="amount">
+                  {{ item.TransactionType === 'Earned' ? '+' + item.Coins : '-' + item.Coins }}
+                </td>
+                <td>{{ item.Description }}</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <div *ngIf="coinsHistory?.length === 0" class="text-muted">
+          No transactions available.
+        </div>
       </div>
+
 
 
       <div class="points-transactions">
         <h2>Points & Transactions</h2>
         <div class="grid-container">
           <!-- Profile Completion -->
+          <!-- Profile Completion -->
           <div class="card profile-card">
             <h3>Profile Completion</h3>
-            <p class="progress-text">60% Complete</p>
+            <p class="progress-text">{{ profileWeight }}% Complete</p>
             <div class="progress-bar">
-              <div class="progress-fill"></div>
+              <div class="progress-fill" [style.width.%]="profileWeight"></div>
             </div>
 
             <ul class="checklist">
-              <li class="complete"><i class="bi bi-check2-circle"></i>Basic Details</li>
-              <li class="complete"><i class="bi bi-check2-circle"></i> Employment</li>
-              <li class="pending"><i class="bi bi-circle"></i> Certifications <span class="inline-right">Complete</span>
-              </li>
-              <li class="complete"><i class="bi bi-check2-circle"></i> Address</li>
-              <li class="pending"><i class="bi bi-circle"></i> Social Links <span class="inline-right">Complete</span>
+              <li *ngFor="let section of sectionStatus"
+                [ngClass]="{ 'complete': section.complete, 'pending': !section.complete }">
+                <i class="bi" [ngClass]="section.complete ? 'bi-check2-circle' : 'bi-circle'"></i>
+                {{ section.label }}
+                <span class="inline-right">
+                  {{ section.complete ? 'Completed' : 'Complete' }}
+                </span>
               </li>
             </ul>
 
-            <button class="btn-complete">Complete Your Profile</button>
+            <button class="btn-complete" [routerLink]="['/profile']">Complete Your Profile</button>
           </div>
+
 
           <!-- Points Leaderboard -->
           <div class="card leaderboard-card">
@@ -149,75 +119,81 @@
               </svg> Points Leaderboard</h3>
             <p class="leaderboard-subtext">Top point earners in the community</p>
             <ul class="leaderboard-list">
-              <li><span class="medal gold">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-trophy h-4 w-4 text-yellow-600">
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                    <path d="M4 22h16"></path>
-                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                  </svg>
-                </span><img src="images/profile-1.png" alt=""> Abhiram Kanna <span class="score">1020</span></li>
-              <li><span class="medal silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-medal h-4 w-4 text-gray-600">
-                    <path
-                      d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
-                    </path>
-                    <path d="M11 12 5.12 2.2"></path>
-                    <path d="m13 12 5.88-9.8"></path>
-                    <path d="M8 7h8"></path>
-                    <circle cx="12" cy="17" r="5"></circle>
-                    <path d="M12 18v-2h-.5"></path>
-                  </svg></span>
-                <span class="medal silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-user h-4 w-4">
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg></span>
+              <li *ngFor="let user of leaderboard; let i = index">
+                <!-- Medal Number or Icon -->
+                <span class="medal" [ngClass]="{
+      'gold': i === 0,
+      'silver': i === 1,
+      'bronze': i === 2,
+      'other': i > 2
+    }">
+                  <ng-container *ngIf="i < 3">
+                    <svg *ngIf="i === 0" xmlns="http://www.w3.org/2000/svg"
+                      class="lucide lucide-trophy h-4 w-4 text-yellow-600" width="20" height="20" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                      <path d="M4 22h16"></path>
+                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                    </svg>
+                    <svg *ngIf="i === 1" xmlns="http://www.w3.org/2000/svg"
+                      class="lucide lucide-medal h-4 w-4 text-gray-600" width="20" height="20" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
+                      </path>
+                      <path d="M11 12 5.12 2.2"></path>
+                      <path d="m13 12 5.88-9.8"></path>
+                      <path d="M8 7h8"></path>
+                      <circle cx="12" cy="17" r="5"></circle>
+                      <path d="M12 18v-2h-.5"></path>
+                    </svg>
+                    <svg *ngIf="i === 2" xmlns="http://www.w3.org/2000/svg"
+                      class="lucide lucide-medal h-4 w-4 text-amber-600" width="20" height="20" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
+                      </path>
+                      <path d="M11 12 5.12 2.2"></path>
+                      <path d="m13 12 5.88-9.8"></path>
+                      <path d="M8 7h8"></path>
+                      <circle cx="12" cy="17" r="5"></circle>
+                      <path d="M12 18v-2h-.5"></path>
+                    </svg>
+                  </ng-container>
+                  <span *ngIf="i > 2">{{ i + 1 }}</span>
+                </span>
 
-                test <span class="score">885</span>
-              </li>
-              <li><span class="medal gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-medal h-4 w-4 text-amber-600">
-                    <path
-                      d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
-                    </path>
-                    <path d="M11 12 5.12 2.2"></path>
-                    <path d="m13 12 5.88-9.8"></path>
-                    <path d="M8 7h8"></path>
-                    <circle cx="12" cy="17" r="5"></circle>
-                    <path d="M12 18v-2h-.5"></path>
-                  </svg></span> <img src="images/profile-2.jpg" alt="">Tendulkar Budida <span class="score">60</span>
-              </li>
-              <li>
-                <span class="medal other">4</span> <span class="medal silver"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4">
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg></span> R Motheesh <span class="score">30</span>
+                <!-- Profile image if exists -->
+                <img *ngIf="user.ImagePath" [src]="user.ImagePath" alt="Profile Image" class="profile-icon" />
+
+                <!-- Name and score -->
+                {{ user.FullName || user.EmailId }}
+                <span class="score">{{ user.TotalPoints }}</span>
               </li>
             </ul>
+
+
           </div>
+
+
+
+
         </div>
       </div>
 
 
       <div class="job-card-wrapper container">
-        <div class="header">
+        <!-- <div class="header">
           <div>
-            <h2>Manage Your Job Postings</h2>
+           <h2>Manage Your Job Postings</h2>
             <p>You have posted {{jobList?.length || 0}} job(s).</p>
           </div>
           <button class="btn-post" data-bs-toggle="modal" data-bs-target="#postNewJob"><i class="bi bi-plus-lg"></i>
             Post New Job</button>
-        </div>
+        </div> -->
 
         <div class="job-card flex-column" *ngFor="let job of jobList">
           <div class="d-flex job-avatar-section">
@@ -290,7 +266,7 @@
       </div>
 
 
- <div class="job-card-wrapper container">
+      <div class="job-card-wrapper container">
         <div class="header">
           <div>
             <h2>Post your event</h2>
@@ -299,7 +275,7 @@
           <button class="btn-post" (click)="onSubmission('Events')"><i class="bi bi-plus-lg"></i>
             Post Events</button>
         </div>
-  </div>
+      </div>
 
 
 
@@ -388,48 +364,49 @@
             an Item</button>
         </div>
 
- <div class="row g-4" *ngIf="cartItems?.length > 0">
-  <div class="col-md-6" *ngFor="let item of cartItems">
-    <div class="product-card shadow-sm">
-      <div class="d-flex justify-content-between align-items-center mb-1">
-        <div class="product-title">
-          <i class="bi bi-box-seam"></i> {{ item.Title }}
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <span class="status-badge">Active</span>
-          <div class="form-check form-switch m-0">
-            <input class="form-check-input" type="checkbox" checked />
+        <div class="row g-4" *ngIf="cartItems?.length > 0">
+          <div class="col-md-6" *ngFor="let item of cartItems">
+            <div class="product-card shadow-sm">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <div class="product-title">
+                  <i class="bi bi-box-seam"></i> {{ item.Title }}
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="status-badge">Active</span>
+                  <div class="form-check form-switch m-0">
+                    <input class="form-check-input" type="checkbox" checked />
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-muted small mb-2">
+                {{ item.CreatedAt | date: 'M/d/yyyy' }}
+              </div>
+
+              <img [src]="item.ImageUrl || 'assets/images/placeholder.svg'" alt="product image" />
+
+              <div class="d-flex justify-content-between mt-3">
+                <div class="price-tag"><i class="bi bi-tag"></i> ₹{{ item.Price }}</div>
+                <div class="qty-tag"><i class="bi bi-cube"></i> Qty: {{ item.Quantity }}</div>
+              </div>
+
+              <p class="text-muted small mt-2">
+                No description available.
+              </p>
+
+              <div class="d-flex justify-content-end align-items-center gap-2 product-card-action-btn">
+                <button class="btn btn-edit" (click)="onSubmission('Product', item)"><i class="bi bi-pencil"></i>
+                  Edit</button>
+                <button class="btn btn-delete"><i class="bi bi-trash"></i> Delete</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="text-muted small mb-2">
-        {{ item.CreatedAt | date: 'M/d/yyyy' }}
-      </div>
-
-      <img [src]="item.ImageUrl || 'assets/images/placeholder.svg'" alt="product image" />
-
-      <div class="d-flex justify-content-between mt-3">
-        <div class="price-tag"><i class="bi bi-tag"></i> ₹{{ item.Price }}</div>
-        <div class="qty-tag"><i class="bi bi-cube"></i> Qty: {{ item.Quantity }}</div>
-      </div>
-
-      <p class="text-muted small mt-2">
-        No description available.
-      </p>
-
-      <div class="d-flex justify-content-end align-items-center gap-2 product-card-action-btn">
-        <button class="btn btn-edit" (click)="onSubmission('Product', item)"><i class="bi bi-pencil"></i> Edit</button>
-        <button class="btn btn-delete"><i class="bi bi-trash"></i> Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- If empty -->
-<div class="text-center text-muted" *ngIf="cartItems?.length === 0">
-  No cart items found.
-</div>
+        <!-- If empty -->
+        <div class="text-center text-muted" *ngIf="cartItems?.length === 0">
+          No cart items found.
+        </div>
 
       </div>
     </div>
@@ -630,5 +607,6 @@
 </div>
 
 
-<app-post-job *ngIf="currentSection === 'Product'"   (onProductSaved)="handleProductSaved()" [Products]="editProducts"></app-post-job>
+<app-post-job *ngIf="currentSection === 'Product'" (onProductSaved)="handleProductSaved()"
+  [Products]="editProducts"></app-post-job>
 <app-post-events *ngIf="currentSection === 'Events'"></app-post-events>

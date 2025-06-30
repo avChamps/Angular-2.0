@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { addCoins } from '../../constants/api-constants';
+import { NoticationsComponent } from '../notications/notications.component';
 
 @Component({
   selector: 'app-coins-page',
   templateUrl: './coins-page.component.html',
   styleUrl: './coins-page.component.css'
+  
 })
 export class CoinsPageComponent implements OnInit {
   @Input() Coins: number = 0;

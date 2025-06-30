@@ -36,3 +36,6 @@ export const deleteCartItem = url +  '/deleteCartItem';
 export const checkout = url + '/checkout';
 export const deleteAllCartItem = url + '/deleteAllCartItem';
 export const addCoins = url + '/addCoins';
+export const getCoinHistory = url + '/getCoinHistory';
+export const getPointsLeaderboard = url + '/getPointsLeaderboard';
+export const addNotification = url + '/addNotification';

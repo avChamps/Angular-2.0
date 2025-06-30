@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { deleteJob, getCartItems, getJobs, getProducts, postJob } from '../../constants/api-constants';
+import { deleteJob, getCartItems, getCoinHistory, getJobs, getPointsLeaderboard, getProducts, getProfile, postJob } from '../../constants/api-constants';
 declare var bootstrap: any;
 
 export enum Section {
@@ -22,6 +22,45 @@ export class UserAdminDashboardComponent {
   cartItems: any;
   currentSection: any;
   editProducts: any;
+  coinsHistory: any[] = [];
+  totalEarned: number = 0;
+  totalSpent: number = 0;
+  totalBalance: number = 0;
+leaderboard: any[] = [];
+
+
+  sectionStatus = [
+    {
+      label: 'Basic Details',
+      fields: ['FullName', 'Gender', 'DOB', 'Mobile', 'ProfileEmailId'],
+      complete: false
+    },
+    {
+      label: 'Employment',
+      fields: ['CompanyName', 'Designation', 'JoiningYear', 'JoiningMonth', 'CurrentJob'],
+      complete: false
+    },
+    {
+      label: 'Certifications',
+      fields: ['CertificationName', 'CertificationId', 'CertificationUrl'],
+      complete: false
+    },
+    {
+      label: 'Address',
+      fields: ['CurrentLocation', 'AddressLine1', 'Country', 'State', 'City', 'ZipCode'],
+      complete: false
+    },
+    {
+      label: 'Social Links',
+      fields: ['TwitterUrl', 'LinkedInUrl', 'FacebookUrl'],
+      complete: false
+    }
+  ];
+
+  profileWeight = 0;
+  profileData: any;
+
+
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.emailId = localStorage.getItem('EmailId')
@@ -44,8 +83,47 @@ export class UserAdminDashboardComponent {
       deadline: ['']
     });
     this.getJobs()
-    this.getProducts()
+    this.getProducts();
+    this.getCoinHistory();
+    this.getProfiles();
+    this.getLeaderboard();
   }
+
+
+  getProfiles() {
+    this.http.get(getProfile, {
+      params: { emailId: this.emailId }
+    }).subscribe((res: any) => {
+      if (res.status && res.data?.length) {
+        this.profileData = res.data[0];
+        this.profileWeight = this.profileData.profileWeight;
+        this.evaluateSections();
+      }
+    });
+  }
+
+  evaluateSections() {
+    this.sectionStatus.forEach(section => {
+      section.complete = section.fields.every(field => {
+        const value = this.profileData[field];
+        return value !== null && value !== undefined && value !== '';
+      });
+    });
+  }
+
+
+getLeaderboard() {
+  this.http.get<{ status: boolean; leaderboard: any[] }>(getPointsLeaderboard).subscribe({
+    next: (res) => {
+      if (res.status) {
+        this.leaderboard = res.leaderboard;
+      }
+    },
+    error: (err) => {
+      console.error('Error loading leaderboard:', err);
+    }
+  });
+}
 
 
   getJobs() {
@@ -59,6 +137,35 @@ export class UserAdminDashboardComponent {
       },
       error: (error) => {
         console.error('Error fetching profile:', error);
+      }
+    });
+  }
+
+
+  getCoinHistory() {
+    this.http.get(getCoinHistory, {
+      params: {
+        emailId: this.emailId || ''
+      }
+    }).subscribe({
+      next: (response: any) => {
+        this.coinsHistory = response?.history || [];
+
+        this.totalEarned = 0;
+        this.totalSpent = 0;
+
+        for (let item of this.coinsHistory) {
+          if (item.TransactionType === 'Earned') {
+            this.totalEarned += item.Coins;
+          } else if (item.TransactionType === 'Spent') {
+            this.totalSpent += item.Coins;
+          }
+        }
+
+        this.totalBalance = this.totalEarned - this.totalSpent;
+      },
+      error: (error) => {
+        console.error('Error fetching Coin History:', error);
       }
     });
   }

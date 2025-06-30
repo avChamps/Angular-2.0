@@ -20,7 +20,8 @@ import { CoinsPageComponent } from '../coins-page/coins-page.component';
     SharedModule
   ],
   exports : [
-    PostJobComponent
+    PostJobComponent,
+    CoinsPageComponent
   ]
 })
 export class EkartPageModule { }

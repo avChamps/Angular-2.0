@@ -6,6 +6,8 @@ import { SharedModule } from '../../shared/shared/shared.module';
 import { EventsComponent } from './events.component';
 import { PostEventsComponent } from './post-events/post-events.component';
 import { CoinsPageComponent } from '../coins-page/coins-page.component';
+import { EkartPageComponent } from '../ekart-page/ekart-page.component';
+import { EkartPageModule } from '../ekart-page/ekart-page.module';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { CoinsPageComponent } from '../coins-page/coins-page.component';
   imports: [
     CommonModule,
     EventsRoutingModule,
-    SharedModule
+    SharedModule,
+    EkartPageModule
   ],
   exports : [
     PostEventsComponent
