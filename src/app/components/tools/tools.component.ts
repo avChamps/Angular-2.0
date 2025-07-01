@@ -31,7 +31,7 @@ export class ToolsComponent {
   emailId: any;
   interestCount: any;
   recentCount: any;
-  searchTerm : string = '';
+  searchTerm: string = '';
 
   toolFilters = [
     { label: 'All Tools', icon: 'bi-tools', type: 'all', active: true },
@@ -45,7 +45,7 @@ export class ToolsComponent {
   ];
 
 
-  constructor(private http: HttpClient, public route : Router) { }
+  constructor(private http: HttpClient, public route: Router) { }
 
   ngOnInit(): void {
     this.emailId = localStorage.getItem('EmailId');
@@ -58,11 +58,11 @@ export class ToolsComponent {
   getTools(showFavourites: boolean = false) {
     const EmailId = localStorage.getItem('EmailId');
     this.selectedTab = showFavourites ? 'favourite' : 'all';
-  
+
     let url = `${getTools}?EmailId=${encodeURIComponent(this.emailId)}`;
     if (showFavourites) url += `&filter=favourite`;
     if (this.searchTerm?.trim()) url += `&search=${encodeURIComponent(this.searchTerm.trim())}`;
-  
+
     this.http.get(url).subscribe((res: any) => {
       this.interestCount = res.interestCount;
       this.recentCount = res.recentCount;
@@ -116,6 +116,11 @@ export class ToolsComponent {
       error: err => console.error('Failed to save recent tool:', err)
     });
     const formattedTitle = tool?.title.replace(/\s+/g, '-');
+
+    if (tool.link.startsWith('http://') || tool.link.startsWith('https://')) {
+      window.open(tool.link, '_blank');
+    }
+
     this.route.navigateByUrl(formattedTitle);
   }
 
@@ -144,8 +149,13 @@ export class ToolsComponent {
 
 
 
-  onFilterSelect(type: any) {
-
+  onFilterSelect(type: string) {
+    this.toolFilters.forEach(filter => filter.active = filter.type === type);
+    if (type === 'all') {
+      this.getTools();
+      return;
+    }
+    this.toolsList = this.toolsList.filter(tool => (tool.toolType || '').toLowerCase() === type.toLowerCase());
   }
 
 

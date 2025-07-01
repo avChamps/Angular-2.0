@@ -37,6 +37,8 @@ export class ProfilePageComponent {
   selectedCountryCode = '';
   selectedStateCode = '';
   progress: number = 0;
+  showLoginRewards : boolean = false;
+  showprofileRewards : boolean = false;
   @ViewChild('personalInfoModal') personalInfoModal!: ElementRef;
   @ViewChild('profModal') profModal!: ElementRef;
   @ViewChild('certModal') certModal!: ElementRef;
@@ -179,6 +181,7 @@ pointsList = [
     this.onExpiryChange();
     this.getProfiles();
     this.getCountries();
+    this.dailyLoginRewardCheck()
   }
 
 
@@ -305,6 +308,7 @@ pointsList = [
         const modal = bootstrap.Modal.getInstance(this.personalInfoModal.nativeElement);
         modal?.hide();
         this.getProfiles();
+        this.showprofileRewards = true;
       },
       error: (error) => {
         this.isSaving = false;
@@ -327,6 +331,7 @@ pointsList = [
         const modal = bootstrap.Modal.getInstance(this.profModal.nativeElement);
         modal?.hide();
         this.getProfiles();
+        this.showprofileRewards = true;
       },
       error: (error) => {
         this.isSaving = false;
@@ -350,6 +355,7 @@ pointsList = [
         const modal = bootstrap.Modal.getInstance(this.certModal.nativeElement);
         modal?.hide();
         this.getProfiles();
+        this.showprofileRewards = true;
       },
       error: (error) => {
         this.isSaving = false;
@@ -371,6 +377,7 @@ pointsList = [
         const modal = bootstrap.Modal.getInstance(this.addressModal.nativeElement);
         modal?.hide();
         this.getProfiles();
+        this.showprofileRewards = true;
       },
       error: (error) => {
         this.isSaving = false;
@@ -397,6 +404,7 @@ pointsList = [
         modal2?.hide();
         modal3?.hide();
         this.getProfiles();
+        this.showprofileRewards = true;
       },
       error: (error) => {
         this.isSaving = false;
@@ -472,5 +480,16 @@ pointsList = [
 
   onImageLoad(): void {
     this.imageLoadError = false;
+  }
+
+
+  dailyLoginRewardCheck() {
+    const today = new Date().toDateString();
+    const lastLoginDate = localStorage.getItem('dailyLoginDate');
+  
+    if (lastLoginDate === today) {
+      return;
+    }
+    // this.showLoginRewards = true;
   }
 }

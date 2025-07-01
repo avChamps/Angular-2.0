@@ -7,7 +7,6 @@ import { NoticationsComponent } from '../notications/notications.component';
   selector: 'app-coins-page',
   templateUrl: './coins-page.component.html',
   styleUrl: './coins-page.component.css'
-  
 })
 export class CoinsPageComponent implements OnInit {
   @Input() Coins: number = 0;

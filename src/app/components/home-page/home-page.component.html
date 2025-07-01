@@ -17,7 +17,7 @@
           <span class="label-text hideInMobile">Tools</span>
         </li>
         <!-- <li (click)="onNaviagate('/careers')"> -->
-          <li>
+        <li>
           <div class="icon-circle careers"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
               viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" class="lucide lucide-send">
@@ -95,51 +95,58 @@
     </li>
 
     <li class="divider hideInMobile"></li>
-   
-   
-   
-   
-   
- <li id="notificationToggle" (click)="toggleDrawer($event)">
-<div class="icon-circle notifications position-relative">
-  <i class="bi bi-bell"></i>
-
-  <!-- Badge shown only when count > 0 -->
-  <span *ngIf="unreadCount > 0" class="position-absolute top-0 start-100 translate-middle  badge rounded-pill bg-danger notification-badge">
-    {{ unreadCount }}
-  </span>
-</div>
-
-<!-- Show fallback text when no unread notifications -->
-<span class="notification-text hideInMobile">
-  {{ unreadCount > 0 ? 'Notifications' : 'No new alerts' }}
-</span>
 
 
-  <div id="notificationDrawer" class="notification-drawer" [class.hidden]="isDrawerHidden">
-    <div class="drawer-header">
-      <span>Notifications</span>
-      <a href="#" class="mark-read-link">Mark all as read</a>
-    </div>
 
-    <div class="notification-list">
-      <div class="notification-card" *ngFor="let item of notifications">
-        <div class="icon-success">✔</div>
-        <div class="notification-content">
-          <div class="d-flex justify-content-between align-items-center">
-            <strong>{{ item.title }}</strong>
-            <span class="timestamp">{{ item.timestamp }}</span>
-          </div>
-          <p>{{ item.message }}</p>
-          <div class="actions">
-            <button class="btn-read">✓ Mark as read</button>
-            <button class="btn-dismiss">✕ Dismiss</button>
+
+
+    <li id="notificationToggle" (click)="toggleDrawer($event)">
+      <div class="icon-circle notifications position-relative">
+        <i class="bi bi-bell"></i>
+
+        <!-- Badge shown only when count > 0 -->
+        <span *ngIf="unreadCount > 0"
+          class="position-absolute top-0 start-100 translate-middle  badge rounded-pill bg-danger notification-badge">
+          {{ unreadCount }}
+        </span>
+      </div>
+
+      <!-- Show fallback text when no unread notifications -->
+      <span class="notification-text hideInMobile">
+        {{ unreadCount > 0 ? 'Notifications' : 'No new alerts' }}
+      </span>
+
+
+      <div id="notificationDrawer" class="notification-drawer" [class.hidden]="isDrawerHidden">
+        <div class="drawer-header">
+          <span>Notifications</span>
+          <a href="#" class="mark-read-link">Mark all as read</a>
+
+        </div>
+
+        <div class="notification-list">
+          <div class="notification-card" *ngFor="let item of notifications">
+            <i [class]="'bi ' + item.icon" [ngClass]="getIconClass(item.type)"></i>
+
+            <div class="notification-content ml-1">
+              <div class="d-flex justify-content-between align-items-center">
+                <strong>{{ item.title }}</strong>
+                <span class="timestamp">{{ item.timestamp }}</span>
+              </div>
+              <p>{{ item.message }}</p>
+              <div class="actions">
+                <button class="btn-read btn btn-sm btn-outline-success" (click)="markAsRead(item)">✓ Mark as
+                  read</button>
+                <button class="btn-dismiss btn btn-sm btn-outline-danger" (click)="dismissNotification(item)">✕
+                  Dismiss</button>
+              </div>
+
+            </div>
           </div>
         </div>
+
       </div>
-    </div>
-  </div>
-</li>
+    </li>
 
 
 

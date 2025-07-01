@@ -11,9 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Swiper from 'swiper';
-import { ContactUs, updateProfile } from '../../constants/api-constants';
+import { ContactUs, SubscribeNewsletter, updateProfile } from '../../constants/api-constants';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+declare var bootstrap: any;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,11 +27,14 @@ gsap.registerPlugin(ScrollTrigger);
 export class HomeComponent implements AfterViewInit, OnInit {
   contactForm!: FormGroup;
   submitted = false;
+  subscriberEmail : any;
+  subscriptionSubmitted = false;
   items = Array(3).fill(null);
   private clickListener!: () => void;
   private scrollListener!: () => void;
+  @ViewChild('contactModalRef') contactModalRef!: ElementRef;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private fb: FormBuilder, private http: HttpClient,private router : Router) { }
+  constructor(private renderer: Renderer2, private el: ElementRef, private fb: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -362,6 +366,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
     this.http.post(ContactUs, formData).subscribe({
       next: (response: any) => {
         this.submitted = false;
+        const modalElement = this.contactModalRef.nativeElement;
+        const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+        modalInstance.hide();
       },
       error: (error) => {
         this.submitted = false;
@@ -370,8 +377,28 @@ export class HomeComponent implements AfterViewInit, OnInit {
   }
 
 
-  onNavigation(url : any) {
+  onNavigation(url: any) {
     this.router.navigate([url]);
+  }
+
+  subscribeNewsletter() {
+    if (!this.subscriberEmail || !this.subscriberEmail.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+  
+    this.subscriptionSubmitted = true;
+    this.http.post(SubscribeNewsletter, { EmailId: this.subscriberEmail }).subscribe({
+      next: (response: any) => {
+        this.subscriptionSubmitted = false;
+        alert(response.message || 'Subscription successful!');
+        this.subscriberEmail = '';
+      },
+      error: (error) => {
+        this.subscriptionSubmitted = false;
+        alert('An error occurred. Please try again later.');
+      }
+    });
   }
 
 }

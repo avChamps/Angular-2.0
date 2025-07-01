@@ -1,23 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { addNotification } from '../../constants/api-constants';
 
 @Component({
   selector: 'app-notications',
   templateUrl: './notications.component.html',
-  styleUrl: './notications.component.css'
+  styleUrls: ['./notications.component.css']
 })
 export class NoticationsComponent {
-  @Input() title : any;
-  @Input() message : any;
-  @Input() pageType : any;
+  @Input() title: string = '';
+  @Input() message: string = '';
+  @Input() pageType: string = '';
 
- emailId = localStorage.getItem('EmailId');
+  emailId = localStorage.getItem('EmailId');
 
   constructor(private http: HttpClient) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['title'] || changes['message']) {
+      // Only trigger if title and message both present
+      if (this.title && this.message) {
+        this.addNotification(this.title, this.message, this.pageType);
+      }
+    }
+  }
 
-   addNotification(title: string, message: string, pageType: string = ''): void {
+  addNotification(title: string, message: string, pageType: string = ''): void {
     const payload = {
       emailId: this.emailId,
       title,
@@ -25,14 +33,13 @@ export class NoticationsComponent {
       pageType
     };
 
-    this.http.post(addNotification, payload)
-      .subscribe({
-        next: (res: any) => {
-          if (res.status) {
-            console.log('Notification added');
-          }
-        },
-        error: (err) => console.error('Error adding notification:', err)
-      });
+    this.http.post(addNotification, payload).subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          console.log('Notification added');
+        }
+      },
+      error: (err) => console.error('Error adding notification:', err)
+    });
   }
 }

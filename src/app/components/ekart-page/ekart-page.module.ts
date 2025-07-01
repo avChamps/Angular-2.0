@@ -6,6 +6,7 @@ import { SharedModule } from '../../shared/shared/shared.module';
 import { EkartPageComponent } from './ekart-page.component';
 import { PostJobComponent } from './post-job/post-job.component';
 import { CoinsPageComponent } from '../coins-page/coins-page.component';
+import { NoticationsModule } from '../notications/notications.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CoinsPageComponent } from '../coins-page/coins-page.component';
   imports: [
     CommonModule,
     EkartPageRoutingModule,
-    SharedModule
+    SharedModule,
+    NoticationsModule
   ],
   exports : [
     PostJobComponent,
