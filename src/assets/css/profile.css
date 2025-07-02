@@ -404,8 +404,8 @@
 
 .info-label {
   font-size: 13px;
-  color: #6b7280;
-  font-weight: 600;
+  /* color: #6b7280; */
+  /* font-weight: 600; */
   margin-bottom: 2px;
 }
 
@@ -879,7 +879,7 @@ svg.svg-blue {
   color: #6c757d;
 }
 
-.info-value {
+/* .info-value {
   font-weight: 600;
   font-size: 18px;
   margin-top: 8px;
@@ -887,7 +887,18 @@ svg.svg-blue {
   display: flex;
   align-items: center;
   padding-left: 22px;
+} */
+
+.info-value {
+font-size: 16px;
+    font-weight: 500;
+    margin-top: 5px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  padding-left: 22px;
 }
+
 
 .info-value svg {
   height: 16px;
@@ -1047,7 +1058,7 @@ svg.svg-blue {
 }
 
 .modal-body {
-  background-color: #fff !important;
+  /* background-color: #fff !important; */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1477,6 +1488,7 @@ position: absolute;
   border-radius: 20px;
   font-weight: 600;
 }
+
 
 @media (max-width: 1500px) {
   .profile-page-section .profile-card {

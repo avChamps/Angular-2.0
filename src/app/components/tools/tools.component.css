@@ -1909,6 +1909,11 @@ svg.svg-blue {
   text-decoration: none;
 }
 
+.tools-page-section .tool-link:hover {
+  background-color: #dbeafe;
+  color: black !important;
+}
+
 .tools-page-section .badge {
   background-color: #f9fafb;
   border-radius: 20px;
@@ -2085,6 +2090,44 @@ svg.svg-blue {
   display: flex;
   gap: 20px;
 }
+
+.custom-dropdown {
+  border-radius: 12px;
+  padding: 0.25rem 0;
+  min-width: 240px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.active-option {
+  background-color: #f1f5ff;
+  color: #0d6efd !important;
+}
+
+.dropdown-toggle {
+  width: 200px;
+  max-width: 200px;
+  height: 44px;
+  border-radius: 58px;
+}
+
 
 @media (max-width: 999px) {
   .sidebar {

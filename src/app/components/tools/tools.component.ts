@@ -32,6 +32,7 @@ export class ToolsComponent {
   interestCount: any;
   recentCount: any;
   searchTerm: string = '';
+  selectedFilterLabel: string = 'All Tools';
 
   toolFilters = [
     { label: 'All Tools', icon: 'bi-tools', type: 'all', active: true },
@@ -149,14 +150,22 @@ export class ToolsComponent {
 
 
 
-  onFilterSelect(type: string) {
-    this.toolFilters.forEach(filter => filter.active = filter.type === type);
-    if (type === 'all') {
-      this.getTools();
-      return;
+onFilterSelect(type: string) {
+  this.toolFilters.forEach(filter => {
+    filter.active = filter.type === type;
+    if (filter.active) {
+      this.selectedFilterLabel = filter.label; // ✅ Update label
     }
-    this.toolsList = this.toolsList.filter(tool => (tool.toolType || '').toLowerCase() === type.toLowerCase());
+  });
+
+  if (type === 'all') {
+    this.getTools();
+    return;
   }
+
+  this.toolsList = this.toolsList.filter(tool => (tool.toolType || '').toLowerCase() === type.toLowerCase());
+}
+
 
 
 }

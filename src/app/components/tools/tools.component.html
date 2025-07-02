@@ -26,10 +26,35 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
 
                 <!-- Search Input -->
-                <div class="flex-grow-1 me-3">
+                <div class="me-3" style="width: 400px;">
                     <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="getTools()"
                         placeholder="Search tools...">
                 </div>
+
+      <div class="dropdown">
+  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="toolFilterDropdown"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    {{ selectedFilterLabel }}
+  </button>
+  <ul class="dropdown-menu custom-dropdown" aria-labelledby="toolFilterDropdown">
+    <li *ngFor="let filter of toolFilters">
+      <a class="dropdown-item d-flex align-items-center justify-content-between gap-2 px-3 py-2"
+        href="#"
+        [ngClass]="{'active-option': filter.active}"
+        (click)="onFilterSelect(filter.type); $event.preventDefault();">
+        
+        <div class="d-flex align-items-center gap-2">
+          <!-- <img  alt="icon" class="dropdown-icon" /> -->
+          <span>{{ filter.label }}</span>
+        </div>
+
+        <i *ngIf="filter.active" class="bi bi-check2"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
 
                 <!-- Tool Tabs (Pills) -->
                 <ul class="nav nav-pills tool-tabs mb-0">
@@ -56,13 +81,13 @@
 
 
             <!-- Tool Filter Buttons -->
-            <div class="d-flex flex-wrap gap-2 tool-filters">
+            <!-- <div class="d-flex flex-wrap gap-2 tool-filters">
                 <button *ngFor="let filter of toolFilters" class="btn"
                     [ngClass]="filter.active ? 'btn-primary active' : 'btn-outline-secondary'"
                     (click)="onFilterSelect(filter.type);">
                     <i class="bi" [ngClass]="filter.icon"></i> {{ filter.label }}
                 </button>
-            </div>
+            </div> -->
 
             <div class="tool-grid d-flex flex-wrap gap-3">
                 <div class="tool-card" [ngClass]="{ premium: tool.premium }" *ngFor="let tool of toolsList">
