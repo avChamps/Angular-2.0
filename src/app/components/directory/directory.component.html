@@ -76,6 +76,13 @@
         </div>
       </div>
 
+
+      <div *ngIf="profileList.length === 0" class="w-100 text-center mt-5">
+        <img src="./assets/images/no-records.png" alt="No Records Found" class="img-fluid"
+            style="max-width: 250px;">
+        <p class="mt-3 text-muted">No Profiles Found</p>
+    </div>
+
     </div>
 
   </div>

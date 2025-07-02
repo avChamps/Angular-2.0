@@ -309,6 +309,19 @@
   margin-bottom: 28px;
 }
 
+.custom-dropdown {
+  height: 30px !important;
+  padding: 2px 8px;
+  font-size: 14px !important;
+  text-align: center;
+  background-position: right 0.5rem center;
+  background-size: 10px 10px;
+  appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding-right: 22px;
+}
+
 @media (max-width: 999px) {
   .sidebar {
     top: unset;

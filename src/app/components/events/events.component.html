@@ -11,20 +11,22 @@
     </div>
 
     <div class="header-filtering">
-     <ul class="nav nav-pills course-tabs">
-  <li class="nav-item cursor-pointer" *ngFor="let tab of courseTabs" (click)="selctedTab(tab)">
-    <a 
-      class="nav-link" 
-      [class.active]="tab === activeTab" 
-      (click)="activeTab = tab">
-      {{ tab }}
-    </a>
-  </li>
-</ul>
-  </div>
-  <div class="section-sub text-muted">Showing 10 of {{ totalRecords }} events</div>
-
-
+      <ul class="nav nav-pills course-tabs">
+        <li class="nav-item cursor-pointer" *ngFor="let tab of courseTabs" (click)="selctedTab(tab)">
+          <a class="nav-link" [class.active]="tab === activeTab" (click)="activeTab = tab">
+            {{ tab }}
+          </a>
+        </li>
+        <!-- Month Dropdown -->
+        <li class="nav-item ml-3">
+          <select class="form-select custom-dropdown" [(ngModel)]="selectedMonth" (change)="getEvents()">
+            <option value="">Select Month</option>
+            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+    <div class="section-sub text-muted">Showing {{ events?.length}} of {{ totalRecords }} events</div>
     <div class="events-page-section">
       <!-- <div class="section-header d-flex justify-content-between align-items-start flex-wrap">
         <div>
@@ -37,7 +39,7 @@
         </select>
       </div> -->
 
-    <div class="px-lg-4 p-0">
+      <!-- <div class="px-lg-4 p-0">
         <div class="featured-title">Featured Events</div>
       </div>
 
@@ -65,7 +67,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>  -->
       <div class="container p-lg-4 p-0 pt-4">
         <!-- <div class="d-flex justify-content-between align-items-start flex-column mb-4">
           <a class="btn btn-primary text-decoration-none" (click)="isPostEvent = true">Submit Your Event</a>
@@ -111,8 +113,10 @@
             </div>
           </div>
 
-          <div *ngIf="!events?.length && !loading" class="col-12">
-            <p>No events available for the selected category.</p>
+          <div *ngIf="!events?.length && !loading" class="w-100 text-center mt-5">
+            <img src="./assets/images/no-records.png" alt="No Records Found" class="img-fluid"
+              style="max-width: 250px;">
+            <p class="mt-3 text-muted">No Events Found</p>
           </div>
 
 
@@ -121,7 +125,7 @@
       </div>
     </div>
   </div>
-<!-- 
+  <!-- 
 
   <div *ngIf="isPostEvent">
    <app-post-events></app-post-events>

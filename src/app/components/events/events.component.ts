@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getEvents, postEvents } from '../../constants/api-constants';
+import { getEvents, Months, postEvents } from '../../constants/api-constants';
 import { HttpClient } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 
@@ -20,6 +20,8 @@ export class EventsComponent implements OnInit {
   limit = 10;
   loading = false;
   activeTab = 'Trade Show';
+  months = Months;
+  selectedMonth: string = '';
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -28,8 +30,8 @@ export class EventsComponent implements OnInit {
     }
   }
 
-  courseTabs  = [
-    'Trade Show','Training' ,'Webinar' , 'Networking' , 'Product Launch'
+  courseTabs = [
+    'Trade Show', 'Training', 'Webinar', 'Networking', 'Product Launch'
   ]
 
 
@@ -84,6 +86,10 @@ export class EventsComponent implements OnInit {
       params = params.set('category', this.selectedCategory);
     }
 
+    if (this.selectedMonth) {
+      params = params.set('month', this.selectedMonth);
+    }
+
     this.http.get(getEvents, { params }).subscribe({
       next: (res: any) => {
         this.loading = false;
@@ -101,7 +107,8 @@ export class EventsComponent implements OnInit {
     });
   }
 
-  selctedTab(tab : any) {
+
+  selctedTab(tab: any) {
     this.selectedCategory = tab;
     this.getEvents()
   }

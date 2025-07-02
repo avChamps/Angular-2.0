@@ -2,6 +2,11 @@ import { environment } from '../../environments/environment.development';
 
 let url = environment.APIURL;
 
+export const Months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
 export const createAccount = url + '/createAccount';
 export const verifyOtpAndRegister = url + '/verifyOtpAndRegister';
 export const login = url + '/login';
