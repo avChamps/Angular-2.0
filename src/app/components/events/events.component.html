@@ -18,13 +18,13 @@
           </a>
         </li>
         <!-- Month Dropdown -->
-        <li class="nav-item ml-3">
-          <select class="form-select custom-dropdown" [(ngModel)]="selectedMonth" (change)="getEvents()">
+
+      </ul>
+
+                <select class="ms-auto form-select custom-dropdown" [(ngModel)]="selectedMonth" (change)="getEvents()">
             <option value="">Select Month</option>
             <option *ngFor="let month of months" [value]="month">{{ month }}</option>
           </select>
-        </li>
-      </ul>
     </div>
     <div class="section-sub text-muted">Showing {{ events?.length}} of {{ totalRecords }} events</div>
     <div class="events-page-section">

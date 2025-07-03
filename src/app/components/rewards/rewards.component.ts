@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { getRewards, redeemReward } from '../../constants/api-constants';
+import { ToasterService } from '../../shared/shared/toaster.service';
+import { Router } from '@angular/router';
+declare var bootstrap : any;
 
 @Component({
   selector: 'app-rewards',
@@ -13,15 +16,17 @@ export class RewardsComponent {
   filteredCategory: string = 'all';
   currentSlide = 0;
   totalCoins: any;
-  selectedReward: any = null;
-userID: any = null;
-emailId : any;
+  selectedReward: any;
+  userID: any = null;
+  emailId: any;
+  showLoginRewards: boolean = false;
+  isRedeeming: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toasterService : ToasterService, public route: Router) { }
 
   ngOnInit(): void {
     this.totalCoins = sessionStorage.getItem('CoinsHistory') || 0;
-    this.emailId = sessionStorage.getItem('EmailId') || '';
+    this.emailId = localStorage.getItem('EmailId') || '';
     this.loadRewards();
   }
 
@@ -52,31 +57,37 @@ emailId : any;
 
 
   openRedeemModal(reward: any): void {
+    debugger;
     this.selectedReward = reward;
-    const modal: any = new (window as any).bootstrap.Modal(document.getElementById('confirmRedemptionModal'));
-    modal.show();
   }
-  
+
 
   redeemReward(): void {
     if (!this.selectedReward || !this.emailId) return;
-  
+ this.isRedeeming = true;
     const body = {
       EmailId: this.emailId,
       RewardID: this.selectedReward.ID,
       PointsUsed: this.selectedReward.Points
     };
-  
+
     this.http.post<any>(redeemReward, body).subscribe(res => {
       if (res.status) {
-        alert('Redemption successful!');
         this.totalCoins -= this.selectedReward.Points;
-        sessionStorage.setItem('CoinsHistory', this.totalCoins);
+        this.showLoginRewards = true;
+         this.isRedeeming = false;
+          const modalElement = document.getElementById('confirmRedemptionModal');
+    if (modalElement) {
+      const modalInstance = bootstrap.Modal.getInstance(modalElement) 
+                          || new bootstrap.Modal(modalElement);
+      modalInstance.hide();
+    }
+        this.toasterService.success('Redemption successful!')
       } else {
-        alert(res.message);
+        this.toasterService.error('Redemption Failed')
+        this.isRedeeming = false;
       }
     });
   }
-  
 
 }

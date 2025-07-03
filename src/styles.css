@@ -40,6 +40,67 @@
   font-display: swap;
 }
 
+
+
+/* TTNorms Fonts */
+
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl Blc';
+    src: url('/fonts/TTNormsProSerifTrl-Blk.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-Blk.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl Db';
+    src: url('/fonts/TTNormsProSerifTrl-DmBd.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-DmBd.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl';
+    src: url('/fonts/TTNormsProSerifTrl-Bd.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-Bd.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl Md';
+    src: url('/fonts/TTNormsProSerifTrl-Md.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-Md.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl Nml';
+    src: url('/fonts/TTNormsProSerifTrl-Nml.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-Nml.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TT Norms Pro Serif Trl';
+    src: url('/fonts/TTNormsProSerifTrl-Rg.woff2') format('woff2'),
+        url('/fonts/TTNormsProSerifTrl-Rg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
 /* body {
     background: #f5f7fa;
     font-family: "Segoe UI", sans-serif;
@@ -48,10 +109,16 @@
 
 body {
   background-color: #f0f2f5;
-  font-family: "Inter", sans-serif;
+  /* font-family: "Inter", sans-serif; */
+   /* font-family: 'TT Norms Pro Serif Trl'; */
 }
 
-
+h1{
+  font-size: 30px;
+}
+h4{
+  font-size: 24px;
+}
 .cursor-pointer {
   cursor: pointer;
 }

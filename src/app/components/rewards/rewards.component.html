@@ -2,7 +2,7 @@
   <div class="left-side">
     <div class="profile-card">
       <div class="profile-card-logo">
-        <img src="images/logo-black.png" alt="">
+        <img src="./assets/images/logo.png" alt="">
       </div>
       <div class="profile-card-info">
         <h1>Rewards Center</h1>
@@ -100,7 +100,7 @@
                   </span>
                 </div>
                 <button class="btn btn-primary w-100 rounded-3 mt-3" data-bs-toggle="modal"
-                  data-bs-target="#confirmRedemptionModal">
+                  data-bs-target="#confirmRedemptionModal" (click)="openRedeemModal(reward)">
                   Redeem Reward
                 </button>
               </div>
@@ -121,7 +121,7 @@
               <div class="earn-card h-100 p-3 rounded-3">
                 <h6 class="fw-semibold">Complete Your Profile</h6>
                 <p class="text-secondary mb-3">Add your professional details and profile picture to earn 50 points.</p>
-                <button class="btn btn-outline-dark btn-sm rounded-3">Go to Profile</button>
+                <button class="btn btn-outline-dark btn-sm rounded-3" routerLink="/profile">Go to Profile</button>
               </div>
             </div>
             <!-- Card 2 -->
@@ -129,7 +129,7 @@
               <div class="earn-card h-100 p-3 rounded-3">
                 <h6 class="fw-semibold">Write Product Reviews</h6>
                 <p class="text-secondary mb-3">Earn 25 points for each detailed product review you submit.</p>
-                <button class="btn btn-outline-dark btn-sm rounded-3">Write Reviews</button>
+                <button class="btn btn-outline-dark btn-sm rounded-3" routerLink="/reviews">Write Reviews</button>
               </div>
             </div>
             <!-- Card 3 -->
@@ -137,7 +137,7 @@
               <div class="earn-card h-100 p-3 rounded-3">
                 <h6 class="fw-semibold">Use AV Tools</h6>
                 <p class="text-secondary mb-3">Earn points by using our professional AV tools regularly.</p>
-                <button class="btn btn-outline-dark btn-sm rounded-3">Explore Tools</button>
+                <button class="btn btn-outline-dark btn-sm rounded-3" routerLink="/tools">Explore Tools</button>
               </div>
             </div>
           </div>
@@ -180,16 +180,21 @@
   </div>
 </div>
 
-<div class="modal fade" id="confirmRedemptionModal" tabindex="-1">
+
+<div class="modal fade" id="confirmRedemptionModal" tabindex="-1" aria-labelledby="confirmRedemptionLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 border-0 shadow-sm">
 
-      <div class="d-flex justify-content-between p-3">
+      <!-- Modal Header with Close -->
+      <div class="d-flex justify-content-between" style="padding: 20px 20px 0 20px;">
         <h6 class="fw-semibold mb-1">Confirm Redemption</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body pt-0 px-4">
+      <!-- Modal Body -->
+      <div class="modal-body pt-0 px-4" style="background-color: #fff !important;gap: 10px !important;">
+
         <p class="text-muted mb-4 small">
           You are about to redeem the following reward using your points.
         </p>
@@ -198,34 +203,45 @@
           <img [src]="selectedReward?.ImageURL" alt="Product" class="rounded-2" width="52" height="52">
           <div>
             <div class="fw-semibold small mb-1">{{ selectedReward?.Title }}</div>
-            <div class="text-muted small">{{ selectedReward?.ShortDescription }}</div>
+            <div class="text-muted small">{{ selectedReward?.ShortDescription }} </div>
           </div>
         </div>
 
         <div class="d-flex justify-content-between align-items-center bg-light rounded-3 py-2 px-3 mb-3">
-          <div class="fw-semibold small">
-            <i class="bi bi-award me-1 text-primary"></i>
-            <span class="text-black">{{ selectedReward?.Points }} points</span>
+          <div class="fw-semibold small" style="font-size: 16px;">
+            <i class="bi bi-award me-1 text-primary"></i> <span class="text-black">{{ selectedReward?.Points}}
+              points</span>
           </div>
-          <div class="text-muted small">
-            Balance after: {{ totalCoins - selectedReward?.Points }} points
-          </div>
+          <div class="text-muted small" style="font-size: 14px;font-weight: 500; color: #64748b !important;">Balance
+            after: {{ totalCoins - selectedReward?.Points }} points</div>
         </div>
 
-        <div class="text-muted small">
-          <i class="bi bi-truck me-1"></i> {{ selectedReward?.DeliveryInfo }}
+        <div class="text-muted small mb-1" style="color: #64748b !important;">
+          <i class="bi bi-truck me-1"></i>Estimated delivery: {{ selectedReward?.DeliveryInfo }}
         </div>
       </div>
 
-      <div class="modal-footer border-0 px-4 pb-4 pt-0 justify-content-between">
-        <button type="button" class="btn btn-outline-secondary rounded-3 px-4" data-bs-dismiss="modal">
-          Cancel
+      <!-- Footer Buttons -->
+      <div class="modal-footer border-0 px-4 pb-4 pt-0 justify-content-between"
+        *ngIf="totalCoins >= selectedReward?.Points">
+        <button type="button" class="btn btn-outline-secondary rounded-3 px-4" data-bs-dismiss="modal"
+          style="border-color: e2e8f0 ;color: #000;">Cancel</button>
+        <button type="button" class="btn btn-primary rounded-3 px-4 d-flex align-items-center justify-content-center"
+          [disabled]="isRedeeming" (click)="redeemReward()">
+          <span *ngIf="!isRedeeming">Confirm Redemption</span>
+          <span *ngIf="isRedeeming" class="spinner-border spinner-border-sm me-2" role="status"
+            aria-hidden="true"></span>
+          <span *ngIf="isRedeeming">Processing...</span>
         </button>
-        <button type="button" class="btn btn-primary rounded-3 px-4" (click)="redeemReward()">
-          Confirm Redemption
-        </button>
+
       </div>
 
     </div>
   </div>
 </div>
+
+
+<ng-container *ngIf="showLoginRewards">
+  <app-coins-page [Coins]="selectedReward?.Points" [PageType]="'Rewards'" [Description]="'Coins Redemption'"
+    [TransactionType]="'Used'">
+  </app-coins-page>
