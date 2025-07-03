@@ -1,0 +1,114 @@
+
+/* Rewards CSS */
+.rewards-page-section .bg-lightblue {
+    background-color: #eaf4ff;
+  }
+  .rewards-page-section .reward-carousel-block{
+    margin-top: 20px;
+  }
+  .rewards-page-section .reward-carousel {
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+  }
+  
+  .rewards-page-section .reward-image-container {
+    max-width: 400px;
+    flex-shrink: 0;
+  }
+  
+  .rewards-page-section .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .rewards-page-section .left-arrow {
+    left: 10px;
+  }
+  
+  .rewards-page-section .right-arrow {
+    right: 10px;
+  }
+  
+  .rewards-page-section .carousel-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    opacity: 0.7;
+  }
+  
+  .rewards-page-section .carousel-dot.active {
+    opacity: 1;
+  }
+  
+  .rewards-page-section .nav-pills{
+    border-radius: 8px;
+    padding: 3px;
+    font-size: 14px;
+  }
+  .rewards-page-section .tool-tabs .nav-link {
+    color: #64748b;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background-color: #f1f5f9;
+  }
+  
+  .rewards-page-section .tool-tabs .nav-link.active {
+    background-color: #fff;
+    color: #000;
+    font-weight: 600;
+    border-radius: 8px;
+  }
+  
+  
+  .rewards-page-section .reward-card {
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  .rewards-page-section .reward-card .card-title{
+    font-size: 24px;
+  }
+  .rewards-page-section .reward-card .text-muted{
+    color: #64748b !important;
+    font-weight: 500;
+  }
+  .rewards-page-section .reward-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .rewards-page-section .reward-card .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .earn-card-section{
+    margin-top: 20px;
+  }
+  .rewards-page-section .earn-card {
+    background: #fff;
+    border: 1px solid #eee;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .rewards-page-section .earn-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  .rewards-page-section .earn-card .btn,.rewards-page-section .earn-card .btn:hover{
+   border-color: #e2e8f0 !important;
+   font-weight: 600;
+   color: #000;
+   background-color: #fff !important;
+  }

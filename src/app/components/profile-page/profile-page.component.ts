@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getCities, getCountries, getProfile, getStates, updateProfile } from '../../constants/api-constants';
+import { getCities, getCoinHistory, getCountries, getProfile, getStates, updateProfile } from '../../constants/api-constants';
 import { ActivatedRoute } from '@angular/router';
+import { ToasterService } from '../../shared/shared/toaster.service';
 declare var bootstrap: any;
 
 export enum TabType {
@@ -37,22 +38,22 @@ export class ProfilePageComponent {
   selectedCountryCode = '';
   selectedStateCode = '';
   progress: number = 0;
-  showLoginRewards : boolean = false;
-  showprofileRewards : boolean = false;
+  showLoginRewards: boolean = false;
+  showprofileRewards: boolean = false;
   @ViewChild('personalInfoModal') personalInfoModal!: ElementRef;
   @ViewChild('profModal') profModal!: ElementRef;
   @ViewChild('certModal') certModal!: ElementRef;
   @ViewChild('addressModal') addressModal!: ElementRef;
 
 
-pointsList = [
-  { label: 'Profile', icon: 'user' },
-  { label: 'Community', icon: 'users' },
-  { label: 'Reiviews', icon: 'star' },
-  { label: 'EKart', icon: 'shopping-cart' },
-  { label: 'Events', icon: 'calendar' },
-  { label: 'Careers', icon: 'briefcase' }
-];
+  pointsList = [
+    { label: 'Profile', icon: 'user' },
+    { label: 'Community', icon: 'users' },
+    { label: 'Reiviews', icon: 'star' },
+    { label: 'EKart', icon: 'shopping-cart' },
+    { label: 'Events', icon: 'calendar' },
+    { label: 'Careers', icon: 'briefcase' }
+  ];
 
 
   bsConfig = {
@@ -77,15 +78,15 @@ pointsList = [
   ];
 
   pointsData = [
-  { label: 'Training', icon: 'award', points: 0 },
-  { label: 'Referrals', icon: 'user', points: 0 },
-  { label: 'Achievements', icon: 'award', points: 0 },
-  { label: 'Careers', icon: 'award', points: 0 },
-  { label: 'Tools', icon: 'award', points: 0 }
-];
+    { label: 'Training', icon: 'award', points: 0 },
+    { label: 'Referrals', icon: 'user', points: 0 },
+    { label: 'Achievements', icon: 'award', points: 0 },
+    { label: 'Careers', icon: 'award', points: 0 },
+    { label: 'Tools', icon: 'award', points: 0 }
+  ];
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toaster: ToasterService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -181,7 +182,8 @@ pointsList = [
     this.onExpiryChange();
     this.getProfiles();
     this.getCountries();
-    this.dailyLoginRewardCheck()
+    this.dailyLoginRewardCheck();
+    this.getCoinHistory()
   }
 
 
@@ -212,6 +214,7 @@ pointsList = [
       },
       error: (err) => {
         console.error('Error fetching countries:', err);
+        this.toaster.error('Error fetching countries');
       }
     })
   }
@@ -235,6 +238,7 @@ pointsList = [
         },
         error: (err) => {
           console.error('Error fetching states:', err);
+          this.toaster.error('Error fetching states');
           reject(err);
         }
       });
@@ -261,6 +265,7 @@ pointsList = [
         },
         error: (err) => {
           console.error('Error fetching cities:', err);
+          this.toaster.error('Error fetching cities:');
           reject(err);
         }
       });
@@ -288,6 +293,7 @@ pointsList = [
       },
       error: (error) => {
         console.error('Error fetching profile:', error);
+        this.toaster.error('Error fetching profile:');
       }
     });
   }
@@ -309,9 +315,12 @@ pointsList = [
         modal?.hide();
         this.getProfiles();
         this.showprofileRewards = true;
+        this.toaster.success('Profile updated successfully');
       },
       error: (error) => {
         this.isSaving = false;
+        console.error('Error updating profile:', error);
+        this.toaster.error('Error updating profile:')
       }
     });
   }
@@ -332,9 +341,11 @@ pointsList = [
         modal?.hide();
         this.getProfiles();
         this.showprofileRewards = true;
+        this.toaster.success('Profile updated successfully');
       },
       error: (error) => {
         this.isSaving = false;
+        this.toaster.error('Error updating profile:')
       }
     });
   }
@@ -356,9 +367,11 @@ pointsList = [
         modal?.hide();
         this.getProfiles();
         this.showprofileRewards = true;
+        this.toaster.success('Profile updated successfully');
       },
       error: (error) => {
         this.isSaving = false;
+        this.toaster.error('Error updating profile:')
       }
     });
   }
@@ -378,9 +391,11 @@ pointsList = [
         modal?.hide();
         this.getProfiles();
         this.showprofileRewards = true;
+        this.toaster.success('Profile updated successfully');
       },
       error: (error) => {
         this.isSaving = false;
+        this.toaster.error('Error updating profile:')
       }
     });
   }
@@ -405,10 +420,12 @@ pointsList = [
         modal3?.hide();
         this.getProfiles();
         this.showprofileRewards = true;
+        this.toaster.success('Profile updated successfully');
       },
       error: (error) => {
         this.isSaving = false;
         console.error('Error saving social links', error);
+        this.toaster.error('Error updating profile:')
       }
     });
   }
@@ -486,10 +503,29 @@ pointsList = [
   dailyLoginRewardCheck() {
     const today = new Date().toDateString();
     const lastLoginDate = localStorage.getItem('dailyLoginDate');
-  
+
     if (lastLoginDate === today) {
       return;
     }
     // this.showLoginRewards = true;
   }
+
+
+  getCoinHistory() {
+    this.http.get(getCoinHistory, {
+      params: {
+        emailId: this.emailId || ''
+      }
+    }).subscribe({
+      next: (response: any) => {
+        sessionStorage.setItem('CoinsHistory',response?.totalCoins || 0)
+      },
+      error: (error) => {
+        console.error('Error fetching Coin History:', error);
+        this.toaster.error('Error fetching Coin History:')
+      }
+    });
+  }
+
+
 }

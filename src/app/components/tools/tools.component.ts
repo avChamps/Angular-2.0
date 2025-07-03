@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import tools from './tools.json';
 import { addRecentTool, getRecentTools, getTools, markInterest } from '../../constants/api-constants';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../shared/shared/toaster.service';
 
 
 export interface Tool {
@@ -46,7 +47,7 @@ export class ToolsComponent {
   ];
 
 
-  constructor(private http: HttpClient, public route: Router) { }
+  constructor(private http: HttpClient, public route: Router,  private toaster: ToasterService) { }
 
   ngOnInit(): void {
     this.emailId = localStorage.getItem('EmailId');
@@ -96,6 +97,7 @@ export class ToolsComponent {
       },
       err => {
         console.error('Error saving interest', err);
+        this.toaster.error('Error saving interest')
         tool.isInterested = !tool.isInterested;
       }
     );
@@ -114,7 +116,10 @@ export class ToolsComponent {
         console.log('Recent tool saved');
         this.loadRecentTools('count');
       },
-      error: err => console.error('Failed to save recent tool:', err)
+      error: err =>  {
+        console.error('Failed to save recent tool:', err)
+        this.toaster.error('Failed to save recent tool:')
+      }
     });
     const formattedTitle = tool?.title.replace(/\s+/g, '-');
 

@@ -7,7 +7,7 @@ import { HomePageModule } from './components/home-page/home-page.module';
 import { SiteGuardGuard } from './authentication/site-guard.guard';
 import { RedirectedPageComponent } from './components/redirected-page/redirected-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoticationsComponent } from './components/notications/notications.component';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { NoticationsComponent } from './components/notications/notications.compo
     BrowserModule,
     AppRoutingModule,
     HomePageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [SiteGuardGuard],
   bootstrap: [AppComponent]

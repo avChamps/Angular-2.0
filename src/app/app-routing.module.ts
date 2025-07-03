@@ -129,6 +129,17 @@ const routes: Routes = [
   },
 
   {
+    path: 'rewards',
+    loadChildren: async () => (await import('./components/rewards/rewards.module')).RewardsModule,
+    canActivate: [SiteGuardGuard], 
+    data: {
+      title: 'Training Programs | Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      description: 'Enhance your audio-visual skills with our comprehensive training programs designed by industry experts',
+      keywords: 'directory, members, av champs'
+    }
+  },
+
+  {
     path: 'Aspect-Ratio-Calculator',
     loadComponent: async () => (await import('./components/tools/aspect-ratio/aspect-ratio.component')).AspectRatioComponent
     , data: {

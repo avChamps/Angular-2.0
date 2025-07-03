@@ -675,7 +675,7 @@
   max-width: 800px;
 }
 .post-update-popup .form-label {
-  font-weight: 600;
+  font-weight: normal !important;
   color: #000 !important;
 }
 .post-update-popup .form-control::placeholder {

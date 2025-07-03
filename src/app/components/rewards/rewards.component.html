@@ -1,0 +1,231 @@
+<div class="profile-page-section rewards-page-section">
+  <div class="left-side">
+    <div class="profile-card">
+      <div class="profile-card-logo">
+        <img src="images/logo-black.png" alt="">
+      </div>
+      <div class="profile-card-info">
+        <h1>Rewards Center</h1>
+        <span>Redeem your points for exclusive rewards and benefits</span>
+      </div>
+      <div class="points"><i class="bi bi-stars"></i> {{ totalCoins }}</div>
+    </div>
+
+
+    <!-- Points Summary Box -->
+    <div class="tools-page-section">
+      <!-- <div class="points-box">
+  <div class="left">
+    <div class="icon"><i class="bi bi-award"></i></div>
+    <div>
+      <div class="text-title">Your Points</div>
+      <div class="text-muted">Redeem your points for exclusive rewards</div>
+    </div>
+  </div>
+  <div class="points"><i class="bi bi-stars"></i> 715</div>
+</div> -->
+
+      <div class="reward-carousel-block" *ngIf="featuredRewards.length">
+        <div class="reward-carousel bg-lightblue rounded-4 d-flex align-items-center p-4 position-relative">
+
+          <button class="carousel-arrow left-arrow" (click)="prevSlide()">&#8249;</button>
+
+          <div class="flex-grow-1 pe-4">
+            <small class="text-muted fw-semibold">Featured Reward</small>
+            <h3 class="fw-bold mt-2">{{ featuredRewards[currentSlide]?.Title }}</h3>
+            <p class="text-secondary mb-3">{{ featuredRewards[currentSlide]?.ShortDescription }}</p>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-award text-primary me-2"></i>
+              <span class="fw-semibold fs-5">{{ featuredRewards[currentSlide]?.Points }} points</span>
+            </div>
+
+            <button class="btn btn-primary rounded-3 px-4">Redeem Now</button>
+          </div>
+
+          <div class="reward-image-container ms-auto">
+            <img [src]="featuredRewards[currentSlide]?.ImageURL" alt="reward" class="img-fluid rounded-3" />
+          </div>
+
+          <button class="carousel-arrow right-arrow" (click)="nextSlide()">&#8250;</button>
+
+          <div class="text-center mt-2 position-absolute bottom-0 start-50 translate-middle-x">
+            <span *ngFor="let reward of featuredRewards; let i = index" class="carousel-dot"
+              [class.active]="i === currentSlide">
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <ul class="nav nav-pills my-3 tool-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filteredCategory === 'all'" (click)="filterRewards('all')">All Rewards</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filteredCategory === 'merchandise'"
+            (click)="filterRewards('merchandise')">Merchandise</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filteredCategory === 'digital'"
+            (click)="filterRewards('digital')">Digital</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filteredCategory === 'experiences'"
+            (click)="filterRewards('experiences')">Experiences</a>
+        </li>
+      </ul>
+
+      <div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 col-12" *ngFor="let reward of rewardsList">
+
+            <div *ngIf="filteredCategory === 'all' || reward.Category === filteredCategory"
+              class="card reward-card h-100">
+              <img [src]="reward.ImageURL" class="card-img-top rounded-top" [alt]="reward.Title">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <h5 class="card-title fw-bold">{{ reward.Title }}</h5>
+                  <span class="badge bg-light border text-dark small">{{ reward.Category }}</span>
+                </div>
+                <p class="card-text text-secondary mb-3">{{ reward.ShortDescription }}</p>
+                <div class="d-flex align-items-center mb-2 text-primary">
+                  <i class="bi bi-award me-2"></i>
+                  <strong>{{ reward.Points }} points</strong>
+                  <span *ngIf="reward.DeliveryInfo" class="text-muted ms-auto d-flex align-items-center">
+                    <i class="bi bi-truck me-1"></i> {{ reward.DeliveryInfo }}
+                  </span>
+                </div>
+                <button class="btn btn-primary w-100 rounded-3 mt-3" data-bs-toggle="modal"
+                  data-bs-target="#confirmRedemptionModal">
+                  Redeem Reward
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="earn-card-section">
+        <div class="card shadow-sm border-0 p-3 bg-light rounded-4">
+          <h5 class="fw-bold mb-3 text-dark">
+            <i class="bi bi-gift-fill text-primary me-2"></i> How to Earn More Points
+          </h5>
+          <div class="row g-3">
+            <!-- Card 1 -->
+            <div class="col-md-4">
+              <div class="earn-card h-100 p-3 rounded-3">
+                <h6 class="fw-semibold">Complete Your Profile</h6>
+                <p class="text-secondary mb-3">Add your professional details and profile picture to earn 50 points.</p>
+                <button class="btn btn-outline-dark btn-sm rounded-3">Go to Profile</button>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-4">
+              <div class="earn-card h-100 p-3 rounded-3">
+                <h6 class="fw-semibold">Write Product Reviews</h6>
+                <p class="text-secondary mb-3">Earn 25 points for each detailed product review you submit.</p>
+                <button class="btn btn-outline-dark btn-sm rounded-3">Write Reviews</button>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4">
+              <div class="earn-card h-100 p-3 rounded-3">
+                <h6 class="fw-semibold">Use AV Tools</h6>
+                <p class="text-secondary mb-3">Earn points by using our professional AV tools regularly.</p>
+                <button class="btn btn-outline-dark btn-sm rounded-3">Explore Tools</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="right-side">
+
+    <div class="ad-card">
+      <div class="ad-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-badge-info h-4 w-4 mr-2">
+          <path
+            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+          </path>
+          <line x1="12" x2="12" y1="16" y2="12"></line>
+          <line x1="12" x2="12.01" y1="8" y2="8"></line>
+        </svg> Sponsored Content
+      </div>
+      <div class="ad-image">
+        <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+        <div class="ad-label">Advertisement</div>
+      </div>
+      <div class="ad-body">
+        <h5>Sample Ad 1</h5>
+        <p>This is a sample advertisement.</p>
+        <button class="btn learn-more-btn mx-auto">Learn More</button>
+      </div>
+      <div class="ad-footer">
+        Google Ad Slot <br>
+        <small>Advertisement · <a href="#">Report this ad</a></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmRedemptionModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow-sm">
+
+      <div class="d-flex justify-content-between p-3">
+        <h6 class="fw-semibold mb-1">Confirm Redemption</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body pt-0 px-4">
+        <p class="text-muted mb-4 small">
+          You are about to redeem the following reward using your points.
+        </p>
+
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <img [src]="selectedReward?.ImageURL" alt="Product" class="rounded-2" width="52" height="52">
+          <div>
+            <div class="fw-semibold small mb-1">{{ selectedReward?.Title }}</div>
+            <div class="text-muted small">{{ selectedReward?.ShortDescription }}</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center bg-light rounded-3 py-2 px-3 mb-3">
+          <div class="fw-semibold small">
+            <i class="bi bi-award me-1 text-primary"></i>
+            <span class="text-black">{{ selectedReward?.Points }} points</span>
+          </div>
+          <div class="text-muted small">
+            Balance after: {{ totalCoins - selectedReward?.Points }} points
+          </div>
+        </div>
+
+        <div class="text-muted small">
+          <i class="bi bi-truck me-1"></i> {{ selectedReward?.DeliveryInfo }}
+        </div>
+      </div>
+
+      <div class="modal-footer border-0 px-4 pb-4 pt-0 justify-content-between">
+        <button type="button" class="btn btn-outline-secondary rounded-3 px-4" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary rounded-3 px-4" (click)="redeemReward()">
+          Confirm Redemption
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

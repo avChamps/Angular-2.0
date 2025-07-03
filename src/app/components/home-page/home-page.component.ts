@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { dismissNotification, getNotifications, getProfile, markAsRead } from '../../constants/api-constants';
+import { ToasterService } from '../../shared/shared/toaster.service';
 
 @Component({
   selector: 'app-home-page',
@@ -93,7 +94,7 @@ export class HomePageComponent {
   ];
 
 
-  constructor(private router: Router, private actRoute: ActivatedRoute, private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private router: Router, private actRoute: ActivatedRoute, private http: HttpClient, private route: ActivatedRoute, private toaster: ToasterService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -126,7 +127,10 @@ export class HomePageComponent {
           icon: this.mapPageTypeToIcon(item.PageType)
         }));
       },
-      error: () => alert('Failed to fetch notifications')
+      error: () => { 
+        // alert('Failed to fetch notifications');
+        this.toaster.error('Failed to fetch notifications');
+      }
     });
   }
 

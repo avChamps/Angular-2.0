@@ -48,3 +48,5 @@ export const getNotifications = url + '/getNotifications';
 export const markAsRead = url + '/markAsRead';
 export const dismissNotification = url + '/dismissNotification';
 export const SubscribeNewsletter = url + '/SubscribeNewsletter';
+export const getRewards = url + '/getRewards';
+export const redeemReward = url + '/redeemReward';

@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { getTrainings, trainingContactUs, updateProfile } from '../../constants/api-constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToasterService } from '../../shared/shared/toaster.service';
 declare var bootstrap: any;
 
 @Component({
@@ -21,7 +22,7 @@ clickedCourse : any;
   @ViewChild('personalInfoModal') personalInfoModal!: ElementRef;
 
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private toaster: ToasterService) {
     this.personalInfoForm = this.fb.group({
       FullName: ['', Validators.required,Validators.maxLength(32)],
       Email: ['', [Validators.required, Validators.email,Validators.maxLength(64)]],
@@ -44,6 +45,7 @@ clickedCourse : any;
       },
       error: (error) => {
         console.error('Error fetching trainings:', error);
+        this.toaster.error('Error fetching trainings:')
       }
     });
   }

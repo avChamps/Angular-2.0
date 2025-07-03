@@ -83,7 +83,20 @@ cartMessages: { [title: string]: string } = {};
     this.getProducts()
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    let profileDataString = localStorage.getItem('ProfileData');
+    
+    if (profileDataString) {
+      let ProfileData = JSON.parse(profileDataString);      
+      this.checkoutForm.patchValue({
+        fullName: ProfileData.FullName || '',
+        address: ProfileData.AddressLine1 || '',
+        email: ProfileData.ProfileEmailId || ProfileData.EmailId || '',
+        phoneNumber: ProfileData.Mobile || ''
+      });
+    }
+  }
+  
 
   getProducts(reset = true): void {
     if (reset) {

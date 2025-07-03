@@ -10,6 +10,8 @@ import { ClickOutsideDirective } from '../directives/ClickOutsideDirective.direc
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoinsPageComponent } from '../../components/coins-page/coins-page.component';
+import { ToasterService } from './toaster.service';
+import { ToasterComponent } from '../../components/toaster/toaster.component';
 
 
 
@@ -17,8 +19,8 @@ import { CoinsPageComponent } from '../../components/coins-page/coins-page.compo
   declarations: [
     InitialsPipe,
     OnlyNumbersDirective,
-    ClickOutsideDirective
-
+    ClickOutsideDirective,
+    ToasterComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { CoinsPageComponent } from '../../components/coins-page/coins-page.compo
     TooltipModule,
     OnlyNumbersDirective,
     ClickOutsideDirective,
-    BsDatepickerModule
+    BsDatepickerModule,
+    ToasterComponent
   ]
 })
 export class SharedModule { }

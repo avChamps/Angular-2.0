@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { applyJob, getJobs, getJobStats } from '../../constants/api-constants';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from '../../shared/shared/toaster.service';
 
 var bootstrap: any;
 
@@ -15,7 +16,7 @@ export class CarrersPageComponent implements OnInit {
   searchLocation = '';
   sortOption = '';
   minSalary = 0;
-  maxSalary = 50;
+  maxSalary = 5000000;
   emailId: any;
   jobList: any;
   selectedCategory = '';
@@ -69,9 +70,9 @@ export class CarrersPageComponent implements OnInit {
   ];
 
 
-  constructor(private http: HttpClient, private router: Router, actRouter : ActivatedRoute) {
+  constructor(private http: HttpClient, private router: Router, actRouter: ActivatedRoute, private toaster: ToasterService) {
     this.emailId = localStorage.getItem('EmailId')
-   actRouter.paramMap.subscribe(params => {
+    actRouter.paramMap.subscribe(params => {
       const jobId = params.get('id');
       if (jobId) {
         this.getJobs(jobId);
@@ -84,20 +85,19 @@ export class CarrersPageComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
- 
+    
   }
 
-  getJobs(jobId ?:any) {
-    const params: any = { EmailId: this.emailId };
+  getJobs(jobId?: any) {
+    const params: any = { EmailId: '' };
 
     if (jobId) {
       params.jobId = jobId;
     }
-  
+
     this.http.get(getJobs, { params }).subscribe({
-      next: (response: any) => { 
+      next: (response: any) => {
         if (response.status && response.data) {
           this.jobList = response.data.map((job: any) => ({
             initial: job.CompanyName?.charAt(0) || '',
@@ -115,12 +115,13 @@ export class CarrersPageComponent implements OnInit {
             Status: job.Applied
           }));
           if (jobId) {
-          this.selectedJob = this.jobList[0];
+            this.selectedJob = this.jobList[0];
           }
         }
       },
       error: (error) => {
-        console.error('Error fetching profile:', error);
+        console.error('Error fetching Jobs:', error);
+        this.toaster.error('Error fetching Jobs');
       }
     });
   }
@@ -143,7 +144,6 @@ export class CarrersPageComponent implements OnInit {
     this.selectedCategory = category;
     this.selectedJobType = '';
     this.selectedExperience = '';
-    this.maxSalary = 50;
     this.searchKeyword = '';
     this.searchLocation = '';
     this.applyFilters();
@@ -155,7 +155,6 @@ export class CarrersPageComponent implements OnInit {
     this.selectedExperience = '';
     this.searchKeyword = '';
     this.searchLocation = '';
-    this.maxSalary = 50;
     this.applyFilters();
   }
 
@@ -165,13 +164,12 @@ export class CarrersPageComponent implements OnInit {
     this.selectedJobType = '';
     this.searchKeyword = '';
     this.searchLocation = '';
-    this.maxSalary = 50;
     this.applyFilters();
   }
 
 
   applyFilters() {
-    const params: any = { EmailId: this.emailId };
+    const params: any = { EmailId: '' };
 
     if (this.selectedCategory) params.category = this.selectedCategory;
     if (this.selectedJobType) params.type = this.selectedJobType;
@@ -211,7 +209,7 @@ export class CarrersPageComponent implements OnInit {
 
 
   getJobStats() {
-    this.http.get<any>(getJobStats, { params: { EmailId: this.emailId } }).subscribe({
+    this.http.get<any>(getJobStats, { params: { EmailId: '' } }).subscribe({
       next: (res) => {
         if (res.status) {
           this.categories = res.data.categories;
@@ -240,7 +238,7 @@ export class CarrersPageComponent implements OnInit {
     this.selectedCategory = '';
     this.selectedJobType = '';
     this.selectedExperience = '';
-    this.maxSalary = 50;
+    this.maxSalary = 5000000;
     this.applyFilters();
   }
 
@@ -311,14 +309,16 @@ export class CarrersPageComponent implements OnInit {
 
       this.http.post(applyJob, payload).subscribe({
         next: () => {
-          alert('Application submitted successfully!');
+          // alert('Application submitted successfully!');
+          this.toaster.success('Application submitted successfully!');
           this.resetFileUpload();
           this.isApplying = false;
           this.closePopup.nativeElement.click();
         },
         error: (err) => {
           console.error('Error sending application:', err);
-          alert('Failed to submit application.');
+          this.toaster.error('Error sending application:');
+          // alert('Failed to submit application.');
           this.isApplying = false;
         }
       });
