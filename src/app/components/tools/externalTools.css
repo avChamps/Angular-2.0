@@ -1,0 +1,874 @@
+/* ================== Base Reset ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f3f4f6;
+    font-family: "Inter", sans-serif;
+  }
+  
+  /* ================== Layout Containers ================== */
+  .form-wrapper-container {
+    max-width: 1280px;
+    margin: 120px auto;
+  }
+  
+  .form-content {
+    padding: 24px;
+    color: #020817;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    color: #020817;
+    border-radius: 12px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ================== Headings ================== */
+  .form-heading {
+    display: flex;
+    padding: 24px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    gap: 8px;
+    letter-spacing: -0.5px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+  
+  .form-heading svg {
+    color: #2563eb;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .form-card h4,
+  .form-table h4 {
+    text-transform: uppercase;
+    color: #6b7280;
+    letter-spacing: 0.7px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  /* ================== Form Card ================== */
+  .form-cards {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-cards .line {
+    width: 100%;
+    height: 1px;
+    background: #e5e7eb;
+    margin-top: 24px;
+  }
+  
+  .form-card {
+    padding: 24px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+  }
+  
+  .form-card:not(:nth-child(1)) {
+    margin-top: 24px;
+  }
+  
+  .form-table {
+    margin-top: 24px;
+  }
+  
+  .form-preview {
+    display: none;
+  }
+  
+  /* ================== Form Fields ================== */
+  .form-fields-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 16px;
+    column-gap: 24px;
+  }
+  
+  .form-section .form-group,
+  .form-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  
+  .form-radio-group {
+    gap: 8px;
+  }
+  
+  .form-section .form-group label,
+  .form-radio-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .form-section .form-group input,
+  .form-section .form-group textarea {
+    background: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    outline: none;
+    resize: none;
+  }
+  
+  .form-section .form-group .form-select {
+    border-radius: 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    padding: 8px 12px;
+  }
+  
+  .form-section .form-group input:focus,
+  .form-section .form-group textarea:focus,
+  .form-section .form-group .form-select:focus {
+    box-shadow: 0 0 0 1.5px #3b82f6;
+  }
+  
+  .form-check label {
+    color: black;
+  }
+  
+  /* ================== Form Buttons ================== */
+  .form-button {
+    width: fit-content;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    line-height: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-button .icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .form-button-primary {
+    color: white;
+    background: #2563eb;
+  }
+  
+  .form-button-primary:hover {
+    background: #1d4ed8;
+  }
+  
+  .form-button-primary:disabled {
+    opacity: 0.5;
+  }
+  
+  .form-button-secondary {
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    background: transparent;
+  }
+  
+  .form-button-secondary:hover {
+    background: #f3f4f6;
+  }
+  
+  .form-table .form-button {
+    margin-top: 8px;
+  }
+  
+  .form-table .form-button-secondary {
+    color: #2563eb;
+  }
+  
+  .form-table .form-button-secondary:hover {
+    color: #0f172a;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px;
+    gap: 12px;
+  }
+  
+  .form-buttons .form-button,
+  .form-preview-buttons .form-button {
+    padding: 11px 16px !important;
+  }
+  
+  /* ================== Form Table ================== */
+  .form-table {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+  }
+  
+  .form-table-header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    font-size: 12px;
+    color: #6b7280;
+    background: #f9fafb;
+    font-weight: 500;
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .form-table-row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    border-bottom: 1px solid #e5e7eb;
+    transition: background 0.3s ease;
+  }
+  
+  .form-table-row:hover {
+    background: #f9fafb;
+  }
+  
+  .table-cell-first {
+    grid-column: span 5 / span 5;
+  }
+  
+  .table-cell-second,
+  .table-cell-third {
+    grid-column: span 3 / span 3;
+  }
+  
+  .table-cell-action {
+    grid-column: span 1 / span 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .table-header-cell {
+    padding: 8px;
+  }
+  
+  .table-cell {
+    padding: 0 8px;
+    transition: background 0.3s ease;
+  }
+  
+  .table-cell input {
+    width: 100%;
+    padding: 8px 0;
+    border: 2px solid transparent;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+    outline: none;
+    background: transparent;
+    transition: border-bottom 0.1s ease;
+  }
+  
+  .table-cell input:focus {
+    border-bottom: 2px solid #2563eb;
+  }
+  
+  .table-cell-action button {
+    border: none;
+    color: #9ca3af;
+    background: transparent;
+    border-radius: 10px;
+    white-space: nowrap;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .table-cell-action button:hover {
+    color: #ef4444;
+    background: #fef2f2;
+  }
+  
+  .table-cell-action button svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* ================= Signature Pad ==================== */
+  .signature-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .signature-wrapper canvas {
+    width: 100%;
+    height: 150px;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: crosshair;
+  }
+  
+  .clear-btn {
+    margin-top: 8px;
+    padding: 4px 10px;
+    background-color: #f87171;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .clear-btn:hover {
+    background-color: #ef4444;
+  }
+  
+  /* ================== Form Switcher ================== */
+  .form-switcher {
+    padding: 4px;
+    background: #f1f5f9;
+    border-radius: 10px;
+  }
+  
+  .form-switcher-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  
+  .form-switcher-list li {
+    width: 100%;
+  }
+  
+  .form-switcher-link {
+    text-decoration: none;
+    color: #64748b;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .form-switcher-link.active {
+    color: #020817;
+    background: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  /* ============= Form Preview ====================== */
+  
+  .form-preview {
+    padding: 24px;
+    color: #020817;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-preview-heading {
+    margin-bottom: 24px;
+  }
+  
+  .form-preview-heading h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .form-preview-heading p {
+    font-weight: 14px;
+    color: #4b5563;
+  }
+  
+  .form-preview-cards {
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-preview-card h4 {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: inherit;
+    margin-bottom: 8px;
+  }
+  
+  .form-preview-card-content {
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  
+  }
+  
+  .card-col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+  
+  .preview-table {
+    overflow-x: auto;
+  }
+  
+  .preview-table table {
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .preview-table table thead {
+    background: #f9fafb;
+  }
+  
+  .preview-table table th,
+  .preview-table table td {
+    padding: 8px;
+  }
+  
+  .preview-table table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .form-preview-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 16px;
+  }
+  
+  
+  /* ===================== Print Page CSS ========================== */
+  
+  .print-page {
+    max-width: 800px;
+    color: #333;
+    padding: 20px 0;
+    margin: auto;
+  }
+  
+  .print-page-container {
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  
+  .print-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 20px;
+  }
+  
+  .header-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .header-logo img {
+    width: 110px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .header-company-info {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+  
+  .print-page-title h2 {
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+  
+  .print-page-title p {
+    text-align: right;
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .print-page-details {
+    margin-bottom: 30px;
+  }
+  
+  .details-card {
+    margin-bottom: 24px;
+  }
+  
+  .details-card-table {
+    overflow-x: auto;
+  }
+  
+  .details-card-title {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #374151;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .user-details {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .user-details strong {
+    color: #374151;
+    ;
+  }
+  
+  .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .details-table th {
+    background-color: #f3f4f6;
+    font-weight: bold;
+    font-size: 12px;
+    color: #374151;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .details-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+  
+  .details-card-authorizations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+    color: #374151;
+  
+  }
+  
+  .details-card-authorizations strong {
+    font-size: 14px;
+  }
+  
+  .authorization-image {
+    max-width: 120px;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  
+  }
+  
+  .authorization-image img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+  
+  .print-page-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 11px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 20px;
+  }
+  
+  .disclaimer {
+    margin-top: 30px;
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+    border-left: 4px solid #e5e7eb;
+  }
+  
+  .disclaimer-text {
+    font-size: 11px;
+    color: #6b7280;
+    line-height: 1.4;
+    text-align: left;
+  }
+  
+  .print-page-footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  
+  .print-page-footer .social-link {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color .3s ease;
+  }
+  
+  .print-page-footer .social-link:hover {
+    color: #374151;
+  }
+  
+  .social-link .icon {
+    font-size: 20px;
+  }
+  
+  /* ============== Employee mileage Report ============ */
+  .form-employee-information {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .employee-report .form-pay-period {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  
+  .form-mileage-span {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .employee-report .table-cell-first,
+  .employee-report .table-cell-fourth {
+    grid-column: span 2 / span 2;
+  }
+  
+  .employee-report .table-cell-second,
+  .employee-report .table-cell-third {
+    grid-column: span 3 / span 3;
+  }
+  
+  .employee-report .table-cell-fifth,
+  .employee-report .table-cell-action {
+    grid-column: span 1 / span 1;
+  }
+  
+  .preview-mileage-summary {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  
+  .preview-mileage-summary-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    ;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .miles-summary-heading {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  .total-miles-count {
+    color: #2563eb;
+  }
+  
+  .total-miles-rate {
+    color: #16a34a;
+  }
+  
+  .total-miles-amount {
+    color: #9333ea;
+  }
+  
+  .miles-summary-text {
+    color: #4b5563;
+    font-size: 14px;
+  }
+  
+  .financial-summary {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    width: 50%;
+    margin-left: auto;
+  }
+  
+  .financial-summary td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .financial-summary tr {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .financial-summary-total {
+    font-weight: bold;
+    font-size: 14px;
+    border-top: 2px solid #e5e7eb;
+    color: #1f2937;
+  }
+  
+  /* ================= Delivery Challan ================== */
+  .delivery-challan .table-cell-first{
+      grid-column: span 5 / span 5;
+  } 
+  .delivery-challan .table-cell-second{
+        grid-column: span 3 / span 3;
+  }
+  .delivery-challan .table-cell-third{
+    grid-column: span 2 / span 2;
+  }
+  .delivery-challan .table-cell-fourth ,.delivery-challan .table-cell-action{
+        grid-column: span 1 / span 1;
+  }
+  
+  @media screen and (max-width:1000px) {
+    .form-employee-information {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media screen and (max-width:700px) {
+    .form-employee-information {
+      grid-template-columns: 1fr;
+    }
+  
+    .employee-report .form-pay-period {
+      flex-wrap: wrap;
+      gap: 0;
+      justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width:786px) {
+    .form-content {
+      margin: 16px;
+      padding: 24px 12px;
+    }
+  
+    .form-preview,
+    .form-preview-cards,
+    .form-cards,
+    .form-card,
+    .form-table {
+      padding: 24px 12px;
+    }
+  
+    .form-fields-container,
+    .form-preview-card-content {
+      grid-template-columns: 1fr;
+    }
+  
+    .form-received-by {
+      display: unset;
+    }
+  
+    .card-col-span-2 {
+      grid-column: span 1 / span 1;
+    }
+  
+    .form-preview-buttons,
+    .form-buttons {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  
+    .form-preview-card-content {
+      gap: 4px;
+    }
+  }
+  
+  
+  
+  @media (max-width: 600px) {
+  
+    .signature-wrapper canvas {
+      height: 100px;
+    }
+  
+    .print-page-container {
+      padding: 24px;
+    }
+  
+    .print-page {
+      margin: 0 16px;
+    }
+  
+    .print-page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+    }
+  
+    .print-page-title p {
+      text-align: left;
+    }
+  
+    .print-page-title {
+      text-align: left;
+    }
+  
+    .header-logo img {
+      width: 100px;
+    }
+  
+    .print-page-footer {
+      margin-top: 20px;
+      padding-top: 0;
+    }
+  }
