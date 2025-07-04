@@ -92,7 +92,7 @@
                   <span class="badge bg-light border text-dark small">{{ reward.Category }}</span>
                 </div>
                 <p class="card-text text-secondary mb-3">{{ reward.ShortDescription }}</p>
-                <div class="d-flex align-items-center mb-2 text-primary">
+                <div class="d-flex align-items-center mb-2 text-primary fs-14">
                   <i class="bi bi-award me-2"></i>
                   <strong>{{ reward.Points }} points</strong>
                   <span *ngIf="reward.DeliveryInfo" class="text-muted ms-auto d-flex align-items-center">
@@ -236,6 +236,8 @@
 
       </div>
 
+
+      <p class="text-danger text-center no-coins" *ngIf="totalCoins <= selectedReward?.Points">You don't have enough coins</p>
     </div>
   </div>
 </div>
