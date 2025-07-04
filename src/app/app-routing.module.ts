@@ -188,9 +188,18 @@ const routes: Routes = [
         title: 'AV Champs Directory',
         description: 'Explore AV Champs members, companies, and experts.',
         keywords: 'directory, members, av champs'
-      }
-  },
-
+      }  
+  }, 
+ 
+   {
+      path: 'Delivery-Challan-Form',
+      loadComponent: async () => (await import('./components/tools/delivery-challan-form/delivery-challan-form.component')).DeliveryChallanFormComponent
+      , data: {
+        title: 'AV Champs Directory',
+        description: 'Explore AV Champs members, companies, and experts.',
+        keywords: 'directory, members, av champs'
+      }  
+  },   
 
   {
     path: '',
