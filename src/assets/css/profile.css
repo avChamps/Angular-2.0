@@ -1,3 +1,5 @@
+
+
 .btn-outline-secondary {
   background-color: #fff !important;
   color: #000 !important;
@@ -1469,7 +1471,8 @@ position: absolute;
   background-color: rgba(0, 0, 0, 0.916) !important; /* Change to your desired color and opacity */
 }
 .course-tabs {
-  background-color: #eeeeee;
+  /* background-color: #e1f0ff; */
+  background-color: #fff;
   padding: 3px;
   width: fit-content;
   border-radius: 20px;
@@ -1483,8 +1486,8 @@ position: absolute;
 }
 
 .course-tabs .nav-link.active {
-  background-color: #fff;
-  color: #000;
+  background-color: #0b5cff;
+  color: #fff;
   border-radius: 20px;
   font-weight: 600;
 }
@@ -1905,5 +1908,8 @@ padding: 0 16px;
 
   .course-card {
     padding: 24px;
+  }
+  .profile-page-section .left-side, .profile-page-section .right-side{
+    padding: 16px;
   }
 }

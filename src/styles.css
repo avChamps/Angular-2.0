@@ -1,3 +1,7 @@
+:root{
+  --bs-primary: #0B5CFF !important;
+}
+
 
 *{
     scroll-behavior: smooth;
@@ -111,6 +115,10 @@ body {
   background-color: #f0f2f5;
   /* font-family: "Inter", sans-serif; */
    /* font-family: 'TT Norms Pro Serif Trl'; */
+}
+
+.btn-primary{
+  background-color: #0B5CFF !important;
 }
 
 h1{

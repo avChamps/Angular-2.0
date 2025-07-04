@@ -20,13 +20,9 @@
     </div>
 
 
-    <div class="kart-product-section">
+    <div class="row">
+<div class="col-md-3 col-12">
       <div class="kart-product-left">
-        <div class="kart-clear-filters | card-section">
-          <button type="button" class="btn btn-outline-secondary" (click)="clearAllFilters()">
-            Clear All Filters
-          </button>
-        </div>
         <div class="kart-product-type | card-section">
           <div class="filter-card">
             <h2 class="mb-3">
@@ -100,16 +96,13 @@
 
         </div>
       </div>
+    </div>
+    <div class="col-md-9 col-12">
       <div class="kart-product-right">
         <div class="kart-available | card-section">
           <div class="kart-available-left">
             <h2>{{ totalCount }} Products Available</h2>
             <p>Showing results based on your preferences</p>
-            <div class="d-flex flex-wrap gap-2">
-              <div class="available-badge">Good</div>
-              <div class="available-badge">Fair Parts</div>
-              <div class="available-badge">New</div>
-            </div>
           </div>
           <div class="kart-available-right">
             <div class="d-flex gap-2">
@@ -206,10 +199,11 @@
                 (click)="openProductModal(product)" data-bs-target="#productDetailModal">
                 <img [src]="product.image" alt="Image">
               </div>
-              <div class="kart-product-badge | limited-stock-badge">{{ product.badge }}</div>
+              <!-- <div class="kart-product-badge | limited-stock-badge">{{ product.badge }}</div> -->
             </div>
             <div class="kart-product-bottom">
               <div class="kart-product-bottom-content">
+                <div class="kart-product-price">₹{{ product.price }}<sup>00</sup></div>
                 <div class="kart-product-tags">
                   <div *ngFor="let tag of product.tags" class="kart-product-tag">{{ tag }}</div>
                   <p class="kart-product-date">{{ product.date }}</p>
@@ -249,17 +243,12 @@
                   {{ cartMessages[product.title] || 'Add to cart' }}
                   </button>
                   <button type="button" class="btn btn-primary w-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-arrow-up-right h-4 w-4 mr-2 flex-shrink-0 me-2">
-                      <path d="M7 7h10v10"></path>
-                      <path d="M7 17 17 7"></path>
-                    </svg>
+                    <i class="bi bi-bag"></i>
                     Buy Now
                   </button>
                 </div>
               </div>
-              <div class="kart-product-price">₹{{ product.price }}</div>
+              
             </div>
           </div>
         </div>
@@ -297,6 +286,7 @@
           <p>Please wait while we fetch the latest items</p>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <div class="right-side">
@@ -582,12 +572,9 @@
       </div>
 
       <div class="modal-body">
-        <!-- Personal Info -->
-        <div class="form-section">
-          <h6>Checkout</h6>
 
           <!-- Cart Summary -->
-          <div class="modal-checkout-summary mb-3" *ngIf="cartItems.length > 0">
+          <!-- <div class="modal-checkout-summary mb-3" *ngIf="cartItems.length > 0">
             <div class="summary-top">
               <h3>Order Summary ({{ cartItems.length }} items)</h3>
             </div>
@@ -611,10 +598,10 @@
               <p class="fw-medium">Total</p>
               <p class="fw-bold text-primary">₹{{ totalAmount }}/-</p>
             </div>
-          </div>
+          </div> -->
 
           <!-- Full Name -->
-          <div class="mb-3">
+          <div>
             <label class="form-label">Full name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" maxlength="50" placeholder="Enter your full name"
               formControlName="fullName" />
@@ -626,7 +613,7 @@
           </div>
 
           <!-- Address -->
-          <div class="mb-3">
+          <div>
             <label class="form-label">Shipping Address <span class="text-danger">*</span></label>
             <textarea class="form-control" placeholder="Enter your complete shipping address..."
               style="min-height: 80px" formControlName="address" maxlength="250"></textarea>
@@ -663,7 +650,7 @@
           </div>
 
           <!-- Payment Method -->
-          <div class="flex-fill mb-3">
+          <div class="flex-fill">
             <label class="form-label">Payment Method <span class="text-danger">*</span></label>
             <select class="form-select" formControlName="paymentMethod">
               <option value="Cash on Delivery" disabled>Cash on Delivery</option>
@@ -675,7 +662,7 @@
           </div>
 
           <!-- Notes -->
-          <div class="mb-3">
+          <div>
             <label class="form-label">Notes (Optional)</label>
             <textarea class="form-control" maxlength="250" placeholder="Any special instructions..."
               style="min-height: 80px" formControlName="notes"></textarea>
@@ -685,7 +672,7 @@
 
 
           <!-- Reward Message -->
-          <div class="points-badge mt-3">
+          <div class="points-badge">
             <svg xmlns="http://www.w3.org2000/svg" width="24" height="24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award h-4 w-4 me-2">
               <circle cx="12" cy="8" r="6"></circle>
@@ -693,7 +680,6 @@
             </svg>
             You'll earn 50 points for posting this item!
           </div>
-        </div>
       </div>
 
       <!-- Footer -->
