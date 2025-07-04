@@ -1,256 +1,348 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <div class="profile-card">
+            <div class="profile-card-logo">
+                <img src="./assets/images/logo.png" alt="">
+            </div>
+            <div class="profile-card-info">
+                <h1>Profile</h1>
+                <span>Manage your personal and professional information</span>
+            </div>
+        </div>
 
-    <div class="form-wrapper employee-mileage-expense-report employee-report">
-        <form class="form-wrapper-container" [formGroup]="mileageForm">
-            <div class="form-content">
-                <div class="form-switcher">
-                    <ul class="list-unstyled form-switcher-list">
-                        <li>
-                            <a href="#" class="form-switcher-link" [class.active]="activeTab === 'form'" (click)="switchTab('form')"> Form </a>
-                        </li>
-                        <li>
-                            <a href="#" class="form-switcher-link" [class.active]="activeTab === 'preview'" (click)="switchTab('preview')"> Preview </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="form-section" *ngIf="activeTab === 'form'">
-                    <div class="form-heading">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-car h-5 w-5 text-blue-600">
-                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
-                            <circle cx="7" cy="17" r="2"></circle>
-                            <path d="M9 17h6"></path>
-                            <circle cx="17" cy="17" r="2"></circle>
-                        </svg>
-                        Employee Mileage Expense Report
+
+
+
+        <div class="form-wrapper employee-mileage-expense-report employee-report">
+            <form class="form-wrapper-container" [formGroup]="mileageForm">
+                <div class="form-content">
+                    <div class="form-switcher">
+                        <ul class="list-unstyled form-switcher-list cursor-pointer">
+                            <li>
+                                <a class="form-switcher-link" [class.active]="activeTab === 'form'"
+                                    (click)="switchTab('form')"> Form </a>
+                            </li>
+                            <li>
+                                <a class="form-switcher-link" [class.active]="activeTab === 'preview'"
+                                    (click)="switchTab('preview')"> Preview </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="form-cards">
-                        <div class="form-card | form-company-information">
-                            <h4 class="form-card-heading">Employee Information</h4>
-                            <div class="form-fields">
-                                <div class="form-fields-container | form-employee-information">
-                                    <div class="form-group">
-                                        <label for="employeeName">Employee Name <span class="text-danger">*</span></label>
-                                        <input type="text" id="employeeName" formControlName="employeeName" placeholder="Enter Employee Name" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="employeeId">Employee ID <span class="text-danger">*</span></label>
-                                        <input type="text" id="employeeId" formControlName="employeeId" placeholder="Enter Employee ID" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="payPeriodFrom">Pay Period <span class="text-danger">*</span></label>
-                                        <div class="form-pay-period">
-                                            <input type="date" id="payPeriodFrom" formControlName="payPeriodFrom" class="form-control" required />
-                                            -
-                                            <input type="date" id="payPeriodTo" formControlName="payPeriodTo" class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="vehicleType">Vehicle Type <span class="text-danger">*</span></label>
-                                        <select id="vehicleType" formControlName="vehicleType" class="form-select" required>
-                                            <option value="" disabled selected hidden>-- Select Vehicle --</option>
-                                            <option value="Car">Car</option>
-                                            <option value="Motorcycle">Motorcycle</option>
-                                            <option value="Truck">Truck</option>
-                                            <option value="Van">Van</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="reportDate">Report Date <span class="text-danger">*</span></label>
-                                        <input type="date" id="reportDate" formControlName="reportDate" class="form-control" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mileageRate">Mileage Rate <span class="text-danger">*</span></label>
-                                        <input type="number" id="mileageRate" formControlName="mileageRate" placeholder="0" required />
-                                        <span class="form-mileage-span">Rupees per Km</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="form-section" *ngIf="activeTab === 'form'">
+                        <div class="form-heading">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-car h-5 w-5 text-blue-600">
+                                <path
+                                    d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                </path>
+                                <circle cx="7" cy="17" r="2"></circle>
+                                <path d="M9 17h6"></path>
+                                <circle cx="17" cy="17" r="2"></circle>
+                            </svg>
+                            Employee Mileage Expense Report
                         </div>
-
-                        <div class="form-table">
-                            <h4>Mileage Entries</h4>
-                            <div class="form-table-header">
-                                <div class="table-cell-first | table-header-cell">Date</div>
-                                <div class="table-cell-second | table-header-cell">Description</div>
-                                <div class="table-cell-third | table-header-cell">Start Location</div>
-                                <div class="table-cell-fourth | table-header-cell">Destination</div>
-                                <div class="table-cell-fifth | table-header-cell">Kms</div>
-                                <div class="table-cell-action | table-header-cell"></div>
-                            </div>
-                            <div id="formTableRows">
-                                <div class="form-table-row" *ngFor="let entry of mileageFormGroups; let i = index" [formGroup]="entry">
-                                    <div class="table-cell-first table-cell">
-                                        <input type="date" formControlName="date" placeholder="Date">
-                                    </div>
-                                    <div class="table-cell-second table-cell">
-                                        <input type="text" formControlName="description" placeholder="Description">
-                                    </div>
-                                    <div class="table-cell-third table-cell">
-                                        <input type="text" formControlName="startLocation" placeholder="Start Location">
-                                    </div>
-                                    <div class="table-cell-fourth table-cell">
-                                        <input type="text" formControlName="destination" placeholder="Destination">
-                                    </div>
-                                    <div class="table-cell-fifth table-cell">
-                                        <input type="number" formControlName="kms" placeholder="Kms" (input)="updateMileageSummary()">
-                                    </div>
-                                    <div class="table-cell-action table-cell">
-                                        <button type="button" class="delete-table-row" (click)="deleteMileageEntry(i)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="lucide lucide-trash2 h-4 w-4">
-                                                <path d="M3 6h18"></path>
-                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                <line x1="10" x2="10" y1="11" y2="17"></line>
-                                                <line x1="14" x2="14" y1="11" y2="17"></line>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                
-                            </div>
-                            <button type="button" class="form-button form-button-secondary" (click)="addMileageEntry()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2 icon">
-                                    <path d="M5 12h14"></path>
-                                    <path d="M12 5v14"></path>
-                                </svg>
-                                Add Material
-                            </button>
-                        </div>
-
-                        <div class="line"></div>
-
-                        <div class="form-card | form-authorization">
-                            <h4 class="form-card-heading">Signature & Authorization</h4>
-                            <div class="form-fields">
-                                <div class="form-fields-container">
-                                    <div class="form-group">
-                                        <label>Prepared By</label>
-                                        <div class="signature-wrapper">
-                                            <canvas id="signaturePadPrepared-Employee" #preparedCanvas></canvas>
-                                            <button type="button" class="clear-btn" (click)="clearPad(preparedPad)">Clear</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-received-by">
+                        <div class="form-cards">
+                            <div class="form-card | form-company-information">
+                                <h4 class="form-card-heading">Employee Information</h4>
+                                <div class="form-fields">
+                                    <div class="form-fields-container | form-employee-information">
                                         <div class="form-group">
-                                            <label>Received By</label>
+                                            <label for="employeeName">Employee Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" id="employeeName" formControlName="employeeName"
+                                                placeholder="Enter Employee Name" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="employeeId">Employee ID <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" id="employeeId" formControlName="employeeId"
+                                                placeholder="Enter Employee ID" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="payPeriodFrom">Pay Period <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="form-pay-period">
+                                                <input type="text" placeholder="DD-MM-YYYY" bsDatepicker id="payPeriodFrom"
+                                                    formControlName="payPeriodFrom" class="form-control" required />
+                                                -
+                                                <input type="text" placeholder="DD-MM-YYYY" bsDatepicker id="payPeriodTo"
+                                                    formControlName="payPeriodTo" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="vehicleType">Vehicle Type <span
+                                                    class="text-danger">*</span></label>
+                                            <select id="vehicleType" formControlName="vehicleType" class="form-select"
+                                                required>
+                                                <option value="" disabled selected hidden>Select Vehicle</option>
+                                                <option value="Car">Car</option>
+                                                <option value="Motorcycle">Motorcycle</option>
+                                                <option value="Truck">Truck</option>
+                                                <option value="Van">Van</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="reportDate">Report Date <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" placeholder="DD-MM-YYYY" bsDatepicker id="reportDate" formControlName="reportDate"
+                                                class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mileageRate">Mileage Rate <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" id="mileageRate" formControlName="mileageRate"
+                                                placeholder="0" onlyNumbers maxlength="6" required />
+                                            <span class="form-mileage-span">Rupees per Km</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-table">
+                                <h4>Mileage Entries</h4>
+                                <div class="form-table-header">
+                                    <div class="table-cell-first | table-header-cell">Date</div>
+                                    <div class="table-cell-second | table-header-cell">Description</div>
+                                    <div class="table-cell-third | table-header-cell">Start Location</div>
+                                    <div class="table-cell-fourth | table-header-cell">Destination</div>
+                                    <div class="table-cell-fifth | table-header-cell">Kms</div>
+                                    <div class="table-cell-action | table-header-cell"></div>
+                                </div>
+                                <div id="formTableRows">
+                                    <div class="form-table-row" *ngFor="let entry of mileageFormGroups; let i = index"
+                                        [formGroup]="entry">
+                                        <div class="table-cell-first table-cell">
+                                            <input type="text" placeholder="DD-MM-YYYY" bsDatepicker formControlName="date" placeholder="Date">
+                                        </div>
+                                        <div class="table-cell-second table-cell">
+                                            <input type="text" formControlName="description" placeholder="Description">
+                                        </div>
+                                        <div class="table-cell-third table-cell">
+                                            <input type="text" formControlName="startLocation"
+                                                placeholder="Start Location">
+                                        </div>
+                                        <div class="table-cell-fourth table-cell">
+                                            <input type="text" formControlName="destination" placeholder="Destination">
+                                        </div>
+                                        <div class="table-cell-fifth table-cell">
+                                            <input type="text" onlyNumbers maxlength="6"  formControlName="kms" placeholder="Kms"
+                                                (input)="updateMileageSummary()">
+                                        </div>
+                                        <div class="table-cell-action table-cell">
+                                            <button type="button" class="delete-table-row"
+                                                (click)="deleteMileageEntry(i)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-trash2 h-4 w-4">
+                                                    <path d="M3 6h18"></path>
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                                                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <button type="button" class="form-button form-button-secondary"
+                                    (click)="addMileageEntry()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2 icon">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5v14"></path>
+                                    </svg>
+                                    Add Material
+                                </button>
+                            </div>
+
+                            <div class="line"></div>
+
+                            <div class="form-card | form-authorization">
+                                <h4 class="form-card-heading">Signature & Authorization</h4>
+                                <div class="form-fields">
+                                    <div class="form-fields-container">
+                                        <div class="form-group">
+                                            <label>Prepared By</label>
                                             <div class="signature-wrapper">
-                                                <canvas id="signaturePadReceived-Employee" #receivedCanvas></canvas>
-                                                <button type="button" class="clear-btn" (click)="clearPad(receivedPad)">Clear</button>
+                                                <canvas id="signaturePadPrepared-Employee" #preparedCanvas></canvas>
+                                                <button type="button" class="clear-btn"
+                                                    (click)="clearPad(preparedPad)">Clear</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-received-by">
+                                            <div class="form-group">
+                                                <label>Received By</label>
+                                                <div class="signature-wrapper">
+                                                    <canvas id="signaturePadReceived-Employee" #receivedCanvas></canvas>
+                                                    <button type="button" class="clear-btn"
+                                                        (click)="clearPad(receivedPad)">Clear</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-buttons">
-                            <button type="button" class="form-button form-button-primary" (click)="previewReport()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 icon">
-                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                                    <path d="M10 9H8"></path>
-                                    <path d="M16 13H8"></path>
-                                    <path d="M16 17H8"></path>
-                                </svg>
-                                Preview Report
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-preview" *ngIf="activeTab === 'preview'">
-                    <div class="form-preview-heading">
-                        <h3>Mileage Expense Report Preview</h3>
-                        <p>Review your report before printing</p>
-                    </div>
-                    <div class="form-preview-cards">
-                        <div class="form-preview-card">
-                            <h4>Employee Information</h4>
-                            <div class="form-preview-card-content">
-                                <div><strong>Employee Name:</strong> <span>{{ mileageForm.get('employeeName')?.value || 'not specified' }}</span></div>
-                                <div><strong>Employee ID:</strong> <span>{{ mileageForm.get('employeeId')?.value || 'not specified' }}</span></div>
-                                <div><strong>Pay Period From:</strong> <span>{{ mileageForm.get('payPeriodFrom')?.value || 'not specified' }}</span></div>
-                                <div><strong>Pay Period To:</strong> <span>{{ mileageForm.get('payPeriodTo')?.value || 'not specified' }}</span></div>
-                                <div><strong>Vehicle Type:</strong> <span>{{ mileageForm.get('vehicleType')?.value || 'not specified' }}</span></div>
-                                <div><strong>Report Date:</strong> <span>{{ mileageForm.get('reportDate')?.value || 'not specified' }}</span></div>
-                                <div><strong>Mileage Rate:</strong> <span>₹{{ mileageForm.get('mileageRate')?.value || 0 }}/km</span></div>
+                            <div class="line"></div>
+                            <div class="form-buttons">
+                                <button type="button" class="form-button form-button-primary" (click)="previewReport()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 icon">
+                                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        <path d="M10 9H8"></path>
+                                        <path d="M16 13H8"></path>
+                                        <path d="M16 17H8"></path>
+                                    </svg>
+                                    Preview Report
+                                </button>
                             </div>
                         </div>
-                        <div class="form-preview-card">
-                            <h4>Mileage Summary</h4>
-                            <div class="preview-mileage-summary">
-                                <div class="preview-mileage-summary-container">
-                                    <div>
-                                        <div class="miles-summary-heading total-miles-count">{{ totalMiles | number:'1.2-2' }}</div>
-                                        <div class="miles-summary-text">Total Miles</div>
-                                    </div>
-                                    <div>
-                                        <div class="miles-summary-heading total-miles-rate">₹{{ mileageForm.get('mileageRate')?.value || 0 }}</div>
-                                        <div class="miles-summary-text">Rate per Km</div>
-                                    </div>
-                                    <div>
-                                        <div class="miles-summary-heading total-miles-amount">₹{{ totalAmount | number:'1.2-2' }}</div>
-                                        <div class="miles-summary-text">Total Amount</div>
+                    </div>
+
+                    <div class="form-preview" *ngIf="activeTab === 'preview'">
+                        <div class="form-preview-heading">
+                            <h3>Mileage Expense Report Preview</h3>
+                            <p>Review your report before printing</p>
+                        </div>
+                        <div class="form-preview-cards">
+                            <div class="form-preview-card">
+                                <h4>Employee Information</h4>
+                                <div class="form-preview-card-content">
+                                    <div><strong>Employee Name:</strong> <span>{{ mileageForm.get('employeeName')?.value
+                                            || 'not specified' }}</span></div>
+                                    <div><strong>Employee ID:</strong> <span>{{ mileageForm.get('employeeId')?.value ||
+                                            'not specified' }}</span></div>
+                                    <div><strong>Pay Period From:</strong> <span>{{
+                                            mileageForm.get('payPeriodFrom')?.value || 'not specified' }}</span></div>
+                                    <div><strong>Pay Period To:</strong> <span>{{ mileageForm.get('payPeriodTo')?.value
+                                            || 'not specified' }}</span></div>
+                                    <div><strong>Vehicle Type:</strong> <span>{{ mileageForm.get('vehicleType')?.value
+                                            || 'not specified' }}</span></div>
+                                    <div><strong>Report Date:</strong> <span>{{ mileageForm.get('reportDate')?.value ||
+                                            'not specified' }}</span></div>
+                                    <div><strong>Mileage Rate:</strong> <span>₹{{ mileageForm.get('mileageRate')?.value
+                                            || 0 }}/km</span></div>
+                                </div>
+                            </div>
+                            <div class="form-preview-card">
+                                <h4>Mileage Summary</h4>
+                                <div class="preview-mileage-summary">
+                                    <div class="preview-mileage-summary-container">
+                                        <div>
+                                            <div class="miles-summary-heading total-miles-count">{{ totalMiles |
+                                                number:'1.2-2' }}</div>
+                                            <div class="miles-summary-text">Total Miles</div>
+                                        </div>
+                                        <div>
+                                            <div class="miles-summary-heading total-miles-rate">₹{{
+                                                mileageForm.get('mileageRate')?.value || 0 }}</div>
+                                            <div class="miles-summary-text">Rate per Km</div>
+                                        </div>
+                                        <div>
+                                            <div class="miles-summary-heading total-miles-amount">₹{{ totalAmount |
+                                                number:'1.2-2' }}</div>
+                                            <div class="miles-summary-text">Total Amount</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-preview-card">
-                            <h4>Materials</h4>
-                            <div class="preview-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="text-left">Date</th>
-                                            <th class="text-left">Description</th>
-                                            <th class="text-left">From</th>
-                                            <th class="text-left">To</th>
-                                            <th class="text-right">Miles</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let entry of mileageEntries.controls">
-                                            <td class="text-left">{{ entry.get('date')?.value || '-' }}</td>
-                                            <td class="text-left">{{ entry.get('description')?.value || '-' }}</td>
-                                            <td class="text-left">{{ entry.get('startLocation')?.value || '-' }}</td>
-                                            <td class="text-left">{{ entry.get('destination')?.value || '-' }}</td>
-                                            <td class="text-right">{{ entry.get('kms')?.value || '-' }}</td>
-                                        </tr>
-                                        
-                                        <tr *ngIf="mileageEntries.length === 0">
-                                            <td class="text-left">-</td>
-                                            <td class="text-left">-</td>
-                                            <td class="text-left">-</td>
-                                            <td class="text-left">-</td>
-                                            <td class="text-right">-</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="form-preview-card">
+                                <h4>Materials</h4>
+                                <div class="preview-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Date</th>
+                                                <th class="text-left">Description</th>
+                                                <th class="text-left">From</th>
+                                                <th class="text-left">To</th>
+                                                <th class="text-right">Miles</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let entry of mileageEntries.controls">
+                                                <td class="text-left">{{ entry.get('date')?.value || '-' }}</td>
+                                                <td class="text-left">{{ entry.get('description')?.value || '-' }}</td>
+                                                <td class="text-left">{{ entry.get('startLocation')?.value || '-' }}
+                                                </td>
+                                                <td class="text-left">{{ entry.get('destination')?.value || '-' }}</td>
+                                                <td class="text-right">{{ entry.get('kms')?.value || '-' }}</td>
+                                            </tr>
+
+                                            <tr *ngIf="mileageEntries.length === 0">
+                                                <td class="text-left">-</td>
+                                                <td class="text-left">-</td>
+                                                <td class="text-left">-</td>
+                                                <td class="text-left">-</td>
+                                                <td class="text-right">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-preview-buttons">
-                            <button type="button" class="form-button form-button-secondary" (click)="switchTab('form')">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left icon">
-                                    <path d="m12 19-7-7 7-7" />
-                                    <path d="M19 12H5" />
-                                </svg>
-                                Back to Form
-                            </button>
-                            <button type="button" class="form-button form-button-primary" (click)="printReport()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4 icon">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" x2="12" y1="15" y2="3"></line>
-                                </svg>
-                                Print Report
-                            </button>
+                            <div class="form-preview-buttons">
+                                <button type="button" class="form-button form-button-secondary"
+                                    (click)="switchTab('form')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-arrow-left-icon lucide-arrow-left icon">
+                                        <path d="m12 19-7-7 7-7" />
+                                        <path d="M19 12H5" />
+                                    </svg>
+                                    Back to Form
+                                </button>
+                                <button type="button" class="form-button form-button-primary" (click)="printReport()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-download h-4 w-4 icon">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" x2="12" y1="15" y2="3"></line>
+                                    </svg>
+                                    Print Report
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
             </div>
-        </form>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
     </div>

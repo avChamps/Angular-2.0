@@ -178,8 +178,17 @@ const routes: Routes = [
         description: 'Explore AV Champs members, companies, and experts.',
         keywords: 'directory, members, av champs'
       }
+  },
 
 
+  {
+      path: 'Material-Gate-Pass-Form',
+      loadComponent: async () => (await import('./components/tools/material-gate-pass-form/material-gate-pass-form.component')).MaterialGatePassFormComponent
+      , data: {
+        title: 'AV Champs Directory',
+        description: 'Explore AV Champs members, companies, and experts.',
+        keywords: 'directory, members, av champs'
+      }
   },
 
 

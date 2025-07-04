@@ -8,6 +8,7 @@ import { AspectRatioComponent } from './aspect-ratio/aspect-ratio.component';
 import { BtuCalculatorComponent } from './btu-calculator/btu-calculator.component';
 import { VideoBandwithCalculatorComponent } from './video-bandwith-calculator/video-bandwith-calculator.component';
 import { MileageExpenseFormComponent } from './mileage-expense-form/mileage-expense-form.component';
+import { MaterialGatePassFormComponent } from './material-gate-pass-form/material-gate-pass-form.component';
 
 
 @NgModule({

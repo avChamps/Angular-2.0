@@ -3,14 +3,14 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared/shared.module';
-declare var SignaturePad: any;
+import SignaturePad from 'signature_pad';
 
 @Component({
   selector: 'app-mileage-expense-form',
   templateUrl: './mileage-expense-form.component.html',
-  styleUrls: ['./mileage-expense-form.component.css', '../../tools/tools.component.css','../../tools/externalTools.css'],
-  imports: [CommonModule, RouterModule,SharedModule, FormsModule,ReactiveFormsModule],
-  standalone : true,
+  styleUrls: ['./mileage-expense-form.component.css', '../../tools/tools.component.css', '../../tools/externalTools.css'],
+  imports: [CommonModule, RouterModule, SharedModule, FormsModule, ReactiveFormsModule],
+  standalone: true,
 })
 export class MileageExpenseFormComponent {
   @ViewChild('preparedCanvas') preparedCanvas!: ElementRef<HTMLCanvasElement>;

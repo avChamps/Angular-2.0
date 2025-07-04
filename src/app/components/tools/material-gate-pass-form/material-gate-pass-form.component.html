@@ -1,0 +1,351 @@
+<div class="profile-page-section">
+    <div class="left-side">
+        <div class="profile-card">
+            <div class="profile-card-logo">
+                <img src="./assets/images/logo.png" alt="">
+            </div>
+            <div class="profile-card-info">
+                <h1>Profile</h1>
+                <span>Manage your personal and professional information</span>
+            </div>
+        </div>
+
+        <!-- material-gate-pass.component.html -->
+        <div class="form-wrapper material-gate-pass-form">
+            <form class="form-wrapper-container">
+                <div class="form-content">
+                    <div class="form-switcher">
+                        <ul class="list-unstyled form-switcher-list cursor-pointer">
+                            <li>
+                                <a class="form-switcher-link" [class.active]="activeTab === 'form'"
+                                    (click)="setActiveTab('form')">Form</a>
+                            </li>
+                            <li>
+                                <a class="form-switcher-link" [class.active]="activeTab === 'preview'"
+                                    (click)="setActiveTab('preview')">Preview</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="form-section" *ngIf="activeTab === 'form'">
+                        <div class="form-heading">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-package h-5 w-5 text-blue-600">
+                                <path
+                                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
+                                </path>
+                                <path d="M12 22V12"></path>
+                                <path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"></path>
+                                <path d="m7.5 4.27 9 5.15"></path>
+                            </svg>
+                            Material Gate Pass
+                        </div>
+
+                        <!-- Company Information -->
+                        <div class="form-card form-company-information">
+                            <h4 class="form-card-heading">Company Information</h4>
+                            <div class="form-fields">
+                                <div class="form-fields-container">
+                                    <div class="form-group">
+                                        <label for="companyInfo">Company Details <span
+                                                class="text-danger">*</span></label>
+                                        <textarea id="companyInfo" placeholder="Enter company details" rows="5"
+                                            [(ngModel)]="formData.companyInfo" name="companyInfo"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="companyName">Company Name <span class="text-danger">*</span></label>
+                                        <input type="text" id="companyName" placeholder="Enter company name"
+                                            [(ngModel)]="formData.companyName" name="companyName" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="personName">Person Name <span class="text-danger">*</span></label>
+                                        <input type="text" id="personName" placeholder="Enter person name"
+                                            [(ngModel)]="formData.personName" name="personName" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gate Pass Information -->
+                        <div class="form-card form-gate-pass-information">
+                            <h4>Gate Pass Information</h4>
+                            <div class="form-fields">
+                                <div class="form-fields-container">
+                                    <div class="form-radio-group">
+                                        <label class="d-block">Gate Pass Type <span class="text-danger">*</span></label>
+                                        <div class="d-flex ms-4">
+                                            <div class="form-check form-check-inline d-flex align-items-center me-4">
+                                                <input class="form-check-input me-1" type="radio" name="gatePassType"
+                                                    id="gatePassReturnable" value="returnable"
+                                                    [(ngModel)]="formData.gatePassType" required />
+                                                <label class="form-check-label mb-0"
+                                                    for="gatePassReturnable">Returnable</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline d-flex align-items-center ms-3">
+                                                <input class="form-check-input me-1" type="radio" name="gatePassType"
+                                                    id="gatePassNonReturnable" value="non-returnable"
+                                                    [(ngModel)]="formData.gatePassType" required />
+                                                <label class="form-check-label mb-0"
+                                                    for="gatePassNonReturnable">Non-Returnable</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gatePassNo">Gate Pass No <span class="text-danger">*</span></label>
+                                        <input type="text" id="gatePassNo" placeholder="Enter your pass number"
+                                            [(ngModel)]="formData.gatePassNo" name="gatePassNo" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="issueDate">Issue Date <span class="text-danger">*</span></label>
+                                        <input type="text" placeholder="DD/MM/YYYY" bsDatepicker id="issueDate"
+                                            [(ngModel)]="formData.issueDate" name="issueDate" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="purpose">Purpose <span class="text-danger">*</span></label>
+                                        <textarea id="purpose" placeholder="Enter purpose" rows="3"
+                                            [(ngModel)]="formData.purpose" name="purpose"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Material Particulars -->
+                        <div class="form-table">
+                            <h4>Material Particulars</h4>
+                            <div class="form-table-header">
+                                <div class="table-cell-first table-header-cell">Particulars</div>
+                                <div class="table-cell-second table-header-cell">QTY</div>
+                                <div class="table-cell-third table-header-cell">Problem in Material</div>
+                                <div class="table-cell-action table-header-cell"></div>
+                            </div>
+                            <div id="formTableRows">
+                                <div class="form-table-row" *ngFor="let material of formData.materials; let i = index">
+                                    <div class="table-cell-first table-cell">
+                                        <input class="particulars" type="text" placeholder="Material details"
+                                            [(ngModel)]="material.particulars" [ngModelOptions]="{standalone: true}" />
+                                    </div>
+                                    <div class="table-cell-second table-cell">
+                                        <input class="qty" type="text" onlyNumbers placeholder="Quantity" maxlength="4"
+                                            [(ngModel)]="material.qty" [ngModelOptions]="{standalone: true}" />
+                                    </div>
+                                    <div class="table-cell-third table-cell">
+                                        <input class="problem" type="text" placeholder="Problem Description"
+                                            [(ngModel)]="material.problem" [ngModelOptions]="{standalone: true}" />
+                                    </div>
+                                    <div class="table-cell-action table-cell">
+                                        <button class="delete-table-row" (click)="removeMaterial(i)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-trash2 h-4 w-4">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                                <line x1="10" x2="10" y1="11" y2="17"></line>
+                                                <line x1="14" x2="14" y1="11" y2="17"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="form-button form-button-secondary" (click)="addMaterial()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-plus h-4 w-4 mr-2 icon">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5v14"></path>
+                                </svg>
+                                Add Material
+                            </button>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <!-- Signature & Authorization -->
+                        <div class="form-card form-authorization">
+                            <h4 class="form-card-heading">Signature & Authorization</h4>
+                            <div class="form-fields">
+                                <div class="form-fields-container">
+                                    <div class="form-group">
+                                        <label>Prepared By</label>
+                                        <div class="signature-wrapper">
+                                            <canvas id="signaturePadPrepared" #signaturePadPrepared></canvas>
+                                            <button type="button" class="clear-btn"
+                                                (click)="clearPad('prepared')">Clear</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Received By</label>
+                                        <div class="signature-wrapper">
+                                            <canvas id="signaturePadReceived" #signaturePadReceived></canvas>
+                                            <button type="button" class="clear-btn"
+                                                (click)="clearPad('received')">Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <!-- Form Buttons -->
+                        <div class="form-buttons">
+                            <button type="button" class="form-button form-button-secondary" (click)="previewReport()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 icon">
+                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                    <path d="M10 9H8"></path>
+                                    <path d="M16 13H8"></path>
+                                    <path d="M16 17H8"></path>
+                                </svg>
+                                Preview Report
+                            </button>
+                            <button type="button" class="form-button form-button-primary" (click)="printReport()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-download h-4 w-4 mr-2 icon">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                                </svg>
+                                Print Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="form-preview" *ngIf="activeTab === 'preview'">
+                        <div class="form-preview-heading">
+                            <h3>Material Gate Pass Preview</h3>
+                            <p>Review your gate pass before printing</p>
+                        </div>
+                        <div class="form-preview-cards">
+                            <div class="form-preview-card">
+                                <h4>Company Information</h4>
+                                <div class="form-preview-card-content">
+                                    <div>
+                                        <strong>Company Name:</strong>
+                                        <span class="ms-2">{{ formData.companyName || 'not specified' }}</span>
+                                    </div>
+                                    <div>
+                                        <strong>Person Name:</strong>
+                                        <span class="ms-2">{{ formData.personName || 'not specified' }}</span>
+                                    </div>
+                                    <div class="card-col-span-2">
+                                        <strong>Company Details:</strong>
+                                        <span class="ms-2">{{ formData.companyInfo || 'not specified' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-preview-card">
+                                <h4>Gate Pass Details</h4>
+                                <div class="form-preview-card-content">
+                                    <div>
+                                        <strong>Gate Pass Type:</strong>
+                                        <span class="ms-2">{{ formData.gatePassType || 'not specified' }}</span>
+                                    </div>
+                                    <div>
+                                        <strong>Gate Pass No:</strong>
+                                        <span class="ms-2">{{ formData.gatePassNo || 'not specified' }}</span>
+                                    </div>
+                                    <div class="card-col-span-2">
+                                        <strong>Issue Date:</strong>
+                                        <span class="ms-2">{{ formData.issueDate || 'not specified' }}</span>
+                                    </div>
+                                    <div class="card-col-span-2">
+                                        <strong>Purpose:</strong>
+                                        <span class="ms-2">{{ formData.purpose || 'not specified' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-preview-card">
+                                <h4>Materials</h4>
+                                <div class="preview-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Particulars</th>
+                                                <th class="text-center">QTY</th>
+                                                <th class="text-left">Problem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let material of formData.materials">
+                                                <td class="text-left">{{ material.particulars || '-' }}</td>
+                                                <td class="text-center">{{ material.qty || '-' }}</td>
+                                                <td class="text-left">{{ material.problem || '-' }}</td>
+                                            </tr>
+                                            <tr *ngIf="!formData.materials.length">
+                                                <td colspan="3" class="text-center">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-preview-buttons">
+                                <button type="button" class="form-button form-button-secondary"
+                                    (click)="setActiveTab('form')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-arrow-left-icon lucide-arrow-left icon">
+                                        <path d="m12 19-7-7 7-7" />
+                                        <path d="M19 12H5" />
+                                    </svg>
+                                    Back to Form
+                                </button>
+                                <button type="button" class="form-button form-button-primary" (click)="printReport()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-download h-4 w-4 icon">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" x2="12" y1="15" y2="3"></line>
+                                    </svg>
+                                    Print Gate Pass
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="right-side">
+
+        <div class="ad-card">
+            <div class="ad-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-badge-info h-4 w-4 mr-2">
+                    <path
+                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                    </path>
+                    <line x1="12" x2="12" y1="16" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                </svg> Sponsored Content
+            </div>
+            <div class="ad-image">
+                <img src="https://via.placeholder.com/240x150?text=Sample+Ad+1" alt="Sample Ad">
+                <div class="ad-label">Advertisement</div>
+            </div>
+            <div class="ad-body">
+                <h5>Sample Ad 1</h5>
+                <p>This is a sample advertisement.</p>
+                <button class="btn learn-more-btn mx-auto">Learn More</button>
+            </div>
+            <div class="ad-footer">
+                Google Ad Slot <br>
+                <small>Advertisement · <a href="#">Report this ad</a></small>
+            </div>
+        </div>
+    </div>

@@ -25,6 +25,7 @@
     "ng-otp-input": "^2.0.8",
     "ngx-bootstrap": "^19.0.2",
     "rxjs": "~7.8.0",
+    "signature_pad": "^5.0.10",
     "swiper": "^11.2.8",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
