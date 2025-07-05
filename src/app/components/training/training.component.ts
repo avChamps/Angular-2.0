@@ -24,7 +24,7 @@ clickedCourse : any;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toaster: ToasterService) {
     this.personalInfoForm = this.fb.group({
-      FullName: ['', Validators.required,Validators.maxLength(32)],
+      FullName: ['', [Validators.required, Validators.maxLength(32)]],
       Email: ['', [Validators.required, Validators.email,Validators.maxLength(64)]],
       Mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       Location: ['', [Validators.maxLength(64)]],
@@ -35,6 +35,23 @@ clickedCourse : any;
 
   ngOnInit(): void {
     this.getEvents();
+    let profileDataString = localStorage.getItem('ProfileData');
+
+    if (profileDataString) {
+      let profileData = JSON.parse(profileDataString);
+       debugger;
+      this.personalInfoForm?.patchValue({
+        FullName: profileData?.FullName || '',
+        Email: profileData?.EmailId || '',
+        Mobile: profileData?.Mobile || '',
+        Location: profileData?.City ||  profileData?.State || '',
+        IsWorking: profileData?.WorkStatus ? 'yes' : 'no',
+        TrainingMode: profileData?.TrainingMode || ''
+      });
+    }
+    
+
+
   }
 
 

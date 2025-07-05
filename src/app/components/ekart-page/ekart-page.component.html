@@ -242,7 +242,8 @@
                     </svg>
                   {{ cartMessages[product.title] || 'Add to cart' }}
                   </button>
-                  <button type="button" class="btn btn-primary w-100">
+                  <button type="button" class="btn btn-primary w-100" (click)="addToCartProduct(product)"  data-bs-toggle="modal"
+                  data-bs-target="#CartModel">
                     <i class="bi bi-bag"></i>
                     Buy Now
                   </button>
@@ -384,7 +385,8 @@
                   </svg>
                  Add to cart
                 </button>
-                <button class="btn btn-primary w-100">
+                <button class="btn btn-primary w-100"  (click)="addToCartProduct(selectedProduct)"  data-bs-toggle="modal"
+                data-bs-target="#CartModel">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-arrow-up-right h-4 w-4 mr-2 flex-shrink-0 me-2">
@@ -663,7 +665,7 @@
 
           <!-- Notes -->
           <div>
-            <label class="form-label">Notes (Optional)</label>
+            <label class="form-label">Delivery Instruction (Optional)</label>
             <textarea class="form-control" maxlength="250" placeholder="Any special instructions..."
               style="min-height: 80px" formControlName="notes"></textarea>
             <small class="text-danger" *ngIf="checkoutForm.get('notes')?.hasError('maxLength')">Notes must be under 200

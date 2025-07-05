@@ -322,6 +322,162 @@
   padding-right: 22px;
 }
 
+.event-insider-page .event-card {
+  background: linear-gradient(135deg, #0c3484, #1642b6);
+  border-radius: 24px;
+  padding: 40px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-insider-page .badge-workshop {
+  background: linear-gradient(to top, #009400, #018301);
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.event-insider-page .label-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+}
+
+.event-insider-page .label-box i {
+  margin-right: 8px;
+  color: #93c5fd;
+}
+
+.event-insider-page .label-box strong {
+  font-size: 16px;
+  color: #93c5fd;
+}
+
+.event-insider-page .label-box span {
+  padding-left: 1.8rem;
+  font-size: 18px;
+}
+
+.event-insider-page .btn-white {
+  background-color: white;
+  color: #1e3a8a;
+  font-weight: 600;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+}
+
+.event-insider-page .btn-outline-white {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+}
+
+.event-insider-page .bg-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/images/logo-black.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+.event-insider-page .event-logo {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.event-insider-page .event-logo img {
+  width: 300px;
+  height: auto;
+}
+
+.event-insider-page .event-logo h4 {
+  font-family: 'Impact', sans-serif;
+  margin: 0;
+  font-size: 28px;
+}
+
+
+.event-insider-page .section-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.event-insider-page .section-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.event-insider-page .text-muted-custom {
+  color: #64748b;
+}
+
+.event-insider-page .icon {
+  color: #2563eb;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.event-detail-label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.event-detail-value {
+  color: #334155;
+}
+
+.event-insider-page .btn-register {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+}
+
+.border,
+.border-top,
+.border-bottom,
+hr {
+  border-color: #c1c1c1 !important;
+}
+
+
+.header-filtering{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-filtering .form-select{
+  width: 200px;
+  min-height: 38px;
+  text-align: left;
+  border: 0;
+}
 @media (max-width: 999px) {
   .sidebar {
     top: unset;
@@ -527,5 +683,19 @@
     width: 100%;
     padding: 20px;
 
+  }
+
+  .event-insider-page .event-card {
+    padding: 16px;
+  }
+
+  .event-insider-page .event-logo img {
+    width: 180px;
+  }
+  .header-filtering{
+    flex-direction: column;
+  }
+  .header-filtering .form-select{
+    margin-top: 10px;
   }
 }

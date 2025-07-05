@@ -15,7 +15,7 @@
 
                 <!-- Job Search Box -->
                 <div class="job-search-box shadow mb-4">
-                    <h5 class="mb-4 fw-semibold">Find Your Perfect Role</h5>
+                    <h5 class="mb-4 fw-semibold" style="font-size: 18px;">Find Your Perfect Role</h5>
 
                     <div class="row g-2 align-items-center mb-3">
                         <!-- Job Title Input -->
@@ -73,7 +73,7 @@
                         <div class="careers-sidebar" id="career-page-sidebar">
                             <div class="d-flex justify-content-between align-items-center mb-2 pt-2 pb-3 border-bottom">
                                 <h5 class="fw-semibold mb-0"><i class="bi bi-funnel"></i> Filters</h5>
-                                <a href="#" class="text-decoration-none text-muted small" (click)="clearAll()">Clear
+                                <a class="text-decoration-none text-muted small" (click)="clearAll()">Clear
                                     All</a>
                             </div>
 
@@ -181,7 +181,9 @@
                                         <span class="badge-soft"><i class="bi bi-geo-alt"></i> {{ job.location }}</span>
                                         <span class="badge-soft"><i class="bi bi-calendar-event"></i> {{ job.posted
                                             }}</span>
-                                        <span class="badge-soft"><i class="bi bi-currency-rupee"></i> {{ job.salary
+                                        <span class="badge-soft">
+                                            <!-- <i class="bi bi-currency-rupee"></i> -->
+                                         {{ job.salary
                                             }}</span>
                                     </div>
                                     <div class="text-muted small mb-3 job-card-description">{{ job.shortDesc }}</div>
@@ -382,7 +384,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title">Upload existing resume</h5>
+                    <h5 class="modal-title">Upload your CV</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" #closePopup></button>
                 </div>
 
@@ -423,7 +425,7 @@
                         <div class="d-flex justify-content-center gap-2">
                             <button class="btn btn-secondary btn-sm" (click)="changeFile()">Change File</button>
                             <button class="btn btn-success btn-sm" (click)="onApplyJob()" [disabled]="isApplying">
-                                <span *ngIf="!isApplying">Proceed</span>
+                                <span *ngIf="!isApplying">Submit</span>
                                 <span *ngIf="isApplying">
                                     <span class="spinner-border spinner-border-sm me-1"></span> Processing...
                                 </span>

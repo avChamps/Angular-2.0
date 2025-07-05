@@ -3,8 +3,8 @@
 .career-page-section .job-search-box {
     background-color: #eef3ff;
     border-radius: 12px;
-    padding: 30px 20px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    padding: 18px 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05) !important;
   }
   
   .career-page-section .job-input-block{

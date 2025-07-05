@@ -105,7 +105,9 @@ export class HomePageComponent {
     });
 
     let emailId = localStorage.getItem('EmailId');
-    this.profileData = JSON.parse(localStorage.getItem('ProfileData') || '{}');
+    setTimeout(() => {
+      this.profileData = JSON.parse(localStorage.getItem('ProfileData') || '{}');
+    }, 1000);
     if (emailId) {
       this.emailId = emailId;
     }
@@ -175,25 +177,28 @@ export class HomePageComponent {
   }
 
 
-  markAsRead(item: any) {
+  markAsRead(event: Event, item: any) {
+    event.stopPropagation();
     this.http.post(markAsRead, { notificationId: item.id }).subscribe({
       next: () => {
-        item.isRead = true,
-          this.getNotifications()
+        item.isRead = true;
+        this.getNotifications();
       },
       error: () => alert('Failed to mark as read')
     });
   }
-
-  dismissNotification(item: any) {
+  
+  dismissNotification(event: Event, item: any) {
+    event.stopPropagation();
     this.http.post(dismissNotification, { notificationId: item.id }).subscribe({
       next: () => {
         this.notifications = this.notifications.filter(n => n.id !== item.id);
-        this.getNotifications()
+        this.getNotifications();
       },
       error: () => alert('Failed to dismiss notification')
     });
   }
+  
 
   toggleMenu(event: Event) {
     event.stopPropagation();
@@ -214,5 +219,17 @@ export class HomePageComponent {
     event.stopPropagation();
     this.isDrawerHidden = !this.isDrawerHidden;
   }
+
+  markAllAsRead(event: Event) {
+    event.stopPropagation();
+    
+    this.http.post(markAsRead, { markAll: true, emailId: this.emailId }).subscribe({
+      next: () => {
+        this.getNotifications();
+      },
+      error: () => this.toaster.error('Failed to mark all as read')
+    });
+  }
+  
 
 }

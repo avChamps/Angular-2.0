@@ -14,7 +14,6 @@ import { ToasterService } from './toaster.service';
 import { ToasterComponent } from '../../components/toaster/toaster.component';
 
 
-
 @NgModule({
   declarations: [
     InitialsPipe,

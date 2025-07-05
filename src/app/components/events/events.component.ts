@@ -22,6 +22,7 @@ export class EventsComponent implements OnInit {
   activeTab = 'Trade Show';
   months = Months;
   selectedMonth: string = '';
+  selectedEvent : any;
 
   @HostListener('window:scroll', [])
   onScroll(): void {
@@ -132,4 +133,9 @@ export class EventsComponent implements OnInit {
       }
     });
   }
+
+  goToEventDetails(event : any) {
+    this.selectedEvent =  event;
+  }
+
 }

@@ -50,3 +50,4 @@ export const dismissNotification = url + '/dismissNotification';
 export const SubscribeNewsletter = url + '/SubscribeNewsletter';
 export const getRewards = url + '/getRewards';
 export const redeemReward = url + '/redeemReward';
+export const deleteCertificationApi = url + '/deleteCertification';

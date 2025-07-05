@@ -116,8 +116,8 @@
       </span>
 
 
-      <div id="notificationDrawer" class="notification-drawer" [class.hidden]="isDrawerHidden">
-        <div class="drawer-header">
+      <div id="notificationDrawer" class="notification-drawer" [class.hidden]="isDrawerHidden" *ngIf="notifications && notifications?.length != 0">
+        <div class="drawer-header" (click)="markAllAsRead($event)">
           <span>Notifications</span>
           <a class="mark-read-link">Mark all as read</a>
 
@@ -134,53 +134,18 @@
               </div>
               <p>{{ item.message }}</p>
               <div class="actions">
-                <button class="btn-read btn btn-sm btn-outline-success" (click)="markAsRead(item)">✓ Mark as
-                  read</button>
-                <button class="btn-dismiss btn btn-sm btn-outline-danger" (click)="dismissNotification(item)">✕
-                  Dismiss</button>
+                <button class="btn-read btn btn-sm btn-outline-success" (click)="markAsRead($event, item)">✓ Mark as read</button>
+                <button class="btn-dismiss btn btn-sm btn-outline-danger" (click)="dismissNotification($event, item)">✕ Dismiss</button>
+                
               </div>
 
             </div>
           </div>
+
         </div>
 
       </div>
     </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <li class="position-relative" (click)="toggleMenu($event)">

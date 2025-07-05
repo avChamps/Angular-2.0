@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getCities, getCoinHistory, getCountries, getProfile, getStates, updateProfile } from '../../constants/api-constants';
+import { deleteCertificationApi, getCities, getCoinHistory, getCountries, getProfile, getStates, updateProfile } from '../../constants/api-constants';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService } from '../../shared/shared/toaster.service';
 declare var bootstrap: any;
@@ -40,6 +40,7 @@ export class ProfilePageComponent {
   progress: number = 0;
   showLoginRewards: boolean = false;
   showprofileRewards: boolean = false;
+  certifications: any[] = [];
   @ViewChild('personalInfoModal') personalInfoModal!: ElementRef;
   @ViewChild('profModal') profModal!: ElementRef;
   @ViewChild('certModal') certModal!: ElementRef;
@@ -136,13 +137,15 @@ export class ProfilePageComponent {
       CompanyName: ['', Validators.compose([Validators.required, Validators.maxLength(64)])],
       Designation: ['', Validators.compose([Validators.required, Validators.maxLength(64)])],
       JoiningYear: ['', Validators.compose([Validators.required, Validators.maxLength(4)])],
-      JoiningMonth: ['', Validators.compose([
+      // JoiningMonth: ['', Validators.compose([
+      //   Validators.min(1),
+      //   Validators.max(12),
+      //   Validators.pattern(/^[0-9]{1,2}$/)
+      // ])],
+      SalaryAmount: ['', Validators.compose([
         Validators.required,
-        Validators.min(1),
-        Validators.max(12),
-        Validators.pattern(/^[0-9]{1,2}$/)
-      ])],
-      SalaryAmount: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
+        Validators.pattern(/^\d{1,6}(\.\d{1,2})?$/)  // Up to 6 digits before decimal, 2 after decimal
+    ])],
       SalaryDuration: [''],
       EmailId: this.emailId
     });
@@ -185,8 +188,6 @@ export class ProfilePageComponent {
     this.dailyLoginRewardCheck();
     this.getCoinHistory()
   }
-
-
   onExpiryChange(): void {
     this.certificationForm.get('NoExpiry')?.valueChanges.subscribe((noExpiry) => {
       if (noExpiry) {
@@ -327,6 +328,7 @@ export class ProfilePageComponent {
 
 
   submitProfessionalForm() {
+    debugger;
     if (this.professionalForm.invalid) {
       this.professionalForm.markAllAsTouched();
       return;
@@ -357,23 +359,57 @@ export class ProfilePageComponent {
       this.certificationForm.markAllAsTouched();
       return;
     }
-
-    this.isSaving = true;
+  
     const formData = this.certificationForm.value;
-    this.http.post(updateProfile, formData).subscribe({
-      next: (response) => {
+  
+    // Add to UI Array
+    this.certifications.push({
+      name: formData.CertificationName,
+      code: formData.CertificationId,
+      url: formData.CertificationUrl,
+      expiryDate: formData.NoExpiry ? 'No Expiry' : `${formData.ValidToMonth}/${formData.ValidToYear}`
+    });
+  
+    // Prepare Payload
+    const payload = {
+      EmailId: this.emailId,
+      Certifications: JSON.stringify(this.certifications)  // Save as JSON string
+    };
+  
+    this.isSaving = true;
+    this.http.post(updateProfile, payload).subscribe({
+      next: () => {
         this.isSaving = false;
         const modal = bootstrap.Modal.getInstance(this.certModal.nativeElement);
         modal?.hide();
-        this.getProfiles();
-        this.showprofileRewards = true;
-        this.toaster.success('Profile updated successfully');
+        this.certificationForm.reset({ NoExpiry: false, EmailId: this.emailId });
+        this.toaster.success('Certification saved');
       },
-      error: (error) => {
+      error: () => {
         this.isSaving = false;
-        this.toaster.error('Error updating profile:')
+        this.toaster.error('Error saving certification');
       }
     });
+  }
+  
+  
+  deleteCertification(index: number) {
+    debugger;
+    this.http.post(deleteCertificationApi, {
+      EmailId: this.profileData.EmailId,
+      index: index
+    }).subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          this.certifications.splice(index, 1);
+          this.toaster.success('Certification deleted');
+        } else {
+          this.toaster.error(res.message);
+        }
+      },
+      error: () => this.toaster.error('Failed to delete certification')
+    });
+    
   }
 
   submitAddressForm() {
@@ -464,6 +500,18 @@ export class ProfilePageComponent {
       SalaryAmount: profile.SalaryAmount,
       SalaryDuration: profile.SalaryDuration || '',
     });
+
+    this.certifications = [];
+    if (profile?.Certifications?.length) {
+      profile.Certifications.forEach((cert: any) => {
+        this.certifications.push({
+          name: cert.name,
+          code: cert.code,
+          url: cert.url,
+          expiryDate: cert.expiryDate
+        });
+      });
+    }
 
     this.addressForm.patchValue({
       CurrentLocation: profile.CurrentLocation,

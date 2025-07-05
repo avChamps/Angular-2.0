@@ -1450,9 +1450,9 @@ position: absolute;
   cursor: pointer;
 }
 
-.notification-drawer .btn-read:hover, .notification-drawer .btn-dismiss:hover {
+/* .notification-drawer .btn-read:hover, .notification-drawer .btn-dismiss:hover {
   background-color: #f9fafb;
-}
+} */
 
 .notification-badge {
   background-color: red;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { deleteJob, getCartItems, getCoinHistory, getJobs, getPointsLeaderboard, getProducts, getProfile, postJob } from '../../constants/api-constants';
+import { ToasterService } from '../../shared/shared/toaster.service';
 declare var bootstrap: any;
 
 export enum Section {
@@ -62,12 +63,13 @@ leaderboard: any[] = [];
 
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toaster : ToasterService) {
     this.emailId = localStorage.getItem('EmailId')
   }
 
   ngOnInit(): void {
     this.jobForm = this.fb.group({
+      EmailId : [this.emailId],
       jobTitle: ['', Validators.required],
       companyName: ['', Validators.required],
       companyEmail: ['', [Validators.required, Validators.email]],
@@ -199,9 +201,12 @@ getLeaderboard() {
         const modalInstance = bootstrap.Modal.getInstance(modal!);
         modalInstance?.hide();
         this.jobForm.reset();
+        this.isSubmitting = false;
+        this.getJobs()
       },
       (err: any) => {
-        alert('Error posting job.');
+        this.isSubmitting = false;
+        this.toaster.error('Error posting job.')
       }
     );
   }

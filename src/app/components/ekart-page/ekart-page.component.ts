@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { addToCart, checkout, deleteAllCartItem, deleteCartItem, getCartItems, getProducts, getProfile, updateCartQuantity } from '../../constants/api-constants';
+import { ToasterService } from '../../shared/shared/toaster.service';
 declare var bootstrap: any;
 
 
@@ -65,7 +66,7 @@ cartMessages: { [title: string]: string } = {};
   }
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private toaster : ToasterService) {
     this.checkoutForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(100)]],
       address: ['', [Validators.required, Validators.maxLength(250)]],
@@ -196,7 +197,9 @@ cartMessages: { [title: string]: string } = {};
   }).subscribe({
     next: (res: any) => {
       if (res.status) {
+        this.getKartItems();
         this.cartItems = [];
+        this.cartMessages = {}
       }
     },
     error: err => console.error('Failed to clear cart:', err)
@@ -232,6 +235,7 @@ cartMessages: { [title: string]: string } = {};
 
 
   addToCartProduct(product: any) {
+    debugger;
     const emailId = localStorage.getItem('EmailId');
 
     if (!emailId) {
@@ -329,7 +333,9 @@ cartMessages: { [title: string]: string } = {};
         if (res.status) {
           this.cartItems = this.cartItems.filter((i: { KartID: any; }) => i.KartID !== item.KartID);
           this.calculateTotalAmount();
-
+          this.cartItemCount = this.cartItems.length;
+          this.getKartItems()
+          delete this.cartMessages[item.Title];
         }
       },
       error: err => console.error('Failed to delete item', err)
@@ -373,6 +379,7 @@ cartMessages: { [title: string]: string } = {};
           modalInstance?.hide();
           this.checkoutForm.reset();
           this.loading = false;
+          this.clearCart();
         }
       },
       error: err => {
